@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/Pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.7.2/275914cb71c76e4d3ce1e4037cf8a9cce8f7c842/gdx-box2d-1.7.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="275914cb71c76e4d3ce1e4037cf8a9cce8f7c842">
+        <dex dex="/Users/Pomavau/Documents/Android_Studio/CrimsonTD/android/build/intermediates/pre-dexed/debug/gdx-box2d-1.7.2-97145fa628ec2abe9ecad5101b5fc8e781e8a2f7.jar" />
+    </item>
+    <item
+        jar="/Users/Pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.7.2/ccf86a454b5ce7029c243da22f432f2edca0a34e/gdx-1.7.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ccf86a454b5ce7029c243da22f432f2edca0a34e">
+        <dex dex="/Users/Pomavau/Documents/Android_Studio/CrimsonTD/android/build/intermediates/pre-dexed/debug/gdx-1.7.2-2ca71d04ce0af5595b173b1a11ae486c5752dfe4.jar" />
+    </item>
+    <item
+        jar="/Users/Pomavau/Documents/Android_Studio/CrimsonTD/core/build/libs/core-1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="cc4975b98230dc53b2254dfd3114b10ece29e914">
+        <dex dex="/Users/Pomavau/Documents/Android_Studio/CrimsonTD/android/build/intermediates/pre-dexed/debug/core-1.0-3d22dc25d4bf6f7e4906152f74dec3e6decdf505.jar" />
+    </item>
+    <item
+        jar="/Users/Pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.7.2/5211971f79423cda216422e62c1ec8684603c3b2/gdx-backend-android-1.7.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5211971f79423cda216422e62c1ec8684603c3b2">
+        <dex dex="/Users/Pomavau/Documents/Android_Studio/CrimsonTD/android/build/intermediates/pre-dexed/debug/gdx-backend-android-1.7.2-2bfdb412066020958a8293573e338ad2a087a548.jar" />
+    </item>
+
+</items>
