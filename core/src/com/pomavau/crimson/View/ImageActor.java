@@ -39,4 +39,9 @@ public class ImageActor extends Actor {
     {
         this.rotate(degrees);
     }*/
+   //public ImageActor(){
+     //  this.img = img;
+     //  setPosition(x * crimsonTD.getInstance().getPpuX(), y * crimsonTD.getInstance().getPpuY());
+     //  setSize(width * crimsonTD.getInstance().getPpuX(), height * crimsonTD.getInstance().getPpuY());
+  // }
 }

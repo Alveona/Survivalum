@@ -33,17 +33,17 @@ public class MainMenuScreen implements Screen{
     }
     public MainMenuScreen(SpriteBatch batch)
     {
-        background = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_bg.png"), 0, 0, 800, 600);
-        playButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_play.png"), 521, 316);
+        background = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_bg.png"), 0, 0, 1145, 616);
+        playButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnPlay.png"), 325, 59); //557
         //if (language == 0)
-            playText = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_playEN.png"), 583, 336);
+           // playText = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_playEN.png"), 583, 336);
        // playButton.setPosition(110,40);
         playButton.addListener(new MoveToGame());
-        playText.addListener(new MoveToGame());
-        settingsButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnSet.png"), 664, 179);
+//        playText.addListener(new MoveToGame());
+        settingsButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnSet.png"), 513, 59);
         //settingsButton.setPosition(540,40);
 
-        ratesButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnStat.png"), 526, 179);
+        ratesButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnStat.png"), 695, 59);
 
         //ratesButton.setPosition(327,40);
         OrthographicCamera camera = new OrthographicCamera();
@@ -52,7 +52,7 @@ public class MainMenuScreen implements Screen{
         stage.addActor(background);
         stage.addActor(playButton);
         stage.addActor(ratesButton);
-        stage.addActor(playText);
+       // stage.addActor(playText);
         stage.addActor(settingsButton);
 
 
@@ -61,6 +61,9 @@ public class MainMenuScreen implements Screen{
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+        //Gdx.gl.glClearColor(0.5f, 1, 0, 1);
+        Gdx.gl.glClearColor(0.294f, 0.294f, 0.294f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
     @Override

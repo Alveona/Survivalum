@@ -3,6 +3,7 @@ package com.pomavau.crimson.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,14 +13,17 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.pomavau.crimson.Model.World;
 import com.pomavau.crimson.View.ImageActor;
+import com.pomavau.crimson.crimsonTD;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -39,14 +43,19 @@ public class GameScreen  implements Screen {
         private Drawable touchKnob;
         private Texture blockTexture;
         private Sprite blockSprite;
+        private Sprite bullet;
         private ImageActor hero;
         private float heroSpeed;
+
+    protected Label FPSlabel;
+    private BitmapFont font;
     //batch = new SpriteBatch();
 
     HashMap<Integer, TextureRegion> textureRegions;
 
 World world;
     public GameScreen(SpriteBatch batch, ShapeRenderer shape, BitmapFont font, HashMap<Integer, TextureRegion> textureRegions) throws FileNotFoundException {
+       // crimsonTD.instance.transform.setToRotation(Vector3.Z, 90).translate(-5,0,0);
             /*
                 OrthographicCamera camera = new OrthographicCamera();
             camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -80,7 +89,8 @@ World world;
                 touchpadStyle.background = touchBackground;
                 touchpadStyle.knob = touchKnob;
                 touchpadLeft = new Touchpad(10, touchpadStyle);
-                touchpadLeft.setBounds(15, 15, 200, 200);
+                //touchpadLeft.setBounds(15, 15, 200, 200);
+                 touchpadLeft.setBounds(15, 15, 200, 200);
                 touchpadRight = new Touchpad(10, touchpadStyle);
                 touchpadRight.setBounds(585, 15, 200, 200);
                // stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, batch);
@@ -101,8 +111,9 @@ World world;
 
             heroSpeed = 3;
 
-
-
+        font = new BitmapFont();
+        FPSlabel = new Label(" ", new Label.LabelStyle(font, Color.WHITE));
+        stage.addActor(FPSlabel);
         }
         @Override
         public void show() {
@@ -111,13 +122,19 @@ World world;
            // Group group = new  Group();
           //  group.addActor(touchpadLeft);
           //  group.addActor(touchpadRight);
+            bullet = new Sprite(new Texture("android//assets//joypad//touchKnob.png"));
         }
 
        @Override
         public void render(float delta) {
+           StringBuilder builder = new StringBuilder();
+           builder.append(" FPS: ").append(Gdx.graphics.getFramesPerSecond());
 
+           FPSlabel.setText(builder);
            // batch = new SpriteBatch();
-
+           camera.position.set(hero.getX(), hero.getY(), 0);
+           // touchpadLeft.setPosition(camera.)
+           // camera.update();
            camera.update();
             //GameScreen.
             Gdx.gl.glClearColor(0.5f, 1, 0, 1);
@@ -164,7 +181,7 @@ World world;
 
         @Override
         public void resize(int width, int height) {
-
+            stage.getViewport().update(width, height, true);
         }
 
         @Override

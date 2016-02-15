@@ -9,8 +9,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		System.setProperty("user.name", "EnglishWords");
 		//config.useGL30 = true;
-		config.width = 800;
-		config.height = 600;
+		config.width = 1145;
+		config.height = 616;
 		new LwjglApplication(crimsonTD.getInstance(), config);
 	}
 }
