@@ -18,6 +18,7 @@ public class ImageActor extends Actor {
         setSize(width * crimsonTD.getInstance().getPpuX(), height * crimsonTD.getInstance().getPpuY());
     }
 
+
     public ImageActor(Texture img, float x, float y) {
         this(new TextureRegion(img), x, y, img.getWidth(), img.getHeight());
     }

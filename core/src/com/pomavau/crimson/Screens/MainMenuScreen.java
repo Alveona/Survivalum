@@ -1,7 +1,10 @@
 package com.pomavau.crimson.Screens;
 
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,6 +27,7 @@ public class MainMenuScreen implements Screen{
     private ImageActor playText;
     private ImageActor settingsButton;
     private ImageActor ratesButton;
+    private Music music;
     private int language = 0;
     private Stage stage;
     class MoveToGame extends ClickListener {
@@ -33,6 +37,10 @@ public class MainMenuScreen implements Screen{
     }
     public MainMenuScreen(SpriteBatch batch)
     {
+
+        music = Gdx.audio.newMusic(new FileHandle("android//assets//mainmenu//music.mp3"));
+        music.setLooping(true);
+        music.play();
         background = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_bg.png"), 0, 0, 1145, 616);
         playButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnPlay.png"), 325, 59); //557
         //if (language == 0)
@@ -90,7 +98,7 @@ public class MainMenuScreen implements Screen{
 
     @Override
     public void hide() {
-
+        music.stop();
     }
 
     @Override

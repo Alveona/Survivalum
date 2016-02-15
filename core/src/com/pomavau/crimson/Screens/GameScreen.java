@@ -34,6 +34,8 @@ import java.util.HashMap;
 public class GameScreen  implements Screen {
        //final crimsonTD gam;
         private Stage stage;
+        private Stage UIstage;
+        private OrthographicCamera UIcamera;
         private OrthographicCamera camera;
         public SpriteBatch batch;
         private Touchpad touchpadLeft, touchpadRight;
@@ -95,9 +97,10 @@ World world;
                 touchpadRight.setBounds(585, 15, 200, 200);
                // stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, batch);
                 stage = new Stage(new ScreenViewport(camera), batch);
-                stage.addActor(touchpadLeft);
+               stage.addActor(touchpadLeft);
                 stage.addActor(touchpadRight);
         stage.addActor(hero);
+                //Gdx.input.setInputProcessor(UIstage);
                 Gdx.input.setInputProcessor(stage);
 
 
@@ -110,14 +113,23 @@ World world;
             //camera.setToOrtho(false, blockSprite.getX(), blockSprite.getY());
 
             heroSpeed = 3;
-
+        UIcamera = new OrthographicCamera();
+       UIcamera.setToOrtho(false, 10f * aspectRatio, 10f);
         font = new BitmapFont();
+        //stage.getCamera().
         FPSlabel = new Label(" ", new Label.LabelStyle(font, Color.WHITE));
-        stage.addActor(FPSlabel);
+       // stage.addActor(FPSlabel);
+        UIstage = new Stage(new ScreenViewport(UIcamera), batch);
+        UIstage.addActor(FPSlabel);
+        //FPSlabel.setPosition(0, 0);
+       //UIstage.addActor(touchpadLeft);
+       //UIstage.addActor(touchpadRight);
+       // UIstage.addActor(touchpadRight);
         }
         @Override
         public void show() {
             Gdx.input.setInputProcessor(stage);
+           // Gdx.input.setInputProcessor(UIstage);
             batch = new SpriteBatch();
            // Group group = new  Group();
           //  group.addActor(touchpadLeft);
@@ -127,39 +139,46 @@ World world;
 
        @Override
         public void render(float delta) {
+
            StringBuilder builder = new StringBuilder();
            builder.append(" FPS: ").append(Gdx.graphics.getFramesPerSecond());
-
+            //touchpadLeft.setPosition(100,100);
            FPSlabel.setText(builder);
            // batch = new SpriteBatch();
            camera.position.set(hero.getX(), hero.getY(), 0);
            // touchpadLeft.setPosition(camera.)
            // camera.update();
+           UIcamera.update();
            camera.update();
             //GameScreen.
-            Gdx.gl.glClearColor(0.5f, 1, 0, 1);
-           //Gdx.gl.glClearColor(0.294f, 0.294f, 0.294f, 1f);
+            //Gdx.gl.glClearColor(0.5f, 1, 0, 1);
+           Gdx.gl.glClearColor(0.294f, 0.294f, 0.294f, 1f);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+          //  Gdx.input.setInputProcessor(stage);
            if(Gdx.input.isKeyPressed(Input.Keys.W)) hero.setY(hero.getY() + 4);
            if(Gdx.input.isKeyPressed(Input.Keys.S)) hero.setY(hero.getY() - 4);
            if(Gdx.input.isKeyPressed(Input.Keys.D)) hero.setX(hero.getX() + 4);
            if(Gdx.input.isKeyPressed(Input.Keys.A)) hero.setX(hero.getX() - 4);
+          // Gdx.input.setInputProcessor(UIstage);
            camera.update();
 
-           hero.setX(hero.getX() + touchpadLeft.getKnobPercentX() * heroSpeed);
-           hero.setY(hero.getY() + touchpadLeft.getKnobPercentY() * heroSpeed);
+           if(touchpadLeft.getKnobPercentX() != 0.0) hero.setX(hero.getX() + touchpadLeft.getKnobPercentX() * heroSpeed);
+           if(touchpadLeft.getKnobPercentY() != 0.0) hero.setY(hero.getY() + touchpadLeft.getKnobPercentY() * heroSpeed);
+           System.out.println(touchpadLeft.getKnobPercentX());
            hero.setOrigin(hero.getWidth() / 2 - hero.getWidth() / 4 - hero.getWidth() / 8, hero.getHeight() / 2 - hero.getHeight() / 4);
            //hero.rotate(touchpadRight.getKnobPercentX() * -3);
         //   hero.rotateBy(touchpadRight.getKnobPercentX() * -3);
           // hero.rotate(touchpadRight.getKnobPercentX() * -3);
-                hero.setSize(152,100);
+                hero.setSize(152, 100);
 
-            batch.begin();
+           // batch.begin();
           //  blockSprite.draw(batch);
-           batch.end();
+          // batch.end();
+
            stage.act(Gdx.graphics.getDeltaTime());
             stage.draw();
+           UIstage.act(Gdx.graphics.getDeltaTime());
+           UIstage.draw();
 
                    /*
             Gdx.gl.glClearColor(0.294f, 0.294f, 0.294f, 1f);
