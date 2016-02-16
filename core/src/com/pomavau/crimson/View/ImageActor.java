@@ -33,7 +33,8 @@ public class ImageActor extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(img, getX(), getY(), getWidth(), getHeight());
+        //batch.draw(img, getX(), getY(), getWidth(), getHeight());
+        batch.draw(img, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
 
    /* public void rotate(float degrees)
