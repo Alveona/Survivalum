@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.pomavau.crimson.Controller.ShowMenu;
 import com.pomavau.crimson.View.ImageActor;
 import com.pomavau.crimson.crimsonTD;
 
@@ -27,8 +28,12 @@ public class MainMenuScreen implements Screen{
     private ImageActor playText;
     private ImageActor settingsButton;
     private ImageActor ratesButton;
+    private ImageActor musicButton;
+    private Group settingScreen;
+    private ImageActor settingsBG;
     private Music music;
     private int language = 0;
+
     private Stage stage;
     class MoveToGame extends ClickListener {
         public void clicked(InputEvent event, float x, float y){
@@ -37,7 +42,11 @@ public class MainMenuScreen implements Screen{
     }
     public MainMenuScreen(SpriteBatch batch)
     {
-
+        settingsBG = new ImageActor(new Texture("android//assets//mainmenu//SettingsScreen.png"), 384, 616-534);
+        settingScreen = new Group();
+        musicButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnPlay.png"), settingsBG.getX() + 120, settingsBG.getY() + 120);
+        settingScreen.addActor(settingsBG);
+        settingScreen.addActor(musicButton);
         music = Gdx.audio.newMusic(new FileHandle("android//assets//mainmenu//music.mp3"));
         music.setLooping(true);
         music.play();
@@ -50,9 +59,9 @@ public class MainMenuScreen implements Screen{
 //        playText.addListener(new MoveToGame());
         settingsButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnSet.png"), 513, 59);
         //settingsButton.setPosition(540,40);
-
+        //settingsButton.addListener(settingScreen.setVisible(true));
         ratesButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnStat.png"), 695, 59);
-
+        settingsButton.addListener(new ShowMenu(settingScreen));
         //ratesButton.setPosition(327,40);
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -62,12 +71,13 @@ public class MainMenuScreen implements Screen{
         stage.addActor(ratesButton);
        // stage.addActor(playText);
         stage.addActor(settingsButton);
-
+        stage.addActor(settingScreen);
 
     }
 
     @Override
     public void show() {
+        settingScreen.setVisible(true);
         Gdx.input.setInputProcessor(stage);
         //Gdx.gl.glClearColor(0.5f, 1, 0, 1);
         Gdx.gl.glClearColor(0.294f, 0.294f, 0.294f, 1f);
@@ -79,6 +89,7 @@ public class MainMenuScreen implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
+
     }
 
     @Override

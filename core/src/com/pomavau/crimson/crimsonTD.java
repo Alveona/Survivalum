@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.pomavau.crimson.Controller.MovementControlStyle;
 import com.pomavau.crimson.Model.World;
 
 import java.io.FileNotFoundException;
@@ -14,7 +16,8 @@ import java.util.HashMap;
 
 public class crimsonTD extends Game {
 	private float ppuX, ppuY;
-
+	private MovementControlStyle movementControlStyle;
+	boolean soundState;
 	private SpriteBatch batch;
 	private com.pomavau.crimson.Screens.MainMenuScreen menuScreen;
 	private com.pomavau.crimson.Screens.GameScreen gameScreen;
@@ -28,12 +31,18 @@ public class crimsonTD extends Game {
 	}
 
 	private crimsonTD() {}
-
+	public void setMovementControlStyle(MovementControlStyle value) {movementControlStyle = value;}
+	public MovementControlStyle getMovementControlStyle() {
+		return movementControlStyle;
+	}
+	public void setSoundState(boolean soundState){this.soundState = soundState;}
+	public boolean getSoundState(){return soundState;}
 
 	@Override
 	public void create() {
-		ppuX = Gdx.graphics.getWidth()/800;
-		ppuY = Gdx.graphics.getHeight()/600;
+		setMovementControlStyle(MovementControlStyle.BUTTONS);
+		ppuX = Gdx.graphics.getWidth()/1145;
+		ppuY = Gdx.graphics.getHeight()/616;
 		loadGraphics();
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
@@ -85,8 +94,12 @@ public class crimsonTD extends Game {
 		setScreen(menuScreen);
 	}
 
-	public void showSettings() {
+	public void showSettings(Group group) {
+		if(group.isVisible())
+		{group.setVisible(false);}
+		else {group.setVisible(true); }
 
+		System.out.println("screen status changed");
 	}
 
 	@Override
@@ -110,4 +123,6 @@ public class crimsonTD extends Game {
 	public void setPpuX(float ppuX) {
 		this.ppuX = ppuX;
 	}
+
+
 }

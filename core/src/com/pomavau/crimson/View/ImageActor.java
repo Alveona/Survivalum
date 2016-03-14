@@ -12,6 +12,7 @@ import com.pomavau.crimson.crimsonTD;
 public class ImageActor extends Actor {
     TextureRegion img;
 
+
     public ImageActor(TextureRegion img, float x, float y, float width, float height) {
         this.img = img;
         setPosition(x * crimsonTD.getInstance().getPpuX(), y * crimsonTD.getInstance().getPpuY());

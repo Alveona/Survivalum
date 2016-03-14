@@ -12,6 +12,6 @@ import com.pomavau.crimson.crimsonTD;
 public class MoveToSettings extends ClickListener {
     public void clicked(InputEvent event, float x, float y) {
        // FrameBuffer frameBuffer = new FrameBuffer()
-        crimsonTD.getInstance().showSettings();
+        //crimsonTD.getInstance().showSettings();
     }
 }
