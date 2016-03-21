@@ -1,4 +1,4 @@
-package com.pomavau.crimson.View;
+package com.pomavau.crimson.Controller;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;

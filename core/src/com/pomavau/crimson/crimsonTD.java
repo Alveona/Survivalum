@@ -26,6 +26,7 @@ public class crimsonTD extends Game {
 	private BitmapFont font;
 	private static crimsonTD instance = new crimsonTD();
 
+
 	public static crimsonTD getInstance() {
 		return instance;
 	}
@@ -40,6 +41,7 @@ public class crimsonTD extends Game {
 
 	@Override
 	public void create() {
+
 		setMovementControlStyle(MovementControlStyle.BUTTONS);
 		ppuX = Gdx.graphics.getWidth()/1145;
 		ppuY = Gdx.graphics.getHeight()/616;
@@ -94,12 +96,17 @@ public class crimsonTD extends Game {
 		setScreen(menuScreen);
 	}
 
-	public void showSettings(Group group) {
+	public void showMenu(Group group) {
 		if(group.isVisible())
 		{group.setVisible(false);}
 		else {group.setVisible(true); }
 
 		System.out.println("screen status changed");
+	}
+
+	public boolean getMenuVisibility(Group group)
+	{
+		return group.isVisible();
 	}
 
 	@Override

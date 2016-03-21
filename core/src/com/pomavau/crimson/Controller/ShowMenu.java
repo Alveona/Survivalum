@@ -24,6 +24,6 @@ public class ShowMenu extends ClickListener {
     }
 
     public void clicked(InputEvent event, float x, float y) {
-        crimsonTD.getInstance().showSettings(group);
+        crimsonTD.getInstance().showMenu(group);
     }
 }

@@ -1,5 +1,6 @@
 package com.pomavau.crimson.Model;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.pomavau.crimson.Controller.Direction;
 import com.pomavau.crimson.Controller.PlayerController;
 import com.pomavau.crimson.View.ImageActor;
@@ -89,4 +90,9 @@ public class Player extends ImageActor {
         return rotationStep;
     }
     public float getMovementStep() { return movementStep; }
+
+    public void setTexture(TextureRegion texture)
+    {
+
+    }
 }
