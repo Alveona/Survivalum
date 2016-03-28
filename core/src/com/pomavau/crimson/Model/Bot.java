@@ -3,9 +3,12 @@ package com.pomavau.crimson.Model;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.pomavau.crimson.Controller.BotController;
 import com.pomavau.crimson.Controller.Direction;
+import com.pomavau.crimson.Controller.PlayerController;
 import com.pomavau.crimson.View.ImageActor;
 import com.pomavau.crimson.crimsonTD;
 
@@ -13,6 +16,11 @@ import com.pomavau.crimson.crimsonTD;
  * Created by Pomavau on 12.03.16.
  */
 public class Bot extends ImageActor {
+    private BotController controller;
+    public void setController(BotController controller) {
+        this.controller = controller;
+    }
+
     float size;
     float movementStep;
     float rotationStep;
@@ -40,6 +48,15 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
     rotationStep = 5;
     movementStep = 150;
 }
+    public Bot(TextureRegion image, float x, float y, float width, float height, float originX, float originY)
+    {
+        super(image, x, y, width, height);
+      //  setOrigin(originX / image.getWidth() * width, originY / image.getHeight() * height);
+        setRotationDirection(Direction.NONE);
+        setMovementDirection(Direction.NONE);
+        rotationStep = 5;
+        movementStep = 150;
+    }
 
 
     public void act(float delta) {

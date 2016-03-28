@@ -11,6 +11,7 @@ import com.pomavau.crimson.crimsonTD;
 public class SoundToggle extends ClickListener {
     public void clicked(InputEvent event, float x, float y) {
         crimsonTD.getInstance().setSoundState(!crimsonTD.getInstance().getSoundState());
+
         System.out.println("Sound State Changed");
     }
 }

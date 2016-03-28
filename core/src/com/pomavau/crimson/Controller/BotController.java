@@ -35,19 +35,26 @@ public class BotController { //implements InputProcessor
     HashMap<Integer, Pointer> pressedPointers;
     Bot bot;
     Pointer pointer = new Pointer(0, 0, 0);
+    int i = 0;
+
+
     public BotController(LevelWorld stage) {
         bot = stage.getBot();
         pressedKeys = new HashSet<Integer>();
         printedCharacters = new ArrayList<Character>();
         pressedPointers = new HashMap<Integer, Pointer>();
         movementControlStyle = crimsonTD.getInstance().getMovementControlStyle();
+
     }
 
     public void update(LevelWorld world) {
         bot.setMovementDirection(getMovementDirection());
         bot.setRotationDirection(getRotationDirection());
         bot.setSpeededUp(isSpeededUp());
-        pointer.setPosition((int)world.getPlayer().getX(), (int)world.getPlayer().getY());
+        pointer.setPosition((int) world.getPlayer().getX(), (int) world.getPlayer().getY());
+        //pressedPointers.put(1, new Pointer((int) world.getPlayer().getX(), (int) world.getPlayer().getY(), 0));
+        pressedPointers.put(0, pointer);
+       // i++;
     }
 
     /*
@@ -134,7 +141,9 @@ public class BotController { //implements InputProcessor
 
                 if (pressedPointers.size() == 0) return false;
                 Pointer tmp = pressedPointers.values().iterator().next();
+
                 float destAngle = new Vector2(tmp.getX(), tmp.getY()).sub(bot.getX(), bot.getY()).angle();
+
                 bot.setDestinationAngle(destAngle);
                 float playerAngle = bot.getRotation();
                 float delta = destAngle - playerAngle;
@@ -148,6 +157,7 @@ public class BotController { //implements InputProcessor
 
                 if (pressedPointers.size() == 0) return false;
                 Pointer tmp = pressedPointers.values().iterator().next();
+
                 float destAngle = new Vector2(tmp.getX(), tmp.getY()).sub(bot.getX(), bot.getY()).angle();
                 bot.setDestinationAngle(destAngle);
                 float playerAngle = bot.getRotation();

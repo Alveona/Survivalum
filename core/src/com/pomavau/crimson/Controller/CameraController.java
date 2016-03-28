@@ -27,6 +27,8 @@ public class CameraController implements InputProcessor {
     private float zoomAmount;
     private Rectangle cameraBorders;
     boolean isBlocked = false;
+    boolean isBlockedX = false;
+    boolean isBlockedY = false;
    // ShapeRenderer shapeRenderer;
     OrthographicCamera camera;
     HashSet<Integer> pressedKeys;
@@ -40,8 +42,8 @@ public class CameraController implements InputProcessor {
         this.step = 3;
         this.zoomAmount = 0.2f; //0.2 default
         this.camera = (OrthographicCamera)world.getCamera();
-        //cameraBorders = new Rectangle(camera.viewportWidth / 2, camera.viewportHeight / 2, world.getWidth() - camera.viewportWidth, world.getHeight() - camera.viewportHeight);
-        cameraBorders = new Rectangle(500, 500, 500, 500);
+        cameraBorders = new Rectangle(camera.viewportWidth / 2, camera.viewportHeight / 2, world.getWidth() - camera.viewportWidth, world.getHeight() - camera.viewportHeight);
+       // cameraBorders = new Rectangle(500, 500, 500, 500);
         //cameraBorders.
         pressedKeys = new HashSet<Integer>();
         printedCharacters = new ArrayList<Character>();
@@ -61,7 +63,7 @@ public class CameraController implements InputProcessor {
         //shapeRenderer.line(500, 500, 1000, 1000);
        // shapeRenderer.end();
         //System.out.format("%b, %b, %b, %b\n", movesDown(), movesLeft(), movesRight(), movesUp());
-        if ((movesRight() && camera.position.x + step < cameraBorders.getX() + cameraBorders.getWidth() )|| (movesUp() && camera.position.y + step < cameraBorders.getY() + cameraBorders.getHeight()))
+        if ((movesRight() && camera.position.x + step < cameraBorders.getX() + cameraBorders.getWidth() ) || (movesUp() && camera.position.y + step < cameraBorders.getY() + cameraBorders.getHeight()))
         {
             camera.translate(step, 0);
             isBlocked = true;
@@ -81,7 +83,48 @@ public class CameraController implements InputProcessor {
             camera.translate(0 , 0);
             isBlocked = false;
         }
-       // System.out.println(isBlocked);
+/*
+        if(camera.position.x < cameraBorders.getX() + cameraBorders.getWidth() && camera.position.x > cameraBorders.getX() && camera.position.y < cameraBorders.getY() + cameraBorders.getHeight() && camera.position.y > cameraBorders.getY()) {
+            isBlocked = false;
+        }
+        else
+        {
+            isBlocked = true;
+            camera.position.x--;
+            camera.position.y--;
+        }
+*//*
+        if(world.getPlayer().getX() < cameraBorders.getX() + cameraBorders.getWidth() && world.getPlayer().getX() > cameraBorders.getX() && world.getPlayer().getY() < cameraBorders.getY() + cameraBorders.getHeight() && world.getPlayer().getY() > cameraBorders.getY()) {
+            isBlocked = false;
+        }
+        else
+        {
+            isBlocked = true;
+            //camera.position.x--;
+           // camera.position.y--;
+        }
+*/
+        if(world.getPlayer().getX() < cameraBorders.getX() + cameraBorders.getWidth() && world.getPlayer().getX() > cameraBorders.getX()) {
+            isBlockedX = false;
+        }
+        else
+        {
+            isBlockedX = true;
+            //camera.position.x--;
+            // camera.position.y--;
+        }
+        if(world.getPlayer().getY() < cameraBorders.getY() + cameraBorders.getHeight() && world.getPlayer().getY() > cameraBorders.getY()) {
+            isBlockedY = false;
+        }
+        else
+        {
+            isBlockedY = true;
+            //camera.position.x--;
+            // camera.position.y--;
+        }
+
+        //System.out.println(isBlocked);
+        /*
         camera.translate(
                 movesRight() && camera.position.x + step < cameraBorders.getX() + cameraBorders.getWidth() ? step : 0,
                 movesUp() && camera.position.y + step < cameraBorders.getY() + cameraBorders.getHeight() ? step : 0,
@@ -90,12 +133,18 @@ public class CameraController implements InputProcessor {
                 movesLeft() && camera.position.x - step > cameraBorders.getX() ? -step : 0,
                 movesDown() && camera.position.y - step > cameraBorders.getY() ? -step : 0,
                 0);
+                */
         camera.zoom += zoomIn() ? zoomAmount : 0;
         camera.zoom -= zoomOut() && camera.zoom > zoomAmount ? zoomAmount : 0;
 
         //if ((camera.position.x + step > cameraBorders.getX() + cameraBorders.getWidth()) && (camera.position.y + step > cameraBorders.getY() + cameraBorders.getHeight()))
-        if(isBlocked == false)
-        camera.position.set(world.getPlayer().getX(), world.getPlayer().getY(), 0);
+        //if(isBlocked == false)
+       // camera.position.set(world.getPlayer().getX(), world.getPlayer().getY(), 0);
+
+        if(isBlockedX == false)
+            camera.position.x = world.getPlayer().getX();
+        if(isBlockedY == false)
+            camera.position.y = world.getPlayer().getY();
 
         camera.update();
     }

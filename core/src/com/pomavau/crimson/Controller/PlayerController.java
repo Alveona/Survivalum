@@ -45,10 +45,26 @@ public class PlayerController implements InputProcessor {
         usedButtons.add(CONTROL_LEFT);
     }
 
-    public void update() {
+    public void update(LevelWorld world) {
         player.setMovementDirection(getMovementDirection());
         player.setRotationDirection(getRotationDirection());
         player.setSpeededUp(isSpeededUp());
+        if (player.getX() > world.getWorldBorders().getX() && player.getX() < world.getWorldBorders().getX() + world.getWorldBorders().getWidth())
+        {
+            player.setBlockedX(false);
+        }
+        else
+        {
+            player.setBlockedX(true);
+        }
+        if (player.getY() > world.getWorldBorders().getY() && player.getY() < world.getWorldBorders().getY() + world.getWorldBorders().getHeight())
+        {
+            player.setBlockedY(false);
+        }
+        else
+        {
+            player.setBlockedY(true);
+        }
     }
 
     @Override
