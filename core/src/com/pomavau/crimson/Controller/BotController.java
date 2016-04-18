@@ -35,7 +35,7 @@ public class BotController { //implements InputProcessor
     HashMap<Integer, Pointer> pressedPointers;
     Bot bot;
     Pointer pointer = new Pointer(0, 0, 0);
-    int i = 0;
+    int i = 1;
 
 
     public BotController(LevelWorld stage) {
@@ -48,66 +48,24 @@ public class BotController { //implements InputProcessor
     }
 
     public void update(LevelWorld world) {
+        bot = world.getBotbyIndex(i);
         bot.setMovementDirection(getMovementDirection());
+       // world.getBotbyIndex(i).setMovementDirection(getMovementDirection());
         bot.setRotationDirection(getRotationDirection());
+       // world.getBotbyIndex(i).setRotationDirection(getRotationDirection());
         bot.setSpeededUp(isSpeededUp());
-        pointer.setPosition((int) world.getPlayer().getX(), (int) world.getPlayer().getY());
+       // world.getBotbyIndex(i).setSpeededUp(isSpeededUp());
+        pointer.setPosition((int) world.getPlayer().getX(), (int) world.getHeight() - (int) world.getPlayer().getY());
         //pressedPointers.put(1, new Pointer((int) world.getPlayer().getX(), (int) world.getPlayer().getY(), 0));
         pressedPointers.put(0, pointer);
-       // i++;
+      //  System.out.format("rotatesR: %b rotatesL: %b\r\n", rotatesRight(), rotatesLeft());
+        i++;
+        if(i > 9)
+            i = 1;
+      //  System.out.println(i);
     }
 
-    /*
-    @Override
-    public boolean keyDown(int keycode) {
-        return pressedKeys.add(keycode);
-    }
 
-    @Override
-    public boolean keyUp(int keycode) {
-        return pressedKeys.remove(keycode);
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return printedCharacters.add(character);
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        pressedPointers.put(pointer, new Pointer(screenX, screenY, button));
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (!pressedPointers.containsKey(pointer))
-            return false;
-        pressedPointers.remove(pointer);
-        return true;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if (!pressedPointers.containsKey(pointer))
-            return false;
-        pressedPointers.get(pointer).setPosition(screenX, screenY);
-        return true;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
-    }
-*/
-    public void following(){
-
-    }
     public boolean isWalking() {
         return (movesBackward() || movesForward());
     }
@@ -142,9 +100,12 @@ public class BotController { //implements InputProcessor
                 if (pressedPointers.size() == 0) return false;
                 Pointer tmp = pressedPointers.values().iterator().next();
 
+               // float destAngle = new Vector2(tmp.getX(), tmp.getY()).sub(bot.getX(), bot.getY()).angle();
                 float destAngle = new Vector2(tmp.getX(), tmp.getY()).sub(bot.getX(), bot.getY()).angle();
 
+               // bot.setDestinationAngle(destAngle);
                 bot.setDestinationAngle(destAngle);
+               // float playerAngle = bot.getRotation();
                 float playerAngle = bot.getRotation();
                 float delta = destAngle - playerAngle;
                 if (delta > 0 && delta < 180 || delta < -180)

@@ -16,16 +16,17 @@ import java.util.Scanner;
  * Created by ga_nesterchuk on 25.01.2016.
  */
 public class World extends Stage {
-
+/*
     HashMap<Integer, TextureRegion> textureRegions;
 
     public World(ScreenViewport screenViewport, SpriteBatch batch, HashMap<Integer, TextureRegion> textureRegions) throws FileNotFoundException {
         super(screenViewport, batch);
         this.textureRegions = textureRegions;
         TextureRegion region;
-       ImageActor temp;
-     region = textureRegions.get(0);
-       temp = new ImageActor(region, 800, 600);
-       addActor(temp);
+        ImageActor temp;
+        region = textureRegions.get(0);
+        temp = new ImageActor(region, 800, 600);
+        addActor(temp);
     }
+    */
 }

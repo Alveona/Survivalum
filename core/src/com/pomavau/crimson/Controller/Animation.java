@@ -14,6 +14,7 @@ public class Animation {
     private float currentFrameTime;
     private int frameCount;
     private int frame;
+    private boolean animationFinishedAtLeastOnce = false;
 
     public Animation(TextureRegion region, int frameCount, float cycleTime)
     {
@@ -35,13 +36,26 @@ public class Animation {
             frame++;
             currentFrameTime = 0;
         }
-        if (frame >= frameCount)
+        if (frame >= frameCount) {
             frame = 0;
+            animationFinishedAtLeastOnce = true;
+        }
 
     }
     public TextureRegion getFrame()
     {
         return frames.get(frame);
     }
+
+    public int getFrameCount(){return frameCount;}
+
+    public int getCurrentFrame(){return frame;}
+
+    public boolean isFinishedOnce()
+    {
+        return animationFinishedAtLeastOnce;
+    }
+
+
 
 }

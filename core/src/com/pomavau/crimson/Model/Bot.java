@@ -22,8 +22,8 @@ public class Bot extends ImageActor {
     }
 
     float size;
-    float movementStep;
-    float rotationStep;
+    private float movementStep;
+    private float rotationStep;
     private Direction rotationDirection;
     private Direction movementDirection;
     private boolean speededUp;
@@ -45,8 +45,8 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
     setOrigin(originX / image.getWidth() * width, originY / image.getHeight() * height);
     setRotationDirection(Direction.NONE);
     setMovementDirection(Direction.NONE);
-    rotationStep = 5;
-    movementStep = 150;
+    rotationStep = 10;
+    movementStep = 100;
 }
     public Bot(TextureRegion image, float x, float y, float width, float height, float originX, float originY)
     {
@@ -54,8 +54,8 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
       //  setOrigin(originX / image.getWidth() * width, originY / image.getHeight() * height);
         setRotationDirection(Direction.NONE);
         setMovementDirection(Direction.NONE);
-        rotationStep = 5;
-        movementStep = 150;
+        rotationStep = 10;
+        movementStep = 100;
     }
 
 
@@ -68,6 +68,7 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
                     break;
                 }
                 rotateBy(rotationStep);
+
                 setRotation(getRotation()%360);
                 break;
             case RIGHT:
@@ -82,6 +83,7 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
         }
         switch (movementDirection){
             case FORWARD:
+
                 moveBy(movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI));
                 break;
             case BACKWARD:
@@ -112,4 +114,23 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
     public void setDestinationAngle(float destinationAngle) {
         this.destinationAngle = destinationAngle;
     }
+
+    public float getMovementStep() {
+        return movementStep;
+    }
+    public void setMovementStep(float movementStep) {
+        this.movementStep = movementStep;
+    }
+    public float getRotationStep() {
+        return rotationStep;
+    }
+    public void setRotationStep(float rotationStep) {
+        this.rotationStep = rotationStep;
+    }
+
+    public void setTexture(TextureRegion texture)
+    {
+        this.img = texture;
+    }
+
 }

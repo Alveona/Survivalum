@@ -52,18 +52,37 @@ public class PlayerController implements InputProcessor {
         if (player.getX() > world.getWorldBorders().getX() && player.getX() < world.getWorldBorders().getX() + world.getWorldBorders().getWidth())
         {
             player.setBlockedX(false);
+            player.setIsBlockedRight(false);
+            player.setIsBlockedLeft(false);
+            /*
+            if(player.getX() > world.getWorldBorders().getX())
+                player.setIsBlockedTop(true);
+            if(player.getX() < world.getWorldBorders().getX() + world.getWorldBorders().getWidth())
+                player.setIsBlockedDown(true);
+                */
         }
         else
         {
             player.setBlockedX(true);
+            if(player.getX() < world.getWorldBorders().getX())
+                player.setIsBlockedLeft(true);
+            if(player.getX() > world.getWorldBorders().getX() + world.getWorldBorders().getWidth())
+                player.setIsBlockedRight(true);
         }
+
         if (player.getY() > world.getWorldBorders().getY() && player.getY() < world.getWorldBorders().getY() + world.getWorldBorders().getHeight())
         {
             player.setBlockedY(false);
+            player.setIsBlockedTop(false);
+            player.setIsBlockedDown(false);
         }
         else
         {
             player.setBlockedY(true);
+            if(player.getY() < world.getWorldBorders().getY() )
+                player.setIsBlockedDown(true);
+            if(player.getY() > world.getWorldBorders().getY() + world.getWorldBorders().getHeight())
+                player.setIsBlockedTop(true);
         }
     }
 

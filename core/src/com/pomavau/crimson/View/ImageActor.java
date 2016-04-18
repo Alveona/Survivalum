@@ -10,7 +10,7 @@ import com.pomavau.crimson.crimsonTD;
  * Created by Pomavau on 29.01.16.
  */
 public class ImageActor extends Actor {
-    TextureRegion img;
+    protected TextureRegion img;
 
 
     public ImageActor(TextureRegion img, float x, float y, float width, float height) {
@@ -37,6 +37,8 @@ public class ImageActor extends Actor {
         //batch.draw(img, getX(), getY(), getWidth(), getHeight());
         batch.draw(img, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
+
+
 
    /* public void rotate(float degrees)
     {
