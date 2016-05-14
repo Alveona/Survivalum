@@ -42,7 +42,10 @@ public class CameraController implements InputProcessor {
         this.step = 3;
         this.zoomAmount = 0.2f; //0.2 default
         this.camera = (OrthographicCamera)world.getCamera();
-        cameraBorders = new Rectangle(camera.viewportWidth / 2, camera.viewportHeight / 2, world.getWidth() - camera.viewportWidth, world.getHeight() - camera.viewportHeight);
+        //cameraBorders = new Rectangle(camera.viewportWidth / 2, camera.viewportHeight / 2, world.getWidth() - camera.viewportWidth, world.getHeight() - camera.viewportHeight);
+        cameraBorders = new Rectangle(0, 0, 1145, 616);
+
+
        // cameraBorders = new Rectangle(500, 500, 500, 500);
         //cameraBorders.
         pressedKeys = new HashSet<Integer>();

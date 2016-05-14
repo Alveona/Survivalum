@@ -1,16 +1,27 @@
 package com.pomavau.crimson.Model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.pomavau.crimson.Controller.BodyEditorLoader;
 import com.pomavau.crimson.Controller.BotController;
+import com.pomavau.crimson.Controller.CustomUserData;
 import com.pomavau.crimson.Controller.Direction;
+import com.pomavau.crimson.Controller.ObjectState;
 import com.pomavau.crimson.Controller.PlayerController;
 import com.pomavau.crimson.View.ImageActor;
 import com.pomavau.crimson.crimsonTD;
+
+import static com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody;
+import static com.badlogic.gdx.physics.box2d.BodyDef.BodyType.KinematicBody;
+import static com.badlogic.gdx.physics.box2d.BodyDef.BodyType.StaticBody;
 
 /**
  * Created by Pomavau on 12.03.16.
@@ -26,9 +37,19 @@ public class Bot extends ImageActor {
     private float rotationStep;
     private Direction rotationDirection;
     private Direction movementDirection;
+    private ObjectState currentState = ObjectState.MOVING;
     private boolean speededUp;
+    private boolean nearplayer;
     ShapeRenderer shape;
+    Body box;
     private float destinationAngle;
+    private Vector2 botOrigin;
+    private Vector2 botPos;
+    private CustomUserData customUserData;
+    private int maxHP = 100;
+    private int currentHP = 100;
+
+    private com.badlogic.gdx.physics.box2d.World phworld;
 /*
     public Bot(float x, float y, float size, float step) {
         setPosition(x, y);
@@ -40,6 +61,36 @@ public class Bot extends ImageActor {
         this.rotationStep = 10;
     }
 */
+public void createBody(com.badlogic.gdx.physics.box2d.World world){
+    phworld = world;
+    BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/hero/bodyproject.json"));
+    BodyDef bodyDef = new BodyDef();
+    bodyDef.position.x = getX();
+    bodyDef.position.y = getY();
+    //bodyDef.type = KinematicBody;
+    bodyDef.type = DynamicBody;
+    //bodyDef.type = StaticBody;
+    box = world.createBody(bodyDef);
+    //  box.setType(DynamicBody);
+    FixtureDef fixtureDef = new FixtureDef();
+    fixtureDef.density = 0; //default 1f
+    fixtureDef.restitution = 1f;
+    fixtureDef.friction = 1f;
+    PolygonShape poly = new PolygonShape();
+    poly.setAsBox(0.0f, 0.0f);
+    //poly.setAsBox(getWidth(), getHeight());
+    fixtureDef.shape = poly;
+    //box.createFixture(fixtureDef).setUserData("bot");
+    poly.dispose();
+    customUserData = new CustomUserData("bot", this);
+    loader.attachFixture(box, "zombie", fixtureDef, 65, customUserData);
+    botOrigin = loader.getOrigin("zombie", 65).cpy();
+    setOrigin(botOrigin.x, botOrigin.y);
+    botPos = getPosition().sub(botOrigin);
+    setPosition(botPos.x, botPos.y);
+    box.setUserData(customUserData);
+
+}
 public Bot(Texture image, float x, float y, float width, float height, float originX, float originY) {
     super(image, x, y, width, height);
     setOrigin(originX / image.getWidth() * width, originY / image.getHeight() * height);
@@ -48,49 +99,111 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
     rotationStep = 10;
     movementStep = 100;
 }
-    public Bot(TextureRegion image, float x, float y, float width, float height, float originX, float originY)
+    public Bot(TextureRegion image, float x, float y, float width, float height, float originX, float originY, World world)
     {
         super(image, x, y, width, height);
       //  setOrigin(originX / image.getWidth() * width, originY / image.getHeight() * height);
         setRotationDirection(Direction.NONE);
         setMovementDirection(Direction.NONE);
         rotationStep = 10;
-        movementStep = 100;
+        movementStep = 50;
+        createBody(world);
+        box.setUserData(new String("bot"));
     }
 
 
     public void act(float delta) {
+        //System.out.println(box.getUserData());
+      // System.out.println(isNearPlayer());
         if (speededUp) delta*=3;
+        if(currentState == ObjectState.MOVING) {
         switch (rotationDirection){
             case LEFT:
                 if (Math.abs(getRotation()-destinationAngle) < rotationStep) {
-                    setRotation(destinationAngle);
+                    //setRotation(destinationAngle);
                     break;
                 }
-                rotateBy(rotationStep);
+                if(!isNearPlayer()) {
+                    rotateBy(rotationStep);
+                    box.setTransform(getPosition(), (float) Math.toRadians((getRotation())));
 
-                setRotation(getRotation()%360);
+                    //box.setTransform(getPosition(), (float)Math.toRadians((rotationStep)));
+                    setRotation(getRotation() % 360);
+                }
+                else
+                {
+                    rotateBy(0);
+                    box.setTransform(getPosition(), (float) Math.toRadians((getRotation())));
+                    setRotation(getRotation() % 360);
+                }
                 break;
             case RIGHT:
                 if (Math.abs(getRotation()-destinationAngle) < rotationStep) {
-                    setRotation(destinationAngle);
+                    //setRotation(destinationAngle);
                     break;
                 }
-                rotateBy(-rotationStep);
-                setRotation((360 + getRotation()) % 360);
+                if(!isNearPlayer()) {
+                    rotateBy(-rotationStep);
+                    box.setTransform(getPosition(), (float) Math.toRadians((getRotation())));
+
+                    //box.setTransform(getPosition(), (float)Math.toRadians((-rotationStep)));
+                    setRotation((360 + getRotation()) % 360);
+                }
+                else
+                {
+                    rotateBy(0);
+                    box.setTransform(getPosition(), (float) Math.toRadians((getRotation())));
+                    setRotation(getRotation() % 360);
+                }
                 break;
 
         }
         switch (movementDirection){
             case FORWARD:
 
-                moveBy(movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI));
+                //moveBy(movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI));
+                if(nearplayer == false) {
+                    box.setLinearVelocity(movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI) * 100, movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI) * 100);
+                }
+                else
+                {
+                    box.setLinearVelocity(0,0);
+                }
                 break;
             case BACKWARD:
-                moveBy(-movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), -movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI));
-
+               // moveBy(-movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), -movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI));
+                box.setLinearVelocity(-movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI) * 100, -movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI) * 100);
+                    break;
+        }}
+        if(isNearPlayer() && currentState != ObjectState.DISABLED) {
+            currentState = ObjectState.ATTACKING;
         }
+        else
+        {
+            if(currentState != ObjectState.SPAWNING && currentState != ObjectState.DISABLED) {
+                currentState = ObjectState.MOVING;
+            }
+            else
+            {
+                if (currentState != ObjectState.DISABLED)
+                currentState = ObjectState.SPAWNING;
+            }
+        }
+        //System.out.println(nearplayer);
+        //setRotation((float)Math.toDegrees(box.getAngle()));
+
+        //setX(box.getPosition().x);
+        //setY(box.getPosition().y);
+        setPosition(box.getPosition().x - getWidth() / 2, box.getPosition().y - getHeight() / 2);
     }
+    public void act2(float delta)
+    {
+        setRotation((float) Math.toDegrees(box.getAngle()));
+        //setPosition(box.getPosition().x-getOriginX(), box.getPosition().y-getOriginY());
+
+        setPosition(box.getPosition().x - getWidth() / 2 + 5, box.getPosition().y - getHeight() / 2 + 3);
+    }
+
 
     public Direction getRotationDirection() {
         return rotationDirection;
@@ -132,5 +245,35 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
     {
         this.img = texture;
     }
+    public void setState(ObjectState state)
+    {
+        currentState = state;
+    }
+    public ObjectState getCurrentState()
+    {
+        return currentState;
+    }
+    public void setCurrentState(ObjectState currentState) {
+        this.currentState = currentState;
+    }
+    public Vector2 getPosition(){
+        return box.getPosition();
+    }
 
+
+
+    public boolean isNearPlayer() {
+        return nearplayer;
+    }
+
+    public void setNearplayer(boolean nearplayer) {
+        this.nearplayer = nearplayer;
+    }
+
+    public void setCurrentHP(int currentHP) {
+        this.currentHP = currentHP;
+    }
+    public int getCurrentHP() {
+        return currentHP;
+    }
 }

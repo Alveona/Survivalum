@@ -27,4 +27,6 @@ public class Pointer {
     public int getY() {
         return screenY;
     }
+
+
 }

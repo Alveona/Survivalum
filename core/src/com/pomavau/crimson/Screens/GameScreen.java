@@ -9,42 +9,37 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.pomavau.crimson.Controller.Animation;
 import com.pomavau.crimson.Controller.CameraController;
-import com.pomavau.crimson.Controller.Direction;
+import com.pomavau.crimson.Controller.ObjectState;
 import com.pomavau.crimson.Controller.PlayerController;
 import com.pomavau.crimson.Controller.BotController;
 import com.pomavau.crimson.Controller.ShowMenu;
+import com.pomavau.crimson.Model.Bullet;
 import com.pomavau.crimson.Model.LevelWorld;
 import com.pomavau.crimson.Model.PhWorld;
-import com.pomavau.crimson.Model.Player;
-import com.pomavau.crimson.Model.World;
 import com.pomavau.crimson.View.ImageActor;
 import com.pomavau.crimson.crimsonTD;
 //import com.sun.javafx.scene.control.skin.TableHeaderRow;
 
-import java.awt.Image;
 import java.io.FileNotFoundException;
-import java.util.EventListener;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 //import javafx.animation.Animation;
 
@@ -68,14 +63,23 @@ public class GameScreen implements Screen {
     private ImageActor pauseButton;
     private ImageActor pauseBG;
     private Group pauseScreen;
+
+    private ImageActor inventoryButton;
+    private ImageActor inventoryBG;
+    private ImageActor inventorySlot;
+    private ImageActor m4a4hud;
+    private ImageActor icegunhud;
+    private ImageActor firegunhud;
+    private Group inventoryScreen;
+
     private Drawable touchBackground;
     private Drawable touchKnob;
 
-    private ImageActor bullet;
+    private Bullet bullet;
     private int bulletSpeed = 300;
-    Array<ImageActor> bullets;
+    Array<Bullet> bullets;
     long shotTime;
-    private int currentBot = 1;
+    private int currentBot = 2;
 
     final float WIDTH = Gdx.graphics.getWidth();
     final float HEIGHT = Gdx.graphics.getHeight();
@@ -87,6 +91,22 @@ public class GameScreen implements Screen {
     private ImageActor bulletsCounterBG;
     private ImageActor[] bulletsCounterCounters;
     private int lastBulletY = 0;
+    private int bulletsShooted = 0;
+
+    private long currenttime = 0;
+    private long deltatime;
+
+    private long currenttimeSec = (long)(currenttime / 1E9);
+    private long deltatimeSec;
+    private boolean timerIsOn = false;
+
+    private float spawntime = 1;
+    private float nextspawn = 0;
+
+
+    ClickListener clickListener = new ClickListener();
+
+
 
     LevelWorld world;
     PhWorld phworld;
@@ -94,6 +114,8 @@ public class GameScreen implements Screen {
     CameraController cameraController;
     BotController botController;
     InputMultiplexer multiplexer;
+
+    private Contact contact;
 
     protected Label FPSlabel;
     private BitmapFont font;
@@ -105,7 +127,7 @@ public class GameScreen implements Screen {
         debugRenderer = new Box2DDebugRenderer();
         phworld = new PhWorld();
         animation = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_atlas.png"), 1565, 824), 5, 3);
-        bullets = new Array<ImageActor>();
+        bullets = new Array<Bullet>();
         font = new BitmapFont();
         camera = new OrthographicCamera();
         this.textureRegions = textureRegions;
@@ -115,12 +137,28 @@ public class GameScreen implements Screen {
 
         world = new LevelWorld(new ScreenViewport(camera), batch);
 
-        pauseButton = new ImageActor(new Texture("android/assets/gamescreen_btnPause.png"), 0, world.getHeight(), 50, 50);
-        pauseBG = new ImageActor(new Texture("android//assets//Menu.png"), 384, 616 - 534);
+        pauseButton = new ImageActor(new Texture("android/assets/gamescreen_btnPause.png"), 0, world.getHeight(), 75, 75);
+        pauseBG = new ImageActor(new Texture("android//assets//Menu2.png"), 384, 616 - 534);
         pauseScreen = new Group();
         pauseScreen.setVisible(false);
         pauseScreen.addActor(pauseBG);
         pauseButton.addListener(new ShowMenu(pauseScreen));
+
+        //inventoryButton = new ImageActor(new Texture("android//assets//gamescreen_bulletsCount.png"), 325, (int)world.getHeight(), 75, 165);
+        inventoryButton = new ImageActor(new Texture("android//assets//gamescreen_btnInventory.png"), 100, (int)world.getHeight());
+        inventoryBG = new ImageActor(new Texture("android//assets//mainmenu//InventoryMenu.png"), 346, 616 - 534);
+        inventorySlot = new ImageActor(new Texture("android//assets//mainmenu//InventorySlot.png"), 507, 616 - 282);
+        m4a4hud = new ImageActor(new Texture("android//assets//mainmenu//m4a4_hud.png"),519, 616 - 266, 113, 75);
+        icegunhud = new ImageActor(new Texture("android//assets//mainmenu//icegun_hud.png"),519, 616 - 266, 113, 75);
+
+        inventoryScreen = new Group();
+        inventoryScreen.setVisible(false);
+        inventoryScreen.addActor(inventoryBG);
+        inventoryScreen.addActor(m4a4hud);
+        inventoryScreen.addActor(icegunhud);
+        inventoryScreen.addActor(inventorySlot);
+
+        inventoryButton.addListener(new ShowMenu(inventoryScreen));
 
         float aspectRatio = (float) Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight(); //camera viewport set
         camera.setToOrtho(false, 10f * aspectRatio, 10f);
@@ -129,8 +167,8 @@ public class GameScreen implements Screen {
         cameraController = new CameraController(world);
         botController = new BotController(world);
         multiplexer = new InputMultiplexer();
-        world.getBot().setController(botController);
-        world.getBot1().setController(botController);
+//        world.getBot().setController(botController);
+    //    world.getBot1().setController(botController);
 
         bulletsCounter = new Group();
         bulletsCounterBG = new ImageActor(new Texture("android//assets//gamescreen_bulletsCount.png"), 1145 - 117, (int)world.getHeight() /2);
@@ -173,6 +211,8 @@ public class GameScreen implements Screen {
         UIstage.addActor(pauseButton);
         UIstage.addActor(pauseScreen);
         UIstage.addActor(bulletsCounter);
+        UIstage.addActor(inventoryButton);
+        UIstage.addActor(inventoryScreen);
         pauseButton.toFront();
         world.setBackgroundtoBack();
         //Multiplexer filling
@@ -181,15 +221,24 @@ public class GameScreen implements Screen {
         multiplexer.addProcessor(playerController);
         multiplexer.addProcessor(cameraController);
         // multiplexer.addProcessor(botController);
+
+
+
     }
 
     private void shot() {
 
         // bullet = new ImageActor (new Texture("android/assets/bullet.png"), (int)(world.getPlayer().getX() + world.getPlayer().getWidth()*Math.cos((double)(world.getPlayer().getRotation()))),(int)(world.getPlayer().getY() + world.getPlayer().getHeight()*Math.sin((double)(world.getPlayer().getRotation()))), 14 , 3);
-        bullet = new ImageActor(new Texture("android/assets/bullet.png"), world.getPlayer().getX(), world.getPlayer().getY(), 14, 3);
+       // bullet = new ImageActor(new Texture("android/assets/bullet.png"), world.getPlayer().getX(), world.getPlayer().getY(), 14, 3);
+        bullet = new Bullet(new Texture("android/assets/bullet.png"), world.getPlayer().getX(), world.getPlayer().getY(), 14f, 3f, world.getPhysicsWorld()); //DEFAULT : 14X3
+        bulletsShooted++;
        // Player player = world.getPlayer();
-        bullet.setPosition(world.getPlayer().getX() + (float) world.getPlayer().getWidth() * (float) Math.cos(world.getPlayer().getRotation() / 180 * Math.PI),
-                world.getPlayer().getY() + (float) world.getPlayer().getWidth() * (float) Math.sin(world.getPlayer().getRotation() / 180 * Math.PI));
+
+        bullet.setPosition(world.getPlayer().getX() + (float) world.getPlayer().getWidth() * (float) Math.cos(world.getPlayer().getRotation() / 180 * Math.PI ) - 10,
+                world.getPlayer().getY() + (float) world.getPlayer().getHeight() * (float) Math.sin(world.getPlayer().getRotation() / 180 * Math.PI ) + 10);
+        //bullet.setPosition(world.getPlayer().getBody().getPosition().x + world.getPlayer().getWidth() / 2, world.getPlayer().getBody().getPosition().y);
+
+        //bullet.setPosition(world.getPlayer().getPosition().x + world.getPlayer().getWidth() / 2 - 10, world.getPlayer().getPosition().y);
         //System.out.println(player.getRotation());
         // System.out.println(world.getPlayer().getRotation());
         world.addActor(bullet);
@@ -219,56 +268,94 @@ public class GameScreen implements Screen {
     public void reload()
     {
 
-            bulletsLeft = bulletsCountDefault;
+            //bulletsLeft = bulletsCountDefault;
             isReloading = true;
-        for(int i = 0; i < bulletsCounterCounters.length - 1; i++)
-        {
-           bulletsCounterCounters[i].setVisible(true);
+        if(world.getReloadAnimation().isFinishedOnce() == true) {
+            for(int i = 0; i < bulletsCounterCounters.length - 1; i++)
+            {
+                bulletsCounterCounters[i].setVisible(true);
+            }
+            bulletsLeft = bulletsCountDefault;
+            world.getReloadAnimation().setFinishedOnce(false);
         }
+
     }
+
+
 
 
     @Override
     public void render(float delta) {
 
-        debugRenderer.render(world.getPhysicsWorld(), UIcamera.combined);
+        //Timer timer = new Timer();
+        //timer.start();
+
+        //SPAWNING BOTS
+        /*if(!timerIsOn) {
+            timerIsOn = true;*/
+        nextspawn+=delta;
+        if(nextspawn>=spawntime){
+            nextspawn=0;
+            crimsonTD.getInstance().spawnbots();
+            //if(world.getZombieSpawnAnimation().getCurrentFrame() == 2)
+
+        }
+        isBotNearPlayer();
+        botsAttacking();
+        //System.out.println(nextspawn);
+        /*
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                crimsonTD.getInstance().spawnbots();
+                Timer.instance().clear();
+            }
+        }, 5);
+*/
+
+       // }
+        world.getReloadAnimation().setFinishedOnce(true);
+        //isBotNearPlayer();
+        world.getPhysicsWorld().step(delta, 6, 2);
         currentBot++;
-            if(currentBot > 9)
+            if(currentBot > world.getBotscount() - 1)
                 currentBot = 1;
 
 
             //System.out.println(isObjectTouched(bulletsCounter) + " " + Gdx.input.getX() + " " + Gdx.input.getY() + " " + Gdx.input.isTouched());
        // if (crimsonTD.getInstance().getMenuVisibility(pauseScreen) == true)
           //  System.out.println("paused");
-        if (crimsonTD.getInstance().getMenuVisibility(pauseScreen) != true) {
-            playerController.update(world);
-            cameraController.update(world);
-            botController.update(world);
-        }
-        else
-        {
 
-        }
+
             //System.out.format("isBlockedX: %b isBlockedY: %b \r\n", world.getPlayer().getBlockedX(), world.getPlayer().getBlockedY());
             //System.out.format("bot RD: %s bot MD: %s\r\n", world.getBot().getRotationDirection(), world.getBot().getMovementDirection()) ;
               //  System.out.println(world.getPlayer().getViewDirection());
         //animation.update(delta);
-       if(Gdx.input.isKeyPressed(Input.Keys.R)) {
+
+
+
+       if(Gdx.input.isKeyPressed(Input.Keys.R) && bulletsLeft < bulletsCountDefault) {
           // while(world.getReloadAnimation().getCurrentFrame() != world.getReloadAnimation().getFrameCount()) {
                //world.getReloadAnimation().update(delta);
                reload();
-                if (isReloading)
-           {
-               world.playerUpdate(world.getReloadAnimation(), delta);
+              //  if (isReloading)
+         //  {
+               //world.playerUpdate(world.getReloadAnimation(), delta);
               // isReloading = false;
-               if(world.getReloadAnimation().isFinishedOnce() == true)
-                   isReloading = false;
-           }
+               //if(world.getReloadAnimation().isFinishedOnce() == true)
+                  // isReloading = false;
+         //  }
           // }
        }
+        //isReloading = false;
+        System.out.println(world.getZombieSpawnAnimation().getCurrentFrame());
         world.getReloadAnimation().update(delta);
         world.getMoveAnimation().update(delta);
+        world.getMoveAnimation_icegun().update(delta);
         world.getZombieMoveAnimation().update(delta);
+        world.getZombieAttackAnimation().update(delta);
+        world.getZombieSpawnAnimation().update(delta);
+
 /*
         if(isReloading)
         {
@@ -276,12 +363,26 @@ public class GameScreen implements Screen {
        }
        else
         {*/
-           if(isReloading = false)
-            world.playerUpdate(world.getMoveAnimation(), delta);
+           //if(isReloading = false) {
+        switch(world.getPlayer().getCurrentWeapon()) {
+            case ASSAULTRIFLE: world.playerUpdate(world.getMoveAnimation(), delta); break;
+            case ICERIFLE: world.playerUpdate(world.getMoveAnimation_icegun(), delta); break;
+        }
+          // }
+      //  else
+         //  {
+          //     if (world.getReloadAnimation().isFinishedOnce() == false)
+         //      world.playerUpdate(world.getReloadAnimation(), delta);
+         //  }
       //  }
-       // world.botUpdate(world.getBot(), delta);
-        world.botsUpdate(currentBot, delta);
 
+       // world.botUpdate(world.getBot(), delta);
+        world.botsUpdate(currentBot, delta, world.getBotbyIndex(currentBot).getCurrentState());
+        if (crimsonTD.getInstance().getMenuVisibility(pauseScreen) != true) {
+            playerController.update(world);
+            cameraController.update(world);
+            botController.update(world);
+        }
         StringBuilder builder = new StringBuilder();
         builder.append(" FPS: ").append(Gdx.graphics.getFramesPerSecond()); //fps label
         FPSlabel.setText(builder);
@@ -291,39 +392,95 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
-        // hero.setX(hero.getX() + touchpadLeft.getKnobPercentX() * heroSpeed);
-        // hero.setY(hero.getY() + touchpadLeft.getKnobPercentY() * heroSpeed);
-        if (world.getPlayer().getBlockedX() != true)
-        world.getPlayer().setX(world.getPlayer().getX() + touchpadLeft.getKnobPercentX() * world.getPlayer().getMovementStep() / 50);
-        if (world.getPlayer().getBlockedY() != true)
-        world.getPlayer().setY(world.getPlayer().getY() + touchpadLeft.getKnobPercentY() * world.getPlayer().getMovementStep() / 50);
-        //world.getPlayer().moveBy((world.getPlayer().getMovementStep() * delta * (float) Math.cos(world.getPlayer().getRotation() / 180 * Math.PI)), world.getPlayer().getMovementStep() * delta * (float) Math.sin(world.getPlayer().getRotation() / 180 * Math.PI) * touchpadLeft.getKnobPercentX());
-        //System.out.println("X:" + hero.getX() + " Y:" + hero.getY()); //debug
-        // hero.setOrigin(hero.getWidth() / 2 - hero.getWidth() / 4 - hero.getWidth() / 8, hero.getHeight() / 2 - hero.getHeight() / 4);
-        //hero.rotateBy(touchpadRight.getKnobPercentX() * -3);
+
 
 
         world.getPlayer().rotateBy(touchpadRight.getKnobPercentX() * -5);
+        world.getPlayer().setBoxRotation((float)Math.toRadians(touchpadRight.getKnobPercentX() * -5));
 
+
+
+        //CONTACTS
+        //Array<Contact> contactList = world.getPhysicsWorld().getContactList();
+        //for(int i = 0; i < contactList.size; i++) {
+            //contact = contactList.get(i);
+            //System.out.println("FIXTURE A USER DATA: " + contact.getFixtureA().getUserData());
+            //System.out.println("FIXTURE B USER DATA: " + contact.getFixtureB().getUserData());
+            //System.out.println(contact);
+            /*
+            if(contact != null) {
+                if (contact.isTouching()
+                        && contact.getFixtureA().getUserData().equals("bullet")
+                        && contact.getFixtureB().getUserData().equals("bot")) {
+                    Body body1 = null;
+                    Body body2 = null;
+                    if (contact.getFixtureA() != null && contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("bullet"))
+                        body1 = contact.getFixtureA().getBody();
+
+                    if (contact.getFixtureB() != null && contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("bot"))
+                        body2 = contact.getFixtureB().getBody();
+
+                    if (body1 != null) {
+
+                        body1.setActive(false);
+                        world.getPhysicsWorld().destroyBody(body1);
+                    }
+
+                }
+            }
+            */
+        //}
+/*
+        if(world.getPlayer().getViewDirection() == Direction.FORWARD && getLeftTouchpadKnobY() > 0)
+            world.getPlayer().setMovementDirection(Direction.FORWARD);                                      //THIS
+        if(world.getPlayer().getViewDirection() == Direction.RIGHT && getLeftTouchpadKnobX() > 0)
+            world.getPlayer().setMovementDirection(Direction.RIGHT);
+*/
+
+
+/*
         if (touchpadLeft.getKnobPercentX() > 0 && touchpadLeft.getKnobPercentY() > 0)
             {
+                world.getPlayer().setState(ObjectState.MOVING);
 
                 world.getPlayer().setMovementDirection(Direction.FORWARD);
             }
         else
         {
-            if(touchpadLeft.getKnobPercentX() != 0 && touchpadLeft.getKnobPercentY() != 0)
-            world.getPlayer().setMovementDirection(Direction.BACKWARD);
+            if(touchpadLeft.getKnobPercentX() != 0 && touchpadLeft.getKnobPercentY() != 0) {
+                world.getPlayer().setMovementDirection(Direction.BACKWARD);
+                world.getPlayer().setState(ObjectState.MOVING);
+            }
 
         }
         if (touchpadLeft.getKnobPercentX() < 0 && touchpadLeft.getKnobPercentY() < 0)
         {
             world.getPlayer().setMovementDirection(Direction.BACKWARD);
+            world.getPlayer().setState(ObjectState.MOVING);
         }
         else {
-            if(touchpadLeft.getKnobPercentX() != 0 && touchpadLeft.getKnobPercentY() != 0)
-            world.getPlayer().setMovementDirection(Direction.FORWARD);
+            if(touchpadLeft.getKnobPercentX() != 0 && touchpadLeft.getKnobPercentY() != 0) {
+                world.getPlayer().setState(ObjectState.MOVING);
+                world.getPlayer().setMovementDirection(Direction.FORWARD);
+
+            }
         }
+*/
+        switch (world.getPlayer().getCurrentWeapon())
+        {
+            case ASSAULTRIFLE:
+                m4a4hud.setVisible(true);
+                icegunhud.setVisible(false);
+               // firegunhud.setVisible(false);
+                break;
+            case ICERIFLE: icegunhud.setVisible(true);
+                m4a4hud.setVisible(false);
+             //   firegunhud.setVisible(false);
+                break;
+        }
+
+       // if (touchpadLeft.getKnobPercentX() == 0 && touchpadLeft.getKnobPercentY() == 0)
+           // world.getPlayer().setState(ObjectState.STAYING);
 
           //  System.out.println(world.getPlayer().getMovementDirection());
         //SHOOTING
@@ -333,23 +490,25 @@ public class GameScreen implements Screen {
                 shot();
             }
         }
+
         for (int i = 0; i < bullets.size; i++) {
             // System.out.println("Shooting..");
             //bullets.get(i).setY(bullets.get(i).getY() + 10);
+            //System.out.println(bullets.get(i).getBox());
             bullets.get(i).moveBy(bulletSpeed * delta * (float) Math.cos(bullets.get(i).getRotation() / 180 * Math.PI), bulletSpeed * delta * (float) Math.sin(bullets.get(i).getRotation() / 180 * Math.PI));
-            if (bullets.get(i).getY() >= 750) {
+            if (bullets.get(i).getY() >= 1000) {
                 bullets.get(i).remove();
                 bullets.removeIndex(i);
             }
         }
-
+/*
             if(Math.abs(world.getBot().getX() - world.getPlayer().getX()) < 10) {
               //  world.getBot().setRotationStep(0);
             }
         else
             {
 
-            }
+            }*/
 
         //hero.setSize(152, 100);
         //stage.act(Gdx.graphics.getDeltaTime());
@@ -358,6 +517,16 @@ public class GameScreen implements Screen {
         world.draw();
         UIstage.act(Gdx.graphics.getDeltaTime());
         UIstage.draw();
+        batch.begin();
+        debugRenderer.SHAPE_STATIC.set(new Color(Color.RED));
+        debugRenderer.SHAPE_AWAKE.set(new Color(Color.RED));
+        debugRenderer.SHAPE_NOT_ACTIVE.set(new Color(Color.RED));
+        debugRenderer.SHAPE_NOT_AWAKE.set(new Color(Color.RED));
+        debugRenderer.SHAPE_KINEMATIC.set(new Color(Color.RED));
+        debugRenderer.VELOCITY_COLOR.set(new Color(Color.RED));
+        //debugRenderer.render(world.getPhysicsWorld(), camera.combined);
+        batch.end();
+        camera.update();
     }
 
     @Override
@@ -392,6 +561,59 @@ public class GameScreen implements Screen {
             return false;
     }
 
+    public float getLeftTouchpadKnobX()
+    {
+        return touchpadLeft.getKnobPercentX();
+    }
+    public float getLeftTouchpadKnobY()
+    {
+        return touchpadLeft.getKnobPercentY();
+    }
 
+    public float getRightTouchpadKnobX()
+    {
+        return touchpadRight.getKnobPercentX();
+    }
+    public float getRightTouchpadKnobY()
+    {
+        return touchpadRight.getKnobPercentY();
+    }
+
+    public void isBotNearPlayer()
+    {
+
+
+
+        for(int i = 1; i < world.getBotscount(); i++)
+       {
+           //System.out.println((Math.abs(world.getBotbyIndex(i).getX() - world.getPlayer().getX()))+ " " + (Math.abs(world.getBotbyIndex(i).getY() - world.getPlayer().getY())));
+           if((Math.abs(world.getBotbyIndex(i).getX() - world.getPlayer().getX()) < 70) && (Math.abs(world.getBotbyIndex(i).getY() - world.getPlayer().getY()) < 70) && world.getBotbyIndex(i).getCurrentState()!= ObjectState.DISABLED)
+           {
+               world.getBotbyIndex(i).setNearplayer(true);
+           }
+           else
+           {
+               world.getBotbyIndex(i).setNearplayer(false);
+           }
+
+           //System.out.println("BOT # " + i + " NEAR PLAYER?: "+world.getBotbyIndex(i).isNearPlayer());
+       }
+
+    }
+    public LevelWorld getWorld() {
+        return world;
+    }
+
+    public void botsAttacking()
+    {
+        for(int i = 1; i < world.getBotscount(); i++)
+        {
+            if(world.getBotbyIndex(i).getCurrentState() == ObjectState.ATTACKING)
+            {
+                world.getPlayer().setCurrentHP(world.getPlayer().getCurrentHP() - 10);
+            }
+        }
+        System.out.println(world.getPlayer().getCurrentHP());
+    }
 }
 

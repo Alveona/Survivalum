@@ -8,5 +8,6 @@ public enum MovementControlStyle {
     STEER,
     TOUCH,
     BUTTONS,
+    JOYPAD,
     NONE
 }

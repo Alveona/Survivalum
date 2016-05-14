@@ -1,5 +1,6 @@
 package com.pomavau.crimson.Controller;
 
+import com.badlogic.gdx.Gdx;
 import com.pomavau.crimson.Controller.MovementControlStyle;
 import com.pomavau.crimson.crimsonTD;
 import com.pomavau.crimson.Model.LevelWorld;
@@ -46,8 +47,27 @@ public class PlayerController implements InputProcessor {
     }
 
     public void update(LevelWorld world) {
-        player.setMovementDirection(getMovementDirection());
-        player.setRotationDirection(getRotationDirection());
+        if(movementControlStyle == MovementControlStyle.JOYPAD) {
+            player.getBody()
+                    .setLinearVelocity(
+                            crimsonTD.getInstance().getLeftTouchpadKnobX() * player.getMovementStep(),
+                            crimsonTD.getInstance().getLeftTouchpadKnobY() * player.getMovementStep()
+                    );
+        }
+        if(movementControlStyle == MovementControlStyle.BUTTONS) {
+            //player.setMovementDirection(getMovementDirection());
+            // player.setRotationDirection(getRotationDirection());
+            if (movesForward() && player.getRotation() > 270 && player.getRotation() < 360) {
+                player.getBody().setLinearVelocity((float) ((player.getX() + player.getMovementStep()) * Math.cos(player.getRotation())), (float) ((player.getY() + player.getMovementStep()) * Math.sin(player.getRotation())));
+            }
+            else
+            {
+                player.getBody().setLinearVelocity((float) ((player.getX() - player.getMovementStep()) * Math.cos(player.getRotation())), (float) ((player.getY() - player.getMovementStep()) * Math.sin(player.getRotation())));
+
+            }
+        }
+        /*
+
         player.setSpeededUp(isSpeededUp());
         if (player.getX() > world.getWorldBorders().getX() && player.getX() < world.getWorldBorders().getX() + world.getWorldBorders().getWidth())
         {
@@ -59,7 +79,7 @@ public class PlayerController implements InputProcessor {
                 player.setIsBlockedTop(true);
             if(player.getX() < world.getWorldBorders().getX() + world.getWorldBorders().getWidth())
                 player.setIsBlockedDown(true);
-                */
+
         }
         else
         {
@@ -83,7 +103,7 @@ public class PlayerController implements InputProcessor {
                 player.setIsBlockedDown(true);
             if(player.getY() > world.getWorldBorders().getY() + world.getWorldBorders().getHeight())
                 player.setIsBlockedTop(true);
-        }
+        }*/
     }
 
     @Override
@@ -151,6 +171,8 @@ public class PlayerController implements InputProcessor {
                 return (pressedKeys.contains(SHIFT_LEFT)) && !isStanding();
             case TOUCH:
                 return pressedPointers.size() > 2;
+            case JOYPAD:
+                return false;
         }
         return false;
 
@@ -162,6 +184,8 @@ public class PlayerController implements InputProcessor {
                 return (pressedKeys.contains(CONTROL_LEFT));
             case TOUCH:
                 return pressedPointers.size() == 0;
+            case JOYPAD:
+                return crimsonTD.getInstance().getLeftTouchpadKnobX() == 0 && crimsonTD.getInstance().getLeftTouchpadKnobY() == 0;
         }
         return false;
     }
@@ -172,6 +196,8 @@ public class PlayerController implements InputProcessor {
                 return pressedKeys.contains(W);
             case TOUCH:
                 return pressedPointers.size() > 0;
+            case JOYPAD:
+                return crimsonTD.getInstance().getLeftTouchpadKnobY() > 0;
         }
         return false;
     }
@@ -182,6 +208,8 @@ public class PlayerController implements InputProcessor {
                 return pressedKeys.contains(S);
             case TOUCH:
                 return false;
+            case JOYPAD:
+                return crimsonTD.getInstance().getLeftTouchpadKnobY() < 0;
         }
         return false;
     }
@@ -233,6 +261,10 @@ public class PlayerController implements InputProcessor {
                 if (movesForward() && !movesBackward() && !isStanding()) return Direction.FORWARD;
                 if (!movesForward() && movesBackward() && !isStanding()) return Direction.BACKWARD;
                 break;
+            case JOYPAD:
+                if (movesForward() && !movesBackward() && !isStanding()) return Direction.FORWARD;
+                if (!movesForward() && movesBackward() && !isStanding()) return Direction.BACKWARD;
+                break;
         }
         return Direction.NONE;
     }
@@ -241,6 +273,10 @@ public class PlayerController implements InputProcessor {
         switch (movementControlStyle) {
             case BUTTONS:
             case TOUCH:
+                if (rotatesRight() && !rotatesLeft() && !isStanding()) return Direction.RIGHT;
+                if (!rotatesRight() && rotatesLeft() && !isStanding()) return Direction.LEFT;
+                break;
+            case JOYPAD:
                 if (rotatesRight() && !rotatesLeft() && !isStanding()) return Direction.RIGHT;
                 if (!rotatesRight() && rotatesLeft() && !isStanding()) return Direction.LEFT;
                 break;

@@ -5,5 +5,6 @@ package com.pomavau.crimson.Controller;
  */
 public enum GameState {
     RUNNING,
-    PAUSE
+    PAUSE,
+    DEBUG_BOTSTAING
 }

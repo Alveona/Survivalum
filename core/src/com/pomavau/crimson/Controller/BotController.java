@@ -39,7 +39,8 @@ public class BotController { //implements InputProcessor
 
 
     public BotController(LevelWorld stage) {
-        bot = stage.getBot();
+        //bot = stage.getBot();
+
         pressedKeys = new HashSet<Integer>();
         printedCharacters = new ArrayList<Character>();
         pressedPointers = new HashMap<Integer, Pointer>();
@@ -49,19 +50,17 @@ public class BotController { //implements InputProcessor
 
     public void update(LevelWorld world) {
         bot = world.getBotbyIndex(i);
-        bot.setMovementDirection(getMovementDirection());
-       // world.getBotbyIndex(i).setMovementDirection(getMovementDirection());
-        bot.setRotationDirection(getRotationDirection());
-       // world.getBotbyIndex(i).setRotationDirection(getRotationDirection());
-        bot.setSpeededUp(isSpeededUp());
-       // world.getBotbyIndex(i).setSpeededUp(isSpeededUp());
-        pointer.setPosition((int) world.getPlayer().getX(), (int) world.getHeight() - (int) world.getPlayer().getY());
-        //pressedPointers.put(1, new Pointer((int) world.getPlayer().getX(), (int) world.getPlayer().getY(), 0));
-        pressedPointers.put(0, pointer);
-      //  System.out.format("rotatesR: %b rotatesL: %b\r\n", rotatesRight(), rotatesLeft());
-        i++;
-        if(i > 9)
-            i = 1;
+
+            bot.setMovementDirection(getMovementDirection());
+            bot.setRotationDirection(getRotationDirection());
+            bot.setSpeededUp(isSpeededUp());
+            pointer.setPosition((int) world.getPlayer().getX(), (int) world.getHeight() - (int) world.getPlayer().getY());
+            //pointer.setPosition((int) world.getPlayer().getX(), (int) world.getPlayer().getY());
+            pressedPointers.put(0, pointer);
+            i++;
+            if (i > world.getBotscount() - 1)
+                i = 1;
+
       //  System.out.println(i);
     }
 
@@ -97,13 +96,14 @@ public class BotController { //implements InputProcessor
 
     public boolean rotatesLeft() {
 
-                if (pressedPointers.size() == 0) return false;
-                Pointer tmp = pressedPointers.values().iterator().next();
+                //if (pressedPointers.size() == 0) return false;
+                //Pointer tmp = pressedPointers.values().iterator().next();
 
-               // float destAngle = new Vector2(tmp.getX(), tmp.getY()).sub(bot.getX(), bot.getY()).angle();
+                Pointer tmp = pointer;
                 float destAngle = new Vector2(tmp.getX(), tmp.getY()).sub(bot.getX(), bot.getY()).angle();
+        //float destAngle = new Vector2(tmp.getX(), tmp.getY()).angle();
 
-               // bot.setDestinationAngle(destAngle);
+        // bot.setDestinationAngle(destAngle);
                 bot.setDestinationAngle(destAngle);
                // float playerAngle = bot.getRotation();
                 float playerAngle = bot.getRotation();
@@ -116,10 +116,11 @@ public class BotController { //implements InputProcessor
 
     public boolean rotatesRight() {
 
-                if (pressedPointers.size() == 0) return false;
-                Pointer tmp = pressedPointers.values().iterator().next();
-
+                //if (pressedPointers.size() == 0) return false;
+                //Pointer tmp = pressedPointers.values().iterator().next();
+        Pointer tmp = pointer;
                 float destAngle = new Vector2(tmp.getX(), tmp.getY()).sub(bot.getX(), bot.getY()).angle();
+
                 bot.setDestinationAngle(destAngle);
                 float playerAngle = bot.getRotation();
                 float delta = destAngle - playerAngle;
@@ -138,9 +139,13 @@ public class BotController { //implements InputProcessor
     }
 
     public Direction getRotationDirection() {
-                if (rotatesRight() && !rotatesLeft() && !isStanding()) return Direction.RIGHT;
-                if (!rotatesRight() && rotatesLeft() && !isStanding()) return Direction.LEFT;
-
+        if(!bot.isNearPlayer()) {
+            if (rotatesRight() && !rotatesLeft() && !isStanding()) return Direction.RIGHT;
+            if (!rotatesRight() && rotatesLeft() && !isStanding()) return Direction.LEFT;
+        }
+        else {
+            return Direction.NONE;
+        }
         return Direction.NONE;
     }
 }

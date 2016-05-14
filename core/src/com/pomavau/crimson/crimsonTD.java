@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.pomavau.crimson.Controller.MovementControlStyle;
-import com.pomavau.crimson.Model.World;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -42,7 +41,8 @@ public class crimsonTD extends Game {
 	@Override
 	public void create() {
 
-		setMovementControlStyle(MovementControlStyle.BUTTONS);
+		//setMovementControlStyle(MovementControlStyle.BUTTONS);
+		setMovementControlStyle(MovementControlStyle.JOYPAD);
 		ppuX = Gdx.graphics.getWidth()/1145;
 		ppuY = Gdx.graphics.getHeight()/616;
 		loadGraphics();
@@ -131,5 +131,26 @@ public class crimsonTD extends Game {
 		this.ppuX = ppuX;
 	}
 
+	public float getLeftTouchpadKnobX()
+	{
+		return gameScreen.getLeftTouchpadKnobX();
+	}
+	public float getLeftTouchpadKnobY()
+	{
+		return gameScreen.getLeftTouchpadKnobY();
+	}
 
+	public float getRightTouchpadKnobX()
+	{
+		return gameScreen.getRightTouchpadKnobX();
+	}
+	public float getRightTouchpadKnobY()
+	{
+		return gameScreen.getRightTouchpadKnobY();
+	}
+
+	public void spawnbots()
+	{
+		gameScreen.getWorld().spawnbot();
+	}
 }

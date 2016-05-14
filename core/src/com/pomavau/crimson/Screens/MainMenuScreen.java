@@ -29,6 +29,7 @@ public class MainMenuScreen implements Screen{
     private ImageActor settingsButton;
     private ImageActor ratesButton;
     private ImageActor musicButton;
+    private ImageActor titleText;
     private Group settingScreen;
     private ImageActor settingsBG;
     private Music music;
@@ -53,6 +54,7 @@ public class MainMenuScreen implements Screen{
         playButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnPlay.png"), 325, 59); //557
         settingsButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnSet.png"), 513, 59);
         ratesButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btnStat.png"), 695, 59);
+        titleText = new ImageActor(new Texture("android//assets//mainmenu//title.png"), 182, 616-224);
 
         settingScreen = new Group();
         settingScreen.addActor(settingsBG);
@@ -66,6 +68,7 @@ public class MainMenuScreen implements Screen{
         stage.addActor(background);
         stage.addActor(playButton);
         stage.addActor(ratesButton);
+        stage.addActor(titleText);
 
         stage.addActor(settingsButton);
         stage.addActor(settingScreen);

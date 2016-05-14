@@ -15,6 +15,9 @@ public class PhWorld {
     Body boxP;
     public int width;
     public int height;
+    private MyContactListener contactListener = new MyContactListener(world);
+
+
 
     public void update(float delta){
 
@@ -30,8 +33,8 @@ public class PhWorld {
     public PhWorld(){
         width = 30;
         height = 8;
-        world = new com.badlogic.gdx.physics.box2d.World(new Vector2(0, -20), true);
-        world.setContactListener(new MyContactListener(world));
+        world = new com.badlogic.gdx.physics.box2d.World(new Vector2(0, 0), true);
+        world.setContactListener(contactListener);
         //world.setAutoClearForces(true);
         createWorld();
     }

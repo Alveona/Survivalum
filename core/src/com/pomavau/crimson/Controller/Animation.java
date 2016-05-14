@@ -15,6 +15,8 @@ public class Animation {
     private int frameCount;
     private int frame;
     private boolean animationFinishedAtLeastOnce = false;
+    private boolean loop = true;
+
 
     public Animation(TextureRegion region, int frameCount, float cycleTime)
     {
@@ -28,18 +30,38 @@ public class Animation {
         maxFrameTime = cycleTime /frameCount;
         frame = 0;
     }
+    public Animation(TextureRegion region, int frameCount, float cycleTime, boolean loop)
+    {
+        this.loop = loop;
+        frames = new Array<TextureRegion>();
+        int frameWidth = region.getRegionWidth() / frameCount;
+        for(int i = 0; i < frameCount; i++)
+        {
+            frames.add(new TextureRegion(region, i * frameWidth, 0, frameWidth, region.getRegionHeight()));
+        }
+        this.frameCount = frameCount;
+        maxFrameTime = cycleTime /frameCount;
+        frame = 0;
+    }
     public void update(float delta)
     {
         currentFrameTime += delta;
-        if (currentFrameTime > maxFrameTime)
+        if ((currentFrameTime > maxFrameTime && loop == true) || (currentFrameTime > maxFrameTime && loop == false && animationFinishedAtLeastOnce == false))
         {
             frame++;
             currentFrameTime = 0;
         }
         if (frame >= frameCount) {
-            frame = 0;
-            animationFinishedAtLeastOnce = true;
+            if(loop == true){
+                frame = 0;
+                animationFinishedAtLeastOnce = true;
+            }
+            else
+            {
+                animationFinishedAtLeastOnce = true;
+            }
         }
+
 
     }
     public TextureRegion getFrame()
@@ -54,6 +76,11 @@ public class Animation {
     public boolean isFinishedOnce()
     {
         return animationFinishedAtLeastOnce;
+    }
+
+    public void setFinishedOnce(boolean bool)
+    {
+        animationFinishedAtLeastOnce = bool;
     }
 
 
