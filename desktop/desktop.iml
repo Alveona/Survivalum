@@ -31,6 +31,7 @@
     <orderEntry type="library" exported="" name="gdx-backend-lwjgl-1.7.2" level="project" />
     <orderEntry type="library" exported="" name="gdx-platform-1.7.2-natives-desktop" level="project" />
     <orderEntry type="library" exported="" name="gdx-box2d-platform-1.7.2-natives-desktop" level="project" />
+    <orderEntry type="library" exported="" name="gdx-freetype-platform-1.7.2-natives-desktop" level="project" />
     <orderEntry type="library" exported="" name="gdx-1.7.2" level="project" />
     <orderEntry type="library" exported="" name="lwjgl-2.9.2" level="project" />
     <orderEntry type="library" exported="" name="lwjgl_util-2.9.2" level="project" />

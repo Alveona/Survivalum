@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.pomavau.crimson.Controller.BodyEditorLoader;
+import com.pomavau.crimson.Controller.BorderType;
 import com.pomavau.crimson.View.ImageActor;
 
 import static com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody;
@@ -19,14 +20,16 @@ public class ArenaBorders extends ImageActor {
    // private Vector2 bulletOrigin;
     //private Vector2 bulletPos;
     //private Vector2 currentPosition;
+    BorderType borderType;
 
 
 
     private boolean isForDeleting = false;
 
-    public ArenaBorders(Texture image, float x, float y, float width, float height, com.badlogic.gdx.physics.box2d.World world) {
+    public ArenaBorders(Texture image, float x, float y, float width, float height, com.badlogic.gdx.physics.box2d.World world, BorderType bordertype) {
 
         super(image, x, y, width, height);
+        this.borderType = bordertype;
         //setOrigin(originX / image.getWidth() * width, originY / image.getHeight() * height);
         createBody(world);
         //currentPosition = new Vector2(x, y);
@@ -49,7 +52,10 @@ public class ArenaBorders extends ImageActor {
         fixtureDef.friction = 1f;
 
         PolygonShape poly = new PolygonShape();
-        poly.setAsBox(1145, 616);
+        switch(borderType) {
+            case VERTICAL: poly.setAsBox(1, 616); break;
+            case HORIZONTAL: poly.setAsBox(1145, 1); break;
+        }
         //poly.setAsBox(getWidth(), getHeight(), new Vector2(getOriginX(), getOriginY()), 0);
         // poly.setAsBox(getWidth() * 0.7f, getHeight() * 0.7f);
         // poly.setAsBox(100, 60);

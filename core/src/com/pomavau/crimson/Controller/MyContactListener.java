@@ -119,6 +119,18 @@ public class MyContactListener implements ContactListener {
     		  //world.destroyBody(body2);
 			  			world.step(0, 0, 0);
 
+
+			  //System.out.println(customUserDataA.getBot()==null);
+			  if(customUserDataA.getBot()!=null)
+			  {
+
+				  if(customUserDataB.getBullet().getBulletType() == BulletType.ICEBALL)
+				  {
+					  customUserDataA.getBot().setCurrentState(ObjectState.FREEZED);
+					  customUserDataA.getBot().setTimefreezed(0);
+
+				  }
+			  }
 			  body2.setActive(false);
 			  customUserDataB.getBullet().setVisible(false);
 			  if(customUserDataA.getBot() != null) {

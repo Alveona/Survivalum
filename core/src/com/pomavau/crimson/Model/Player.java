@@ -61,8 +61,8 @@ public class Player extends ImageActor {
 
 
 
-    private int currentHP = 100;
-    private int maxHP = 100;
+    private int currentHP = 50000;
+    private int maxHP = 50000;
 
     public Player(Texture image, float x, float y, float width, float height, float originX, float originY, World world) {
         super(image, x, y, width, height);
@@ -79,7 +79,7 @@ public class Player extends ImageActor {
 
     }
     public void createBody(World world){
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/hero/bodyproject.json"));
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/bodyproject.json"));
         BodyDef bodyDef = new BodyDef();
       //  bodyDef.position.x = getX()+getWidth()/2;
        // bodyDef.position.y = getY()+getHeight()/2;
@@ -185,7 +185,7 @@ public class Player extends ImageActor {
         //box.getPosition().y = getY();
        // box.setUserData("pl");
         //System.out.println("PlayerX: " +getX()+"/BoxX: "  +box.getPosition().x + "PlayerY: " +getY()+"/BoxY: "  +box.getPosition().y + " BoxAngle: " + box.getAngle());
-        System.out.println(crimsonTD.getInstance().getLeftTouchpadKnobX());
+        //System.out.println(crimsonTD.getInstance().getLeftTouchpadKnobX());
     }
 
     public void act(float delta) {

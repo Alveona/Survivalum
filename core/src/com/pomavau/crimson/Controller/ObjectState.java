@@ -8,5 +8,6 @@ public enum ObjectState {
     RELOADING,
     SPAWNING,
     ATTACKING,
-    DISABLED
+    DISABLED,
+    FREEZED
 }

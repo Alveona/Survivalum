@@ -1,5 +1,6 @@
 package com.pomavau.crimson.Controller;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.pomavau.crimson.crimsonTD;
 import com.pomavau.crimson.Model.LevelWorld;
@@ -29,7 +30,7 @@ public class CameraController implements InputProcessor {
     boolean isBlocked = false;
     boolean isBlockedX = false;
     boolean isBlockedY = false;
-   // ShapeRenderer shapeRenderer;
+  // ShapeRenderer shapeRenderer;
     OrthographicCamera camera;
     HashSet<Integer> pressedKeys;
     ArrayList<Character> printedCharacters;
@@ -38,12 +39,14 @@ public class CameraController implements InputProcessor {
 
 
     public CameraController(LevelWorld world) {
-       // shapeRenderer = new ShapeRenderer();
+        //shapeRenderer = new ShapeRenderer();
         this.step = 3;
         this.zoomAmount = 0.2f; //0.2 default
         this.camera = (OrthographicCamera)world.getCamera();
         //cameraBorders = new Rectangle(camera.viewportWidth / 2, camera.viewportHeight / 2, world.getWidth() - camera.viewportWidth, world.getHeight() - camera.viewportHeight);
-        cameraBorders = new Rectangle(0, 0, 1145, 616);
+        //cameraBorders = new Rectangle(0, 0, 1145, 616);
+        cameraBorders = new Rectangle(572, 308, 572, 308);
+
 
 
        // cameraBorders = new Rectangle(500, 500, 500, 500);
@@ -62,10 +65,17 @@ public class CameraController implements InputProcessor {
     }
 
     public void update(LevelWorld world) {
-       // shapeRenderer.begin();
-        //shapeRenderer.line(500, 500, 1000, 1000);
-       // shapeRenderer.end();
+        /*
+        shapeRenderer.setAutoShapeType(true);
+        shapeRenderer.begin();
+        shapeRenderer.setColor(Color.GREEN);
+        shapeRenderer.line(500, 500, 1000, 1000);
+        shapeRenderer.rect(0,0, 1145, 616);
+        shapeRenderer.updateMatrices();
+        shapeRenderer.end();
+        */
         //System.out.format("%b, %b, %b, %b\n", movesDown(), movesLeft(), movesRight(), movesUp());
+       /*
         if ((movesRight() && camera.position.x + step < cameraBorders.getX() + cameraBorders.getWidth() ) || (movesUp() && camera.position.y + step < cameraBorders.getY() + cameraBorders.getHeight()))
         {
             camera.translate(step, 0);
@@ -76,6 +86,7 @@ public class CameraController implements InputProcessor {
             camera.translate(0 , 0);
             isBlocked = false;
         }
+        System.out.println(camera.position.x + " " + camera.position.y);
         if ((movesLeft() && camera.position.x - step > cameraBorders.getX()) || (movesDown() && camera.position.y - step > cameraBorders.getY()))
         {
             camera.translate(-step, 0);
@@ -86,7 +97,9 @@ public class CameraController implements InputProcessor {
             camera.translate(0 , 0);
             isBlocked = false;
         }
-/*
+*/
+
+        /*
         if(camera.position.x < cameraBorders.getX() + cameraBorders.getWidth() && camera.position.x > cameraBorders.getX() && camera.position.y < cameraBorders.getY() + cameraBorders.getHeight() && camera.position.y > cameraBorders.getY()) {
             isBlocked = false;
         }
@@ -107,6 +120,8 @@ public class CameraController implements InputProcessor {
            // camera.position.y--;
         }
 */
+
+
         if(world.getPlayer().getX() < cameraBorders.getX() + cameraBorders.getWidth() && world.getPlayer().getX() > cameraBorders.getX()) {
             isBlockedX = false;
         }
@@ -125,7 +140,8 @@ public class CameraController implements InputProcessor {
             //camera.position.x--;
             // camera.position.y--;
         }
-
+        //System.out.println(world.getPlayer().getX() > cameraBorders.getX());
+        //System.out.println(isBlockedX + " " + isBlockedY)   ;
         //System.out.println(isBlocked);
         /*
         camera.translate(

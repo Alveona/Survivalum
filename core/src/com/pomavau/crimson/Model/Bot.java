@@ -12,12 +12,15 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.pomavau.crimson.Controller.BodyEditorLoader;
 import com.pomavau.crimson.Controller.BotController;
+import com.pomavau.crimson.Controller.BotType;
 import com.pomavau.crimson.Controller.CustomUserData;
 import com.pomavau.crimson.Controller.Direction;
 import com.pomavau.crimson.Controller.ObjectState;
 import com.pomavau.crimson.Controller.PlayerController;
 import com.pomavau.crimson.View.ImageActor;
 import com.pomavau.crimson.crimsonTD;
+
+import java.awt.Image;
 
 import static com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody;
 import static com.badlogic.gdx.physics.box2d.BodyDef.BodyType.KinematicBody;
@@ -49,6 +52,25 @@ public class Bot extends ImageActor {
     private int maxHP = 100;
     private int currentHP = 100;
 
+    private float timefromspawn;
+    private float spawntimer = 1;
+
+    public float getTimefreezed() {
+        return timefreezed;
+    }
+
+    public void setTimefreezed(float timefreezed) {
+        this.timefreezed = timefreezed;
+    }
+
+    private float timefreezed;
+    private float freezetimer = 1.5f;
+
+    private boolean isspawned = false;
+
+    private BotType botType;
+
+    private ImageActor iceblock;
     private com.badlogic.gdx.physics.box2d.World phworld;
 /*
     public Bot(float x, float y, float size, float step) {
@@ -61,9 +83,9 @@ public class Bot extends ImageActor {
         this.rotationStep = 10;
     }
 */
-public void createBody(com.badlogic.gdx.physics.box2d.World world){
+public void createBodyZombie(com.badlogic.gdx.physics.box2d.World world){
     phworld = world;
-    BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/hero/bodyproject.json"));
+    BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/bodyproject.json"));
     BodyDef bodyDef = new BodyDef();
     bodyDef.position.x = getX();
     bodyDef.position.y = getY();
@@ -91,23 +113,20 @@ public void createBody(com.badlogic.gdx.physics.box2d.World world){
     box.setUserData(customUserData);
 
 }
-public Bot(Texture image, float x, float y, float width, float height, float originX, float originY) {
-    super(image, x, y, width, height);
-    setOrigin(originX / image.getWidth() * width, originY / image.getHeight() * height);
-    setRotationDirection(Direction.NONE);
-    setMovementDirection(Direction.NONE);
-    rotationStep = 10;
-    movementStep = 100;
-}
-    public Bot(TextureRegion image, float x, float y, float width, float height, float originX, float originY, World world)
+
+    public Bot(TextureRegion image, float x, float y, float width, float height, float originX, float originY, World world, BotType bottype)
     {
         super(image, x, y, width, height);
+        this.botType = bottype;
       //  setOrigin(originX / image.getWidth() * width, originY / image.getHeight() * height);
         setRotationDirection(Direction.NONE);
         setMovementDirection(Direction.NONE);
         rotationStep = 10;
         movementStep = 50;
-        createBody(world);
+        switch(bottype) {
+            case ZOMBIE:  createBodyZombie(world); break;
+            case ZOMBIE_RANGE: createBodyZombie(world); break;
+        }
         box.setUserData(new String("bot"));
     }
 
@@ -123,7 +142,7 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
                     //setRotation(destinationAngle);
                     break;
                 }
-                if(!isNearPlayer()) {
+                if(!isNearPlayer() && currentState != ObjectState.FREEZED) {
                     rotateBy(rotationStep);
                     box.setTransform(getPosition(), (float) Math.toRadians((getRotation())));
 
@@ -142,7 +161,7 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
                     //setRotation(destinationAngle);
                     break;
                 }
-                if(!isNearPlayer()) {
+                if(!isNearPlayer() && currentState != ObjectState.FREEZED) {
                     rotateBy(-rotationStep);
                     box.setTransform(getPosition(), (float) Math.toRadians((getRotation())));
 
@@ -162,7 +181,7 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
             case FORWARD:
 
                 //moveBy(movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI));
-                if(nearplayer == false) {
+                if(nearplayer == false && currentState != ObjectState.FREEZED) {
                     box.setLinearVelocity(movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI) * 100, movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI) * 100);
                 }
                 else
@@ -175,18 +194,50 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
                 box.setLinearVelocity(-movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI) * 100, -movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI) * 100);
                     break;
         }}
-        if(isNearPlayer() && currentState != ObjectState.DISABLED) {
-            currentState = ObjectState.ATTACKING;
-        }
-        else
-        {
-            if(currentState != ObjectState.SPAWNING && currentState != ObjectState.DISABLED) {
-                currentState = ObjectState.MOVING;
+
+        if(currentState == ObjectState.FREEZED) {
+            timefreezed += delta;
+            iceblock = new ImageActor(new Texture("android//assets//iceblock.png"), getX(), getY());
+            if (timefreezed >= freezetimer) {
+                if (!isspawned)
+                    timefromspawn += delta;
+                if (timefromspawn <= spawntimer) {
+                    // timefromspawn = 0;
+                    currentState = ObjectState.SPAWNING;
+                } else {
+                    isspawned = true;
+                    if (isNearPlayer() && currentState != ObjectState.DISABLED) {
+                        currentState = ObjectState.ATTACKING;
+                    } else {
+                        if (currentState != ObjectState.SPAWNING && currentState != ObjectState.DISABLED) {
+                            currentState = ObjectState.MOVING;
+                        } else {
+                            if (currentState != ObjectState.DISABLED)
+                                currentState = ObjectState.SPAWNING;
+                        }
+                    }
+                }
+
             }
-            else
-            {
-                if (currentState != ObjectState.DISABLED)
+        }
+        else {
+            if (!isspawned)
+                timefromspawn += delta;
+            if (timefromspawn <= spawntimer) {
+                // timefromspawn = 0;
                 currentState = ObjectState.SPAWNING;
+            } else {
+                isspawned = true;
+                if (isNearPlayer() && currentState != ObjectState.DISABLED) {
+                    currentState = ObjectState.ATTACKING;
+                } else {
+                    if (currentState != ObjectState.SPAWNING && currentState != ObjectState.DISABLED) {
+                        currentState = ObjectState.MOVING;
+                    } else {
+                        if (currentState != ObjectState.DISABLED)
+                            currentState = ObjectState.SPAWNING;
+                    }
+                }
             }
         }
         //System.out.println(nearplayer);
@@ -276,4 +327,10 @@ public Bot(Texture image, float x, float y, float width, float height, float ori
     public int getCurrentHP() {
         return currentHP;
     }
+
+
+    public BotType getBotType() {
+        return botType;
+    }
+
 }

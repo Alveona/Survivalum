@@ -9,7 +9,9 @@ import com.pomavau.crimson.crimsonTD;
  * Created by ga_nesterchuk on 25.01.2016.
  */
 public class MoveToGame extends ClickListener {
+
     public void clicked(InputEvent event, float x, float y) {
+        crimsonTD.getInstance().setGameDifficulty(GameDifficulty.EASY);
         crimsonTD.getInstance().showGame();
     }
 }

@@ -26,7 +26,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.pomavau.crimson.Controller.Animation;
+import com.pomavau.crimson.Controller.BulletType;
 import com.pomavau.crimson.Controller.CameraController;
+import com.pomavau.crimson.Controller.GameDifficulty;
 import com.pomavau.crimson.Controller.ObjectState;
 import com.pomavau.crimson.Controller.PlayerController;
 import com.pomavau.crimson.Controller.BotController;
@@ -100,8 +102,12 @@ public class GameScreen implements Screen {
     private long deltatimeSec;
     private boolean timerIsOn = false;
 
-    private float spawntime = 1;
+    private float spawntime = 5;
     private float nextspawn = 0;
+
+
+
+    private GameDifficulty gameDifficulty = GameDifficulty.EASY;
 
 
     ClickListener clickListener = new ClickListener();
@@ -124,6 +130,12 @@ public class GameScreen implements Screen {
 
 
     public GameScreen(SpriteBatch batch, ShapeRenderer shape, BitmapFont font, HashMap<Integer, TextureRegion> textureRegions) throws FileNotFoundException {
+        switch (gameDifficulty)
+        {
+            case EASY: nextspawn = 5; break;
+            case MEDIUM: nextspawn = 4; break;
+            case HARD: nextspawn = 3; break;
+        }
         debugRenderer = new Box2DDebugRenderer();
         phworld = new PhWorld();
         animation = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_atlas.png"), 1565, 824), 5, 3);
@@ -133,9 +145,21 @@ public class GameScreen implements Screen {
         this.textureRegions = textureRegions;
         TextureRegion region;
         region = textureRegions.get(0);
-        bulletsLeft = 30;
-
         world = new LevelWorld(new ScreenViewport(camera), batch);
+        switch (world.getPlayer().getCurrentWeapon())
+        {
+            case ASSAULTRIFLE:
+                bulletsLeft = 30;
+                bulletsCountDefault = 30;
+                break;
+            case ICERIFLE:
+                bulletsLeft = 5;
+                bulletsCountDefault = 5;
+                break;
+        }
+
+
+
 
         pauseButton = new ImageActor(new Texture("android/assets/gamescreen_btnPause.png"), 0, world.getHeight(), 75, 75);
         pauseBG = new ImageActor(new Texture("android//assets//Menu2.png"), 384, 616 - 534);
@@ -171,17 +195,35 @@ public class GameScreen implements Screen {
     //    world.getBot1().setController(botController);
 
         bulletsCounter = new Group();
-        bulletsCounterBG = new ImageActor(new Texture("android//assets//gamescreen_bulletsCount.png"), 1145 - 117, (int)world.getHeight() /2);
-        bulletsCounterCounters = new ImageActor[30];
-        lastBulletY = (int)bulletsCounterBG.getY() + 25;
-        bulletsCounter.addActor(bulletsCounterBG);
-        for(int i = 0; i < bulletsCounterCounters.length - 1; i++)
-        {
-           // bulletsCounterCounters[i] = new ImageActor(new Texture("android//assets//bullet.png"), bulletsCounterBG.getWidth() / 2, bulletsCounterBG.getHeight() + 10);
-            bulletsCounterCounters[i] = new ImageActor(new Texture("android//assets//bullet.png"), 1145 - bulletsCounterBG.getWidth() / 2, lastBulletY + 7, 25, 5);
-            lastBulletY = (int)bulletsCounterCounters[i].getY();
-            bulletsCounter.addActor(bulletsCounterCounters[i]);
+        switch (world.getPlayer().getCurrentWeapon()) {
+            case ASSAULTRIFLE:
+            bulletsCounterBG = new ImageActor(new Texture("android//assets//gamescreen_bulletsCount.png"), 1145 - 117, (int) world.getHeight() / 2);
+            bulletsCounterCounters = new ImageActor[30];
+            lastBulletY = (int) bulletsCounterBG.getY() + 25;
+            bulletsCounter.addActor(bulletsCounterBG);
+                for(int i = 0; i < bulletsCounterCounters.length - 1; i++)
+                {
+                    // bulletsCounterCounters[i] = new ImageActor(new Texture("android//assets//bullet.png"), bulletsCounterBG.getWidth() / 2, bulletsCounterBG.getHeight() + 10);
+                    bulletsCounterCounters[i] = new ImageActor(new Texture("android//assets//bullet.png"), 1145 - bulletsCounterBG.getWidth() / 2, lastBulletY + 7, 25, 5);
+                    lastBulletY = (int)bulletsCounterCounters[i].getY();
+                    bulletsCounter.addActor(bulletsCounterCounters[i]);
+                }
+                break;
+            case ICERIFLE:
+                bulletsCounterBG = new ImageActor(new Texture("android//assets//gamescreen_bulletsCount.png"), 1145 - 117, (int) world.getHeight() / 2);
+                bulletsCounterCounters = new ImageActor[5];
+                lastBulletY = (int) bulletsCounterBG.getY() + 70;
+                bulletsCounter.addActor(bulletsCounterBG);
+                for(int i = 0; i < bulletsCounterCounters.length; i++)
+                {
+                    // bulletsCounterCounters[i] = new ImageActor(new Texture("android//assets//bullet.png"), bulletsCounterBG.getWidth() / 2, bulletsCounterBG.getHeight() + 10);
+                    bulletsCounterCounters[i] = new ImageActor(new Texture("android//assets//Iceball.png"), 1145 - bulletsCounterBG.getWidth() / 2, lastBulletY + 30, 40, 40);
+                    lastBulletY = (int)bulletsCounterCounters[i].getY();
+                    bulletsCounter.addActor(bulletsCounterCounters[i]);
+                }
+                break;
         }
+
 
         bulletsCounterBG.toBack();
 
@@ -230,17 +272,20 @@ public class GameScreen implements Screen {
 
         // bullet = new ImageActor (new Texture("android/assets/bullet.png"), (int)(world.getPlayer().getX() + world.getPlayer().getWidth()*Math.cos((double)(world.getPlayer().getRotation()))),(int)(world.getPlayer().getY() + world.getPlayer().getHeight()*Math.sin((double)(world.getPlayer().getRotation()))), 14 , 3);
        // bullet = new ImageActor(new Texture("android/assets/bullet.png"), world.getPlayer().getX(), world.getPlayer().getY(), 14, 3);
-        bullet = new Bullet(new Texture("android/assets/bullet.png"), world.getPlayer().getX(), world.getPlayer().getY(), 14f, 3f, world.getPhysicsWorld()); //DEFAULT : 14X3
-        bulletsShooted++;
-       // Player player = world.getPlayer();
+       switch(world.getPlayer().getCurrentWeapon()) {
+           case ASSAULTRIFLE:
+               bullet = new Bullet(new Texture("android/assets/bullet.png"), world.getPlayer().getX(), world.getPlayer().getY(), 14f, 3f, world.getPhysicsWorld(), BulletType.BULLET); //DEFAULT : 14X3
+                break;
+           case ICERIFLE:
+               bullet = new Bullet(new Texture("android/assets/Iceball.png"), world.getPlayer().getX(), world.getPlayer().getY(), 25, 25, world.getPhysicsWorld(), BulletType.ICEBALL);
+       }
+           bulletsShooted++;
+        bullet.setPosition(world.getPlayer().getX() + world.getPlayer().getWidth() * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation())),
+                world.getPlayer().getY() + world.getPlayer().getHeight()  * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation())));
 
-        bullet.setPosition(world.getPlayer().getX() + (float) world.getPlayer().getWidth() * (float) Math.cos(world.getPlayer().getRotation() / 180 * Math.PI ) - 10,
-                world.getPlayer().getY() + (float) world.getPlayer().getHeight() * (float) Math.sin(world.getPlayer().getRotation() / 180 * Math.PI ) + 10);
-        //bullet.setPosition(world.getPlayer().getBody().getPosition().x + world.getPlayer().getWidth() / 2, world.getPlayer().getBody().getPosition().y);
+       // bullet.setPosition(world.getPlayer().getX() + world.getPlayer().getWidth() * (float) Math.cos(Math.toRadians(world.getPlayer().getBody().getAngle())),
+             //   world.getPlayer().getY() + world.getPlayer().getHeight()  * (float) Math.sin(Math.toRadians(world.getPlayer().getBody().getAngle())));
 
-        //bullet.setPosition(world.getPlayer().getPosition().x + world.getPlayer().getWidth() / 2 - 10, world.getPlayer().getPosition().y);
-        //System.out.println(player.getRotation());
-        // System.out.println(world.getPlayer().getRotation());
         world.addActor(bullet);
         bullets.add(bullet);
         shotTime = TimeUtils.nanoTime();
@@ -257,6 +302,7 @@ public class GameScreen implements Screen {
         bulletsLeft--;
         if(bulletsLeft > 0)
         bulletsCounterCounters[bulletsLeft - 1].setVisible(false);
+
     }
 
     @Override
@@ -296,9 +342,13 @@ public class GameScreen implements Screen {
         nextspawn+=delta;
         if(nextspawn>=spawntime){
             nextspawn=0;
-            crimsonTD.getInstance().spawnbots();
+            getWorld().spawnbot(delta);
+            if(spawntime > 1)
+            {
+                spawntime-=delta;
+            }
+            //crimsonTD.getInstance().spawnbots();
             //if(world.getZombieSpawnAnimation().getCurrentFrame() == 2)
-
         }
         isBotNearPlayer();
         botsAttacking();
@@ -348,13 +398,18 @@ public class GameScreen implements Screen {
           // }
        }
         //isReloading = false;
-        System.out.println(world.getZombieSpawnAnimation().getCurrentFrame());
+        //System.out.println(world.getZombieSpawnAnimation().getCurrentFrame());
         world.getReloadAnimation().update(delta);
         world.getMoveAnimation().update(delta);
         world.getMoveAnimation_icegun().update(delta);
+
         world.getZombieMoveAnimation().update(delta);
         world.getZombieAttackAnimation().update(delta);
         world.getZombieSpawnAnimation().update(delta);
+
+        world.getZombieRangeMoveAnimation().update(delta);
+        world.getZombieRangeAttackAnimation().update(delta);
+        world.getZombieRangeSpawnAnimation().update(delta);
 
 /*
         if(isReloading)
@@ -378,7 +433,7 @@ public class GameScreen implements Screen {
 
        // world.botUpdate(world.getBot(), delta);
         world.botsUpdate(currentBot, delta, world.getBotbyIndex(currentBot).getCurrentState());
-        if (crimsonTD.getInstance().getMenuVisibility(pauseScreen) != true) {
+        if (!pauseScreen.isVisible() && !inventoryScreen.isVisible()) {
             playerController.update(world);
             cameraController.update(world);
             botController.update(world);
@@ -393,7 +448,7 @@ public class GameScreen implements Screen {
 
         camera.update();
 
-
+       // System.out.println((int)Math.random()*5);
 
         world.getPlayer().rotateBy(touchpadRight.getKnobPercentX() * -5);
         world.getPlayer().setBoxRotation((float)Math.toRadians(touchpadRight.getKnobPercentX() * -5));
@@ -484,11 +539,21 @@ public class GameScreen implements Screen {
 
           //  System.out.println(world.getPlayer().getMovementDirection());
         //SHOOTING
-        if (Gdx.input.isKeyPressed(Input.Keys.Q) || (touchpadRight.getKnobPercentX() != 0) || touchpadRight.getKnobPercentY() != 0) { //System.out.println("Shooting..");
-            if (TimeUtils.nanoTime() - shotTime > 100000000 && bulletsLeft != 0) {      // default: 200000000
-                //System.out.println("Shooting..");
-                shot();
+        switch (world.getPlayer().getCurrentWeapon()) {
+            case ASSAULTRIFLE: if (Gdx.input.isKeyPressed(Input.Keys.Q) || (touchpadRight.getKnobPercentX() != 0) || touchpadRight.getKnobPercentY() != 0) { //System.out.println("Shooting..");
+                if (TimeUtils.nanoTime() - shotTime > 100000000 && bulletsLeft != 0) {      // default: 200000000
+                    //System.out.println("Shooting..");
+                    shot();
+                }
             }
+                break;
+            case ICERIFLE:
+                if (Gdx.input.isKeyPressed(Input.Keys.Q) || (touchpadRight.getKnobPercentX() != 0) || touchpadRight.getKnobPercentY() != 0) { //System.out.println("Shooting..");
+                    if (TimeUtils.nanoTime() - shotTime > 1000000000 && bulletsLeft != 0) {      // default: 200000000
+                        //System.out.println("Shooting..");
+                        shot();
+                    }
+                }
         }
 
         for (int i = 0; i < bullets.size; i++) {
@@ -496,6 +561,7 @@ public class GameScreen implements Screen {
             //bullets.get(i).setY(bullets.get(i).getY() + 10);
             //System.out.println(bullets.get(i).getBox());
             bullets.get(i).moveBy(bulletSpeed * delta * (float) Math.cos(bullets.get(i).getRotation() / 180 * Math.PI), bulletSpeed * delta * (float) Math.sin(bullets.get(i).getRotation() / 180 * Math.PI));
+
             if (bullets.get(i).getY() >= 1000) {
                 bullets.get(i).remove();
                 bullets.removeIndex(i);
@@ -513,10 +579,15 @@ public class GameScreen implements Screen {
         //hero.setSize(152, 100);
         //stage.act(Gdx.graphics.getDeltaTime());
         //stage.draw();
-        world.act(Gdx.graphics.getDeltaTime());
         world.draw();
-        UIstage.act(Gdx.graphics.getDeltaTime());
         UIstage.draw();
+
+        if (!inventoryScreen.isVisible() && !pauseScreen.isVisible()) {
+            world.act(Gdx.graphics.getDeltaTime());
+            UIstage.act(Gdx.graphics.getDeltaTime());
+
+        }
+
         batch.begin();
         debugRenderer.SHAPE_STATIC.set(new Color(Color.RED));
         debugRenderer.SHAPE_AWAKE.set(new Color(Color.RED));
@@ -524,7 +595,7 @@ public class GameScreen implements Screen {
         debugRenderer.SHAPE_NOT_AWAKE.set(new Color(Color.RED));
         debugRenderer.SHAPE_KINEMATIC.set(new Color(Color.RED));
         debugRenderer.VELOCITY_COLOR.set(new Color(Color.RED));
-        //debugRenderer.render(world.getPhysicsWorld(), camera.combined);
+        debugRenderer.render(world.getPhysicsWorld(), camera.combined);
         batch.end();
         camera.update();
     }
@@ -611,9 +682,19 @@ public class GameScreen implements Screen {
             if(world.getBotbyIndex(i).getCurrentState() == ObjectState.ATTACKING)
             {
                 world.getPlayer().setCurrentHP(world.getPlayer().getCurrentHP() - 10);
+                if(world.getPlayer().getCurrentHP() <= 0)
+                    crimsonTD.getInstance().showMenu();
             }
         }
-        System.out.println(world.getPlayer().getCurrentHP());
+        //System.out.println(world.getPlayer().getCurrentHP());
+    }
+
+    public GameDifficulty getGameDifficulty() {
+        return gameDifficulty;
+    }
+
+    public void setGameDifficulty(GameDifficulty gameDifficulty) {
+        this.gameDifficulty = gameDifficulty;
     }
 }
 

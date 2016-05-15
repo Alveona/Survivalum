@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.pomavau.crimson.Controller.GameDifficulty;
 import com.pomavau.crimson.Controller.MovementControlStyle;
+import com.pomavau.crimson.Screens.GameScreen;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -24,6 +26,7 @@ public class crimsonTD extends Game {
 	private ShapeRenderer shape;
 	private BitmapFont font;
 	private static crimsonTD instance = new crimsonTD();
+	private boolean firstlaunch = true;
 
 
 	public static crimsonTD getInstance() {
@@ -50,6 +53,7 @@ public class crimsonTD extends Game {
 		shape = new ShapeRenderer();
 		font = new BitmapFont();
 		menuScreen = new com.pomavau.crimson.Screens.MainMenuScreen(batch);
+
 		try {
 			gameScreen = new com.pomavau.crimson.Screens.GameScreen(batch, shape, font, textureRegions);
 		} catch (FileNotFoundException e) {
@@ -89,7 +93,18 @@ public class crimsonTD extends Game {
 
 	}
 	public void showGame() {
-		setScreen(gameScreen);
+		if(firstlaunch)
+		{
+			setScreen(gameScreen);
+		}
+		else {
+			try {
+				gameScreen = new com.pomavau.crimson.Screens.GameScreen(batch, shape, font, textureRegions);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			setScreen(gameScreen);
+		}
 	}
 
 	public void showMenu() {
@@ -101,7 +116,7 @@ public class crimsonTD extends Game {
 		{group.setVisible(false);}
 		else {group.setVisible(true); }
 
-		System.out.println("screen status changed");
+		//System.out.println("screen status changed");
 	}
 
 	public boolean getMenuVisibility(Group group)
@@ -151,6 +166,11 @@ public class crimsonTD extends Game {
 
 	public void spawnbots()
 	{
-		gameScreen.getWorld().spawnbot();
+		gameScreen.getWorld().spawnbot(Gdx.graphics.getDeltaTime());
+	}
+
+	public void setGameDifficulty(GameDifficulty gameDifficulty)
+	{
+		gameScreen.setGameDifficulty(gameDifficulty);
 	}
 }
