@@ -36,6 +36,7 @@ public class Bot extends ImageActor {
     }
 
     float size;
+
     private float movementStep;
     private float rotationStep;
     private Direction rotationDirection;
@@ -52,6 +53,7 @@ public class Bot extends ImageActor {
     private int maxHP = 100;
     private int currentHP = 100;
 
+    private Blood blood;
     private float timefromspawn;
     private float spawntimer = 1;
 
@@ -72,6 +74,7 @@ public class Bot extends ImageActor {
 
     private ImageActor iceblock;
     private com.badlogic.gdx.physics.box2d.World phworld;
+    LevelWorld levelworld;
 /*
     public Bot(float x, float y, float size, float step) {
         setPosition(x, y);
@@ -113,8 +116,38 @@ public void createBodyZombie(com.badlogic.gdx.physics.box2d.World world){
     box.setUserData(customUserData);
 
 }
+    public void createBodyPudge(com.badlogic.gdx.physics.box2d.World world){
+        phworld = world;
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/bodyproject.json"));
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.x = getX();
+        bodyDef.position.y = getY();
+        //bodyDef.type = KinematicBody;
+        bodyDef.type = DynamicBody;
+        //bodyDef.type = StaticBody;
+        box = world.createBody(bodyDef);
+        //  box.setType(DynamicBody);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = 0; //default 1f
+        fixtureDef.restitution = 1f;
+        fixtureDef.friction = 1f;
+        PolygonShape poly = new PolygonShape();
+        poly.setAsBox(0.0f, 0.0f);
+        //poly.setAsBox(getWidth(), getHeight());
+        fixtureDef.shape = poly;
+        //box.createFixture(fixtureDef).setUserData("bot");
+        poly.dispose();
+        customUserData = new CustomUserData("bot", this);
+        loader.attachFixture(box, "pudge", fixtureDef, 65, customUserData);
+        botOrigin = loader.getOrigin("pudge", 65).cpy();
+        setOrigin(botOrigin.x, botOrigin.y);
+        botPos = getPosition().sub(botOrigin);
+        setPosition(botPos.x, botPos.y);
+        box.setUserData(customUserData);
 
-    public Bot(TextureRegion image, float x, float y, float width, float height, float originX, float originY, World world, BotType bottype)
+    }
+
+    public Bot(TextureRegion image, float x, float y, float width, float height, float originX, float originY, World world, BotType bottype, LevelWorld levelworld)
     {
         super(image, x, y, width, height);
         this.botType = bottype;
@@ -126,12 +159,20 @@ public void createBodyZombie(com.badlogic.gdx.physics.box2d.World world){
         switch(bottype) {
             case ZOMBIE:  createBodyZombie(world); break;
             case ZOMBIE_RANGE: createBodyZombie(world); break;
+            case DOCTOR: createBodyZombie(world); break;
+            case PYRO: createBodyZombie(world); break;
+            case PUDGE: createBodyPudge(world); break;
         }
         box.setUserData(new String("bot"));
+        this.levelworld = levelworld;
+        iceblock = new ImageActor(new Texture("android//assets//iceblock.png"), 0, 0, 85, 85);
+        iceblock.setVisible(false);
+        blood = new Blood(new Texture("android//assets//arenaborders.png"), 0, 0, 55, 45, levelworld);
     }
 
 
     public void act(float delta) {
+        blood.update(this, delta);
         //System.out.println(box.getUserData());
       // System.out.println(isNearPlayer());
         if (speededUp) delta*=3;
@@ -177,7 +218,16 @@ public void createBodyZombie(com.badlogic.gdx.physics.box2d.World world){
                 break;
 
         }
-        switch (movementDirection){
+
+            if(currentState == ObjectState.SPAWNING || currentState == ObjectState.FREEZED)
+            {
+                box.setType(StaticBody);
+            }
+            else
+            {
+                box.setType(DynamicBody);
+            }
+            switch (movementDirection){
             case FORWARD:
 
                 //moveBy(movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI));
@@ -196,9 +246,16 @@ public void createBodyZombie(com.badlogic.gdx.physics.box2d.World world){
         }}
 
         if(currentState == ObjectState.FREEZED) {
+            box.setLinearVelocity(0, 0);
             timefreezed += delta;
-            iceblock = new ImageActor(new Texture("android//assets//iceblock.png"), getX(), getY());
+            //iceblock = new ImageActor(new Texture("android//assets//iceblock.png"), box.getPosition().x - getWidth() / 2 + 5, box.getPosition().y - getHeight() / 2 + 3, 70, 70);
+            iceblock.setPosition(box.getPosition().x - getWidth(), box.getPosition().y - getHeight() / 2);
+            box.setType(StaticBody);
+            iceblock.setVisible(true);
+            levelworld.addActor(iceblock);
             if (timefreezed >= freezetimer) {
+                iceblock.setVisible(false);
+                box.setType(DynamicBody);
                 if (!isspawned)
                     timefromspawn += delta;
                 if (timefromspawn <= spawntimer) {
@@ -332,5 +389,11 @@ public void createBodyZombie(com.badlogic.gdx.physics.box2d.World world){
     public BotType getBotType() {
         return botType;
     }
+
+
+    public Blood getBlood() {
+        return blood;
+    }
+
 
 }

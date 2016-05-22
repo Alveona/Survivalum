@@ -8,5 +8,8 @@ public enum BotType {
     ZOMBIE_RANGE,
     COW,
     DOG,
-    PUDGE
+    PUDGE,
+    DOCTOR,
+    PYRO,
+    WITCH
 }

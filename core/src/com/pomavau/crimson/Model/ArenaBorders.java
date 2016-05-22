@@ -73,7 +73,7 @@ public class ArenaBorders extends ImageActor {
     {
         //box.getPosition().x = getX();
         //box.getPosition().y = getY();
-        System.out.println(box.getPosition().y);
+       // System.out.println(box.getPosition().y);
         //currentPosition.set(getX(), getY());
         //box.setLinearVelocity(currentPosition);
         //box.setTransform(currentPosition, (float)Math.toRadians(getRotation()));

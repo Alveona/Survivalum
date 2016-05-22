@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
@@ -144,7 +145,53 @@ public class BodyEditorLoader {
             circleShape.setRadius(radius);
             fd.shape = circleShape;
             fd.density = 0;
+            //fd.density = 0f;
+
+            body.createFixture(fd).setUserData(userdata);
+
+            free(center);
+        }
+    }
+    public void attachFixture(Body body, String name, FixtureDef fd, float scale, CustomUserData userdata, int index) {
+        RigidBodyModel rbModel = model.rigidBodies.get(name);
+
+        if (rbModel == null) throw new RuntimeException("Name '" + name + "' was not found.");
+
+        Vector2 origin = vec.set(rbModel.origin).scl(scale);
+
+        for (int i=0, n=rbModel.polygons.size(); i<n; i++) {
+            PolygonModel polygon = rbModel.polygons.get(i);
+            Vector2[] vertices = polygon.buffer;
+
+            for (int ii=0, nn=vertices.length; ii<nn; ii++) {
+                vertices[ii] = newVec().set(polygon.vertices.get(ii)).scl(scale);
+                vertices[ii].sub(origin);
+            }
+
+            polygonShape.set(vertices);
+            fd.shape = polygonShape;
+            //fd.density = 0f;
+            fd.density = 0;
+            fd.filter.groupIndex = (short)index;
+            body.createFixture(fd).setUserData(userdata);
+
+            for (int ii=0, nn=vertices.length; ii<nn; ii++) {
+                free(vertices[ii]);
+            }
+        }
+
+        for (int i=0, n=rbModel.circles.size(); i<n; i++) {
+            CircleModel circle = rbModel.circles.get(i);
+            Vector2 center = newVec().set(circle.center).scl(scale);
+            float radius = circle.radius * scale;
+
+            circleShape.setPosition(center);
+            circleShape.setRadius(radius);
+            fd.shape = circleShape;
+            fd.density = 0;
            //fd.density = 0f;
+            fd.filter.groupIndex = (short)index;
+
             body.createFixture(fd).setUserData(userdata);
 
             free(center);

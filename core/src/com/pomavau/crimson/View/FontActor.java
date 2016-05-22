@@ -13,6 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class FontActor extends Actor{
     private BitmapFont font;
     private String text;
+    private float x;
+    private float y;
+    FreeTypeFontGenerator generator;
+    FreeTypeFontGenerator.FreeTypeFontParameter parameter;
         public FontActor(BitmapFont font, String text, float x, float y)
         {
             this.font = font;
@@ -22,8 +26,8 @@ public class FontActor extends Actor{
 
     public FontActor(String pathToFont, int size, Color color, String text, float x, float y)
         {
-            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(new FileHandle(pathToFont));
-            FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+            generator = new FreeTypeFontGenerator(new FileHandle(pathToFont));
+            parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
             parameter.size = size;
             parameter.color = color;
             font = generator.generateFont(parameter);
@@ -35,4 +39,20 @@ public class FontActor extends Actor{
         font.draw(batch, text, getX(), getY());
     }
 
+    public void update(String text)
+    {
+        this.text = text;
+    }
+
+    public void update(String text, Color color)
+    {
+        parameter.color = color;
+        font = generator.generateFont(parameter);
+        this.text = text;
+    }
+
+    public String getText()
+    {
+        return text;
+    }
 }

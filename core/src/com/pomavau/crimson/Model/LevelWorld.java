@@ -38,8 +38,12 @@ public class LevelWorld extends Stage {
 
     private Animation moveAnimation;
     private Animation moveAnimation_icegun;
+    private Animation moveAnimation_pistol;
+    private Animation moveAnimation_thrower;
     private Animation reloadAnimation;
     private Animation reloadAnimation_icegun;
+    private Animation reloadAnimation_pistol;
+    private Animation reloadAnimation_thrower;
 
     private Animation zombiemoveAnimation;
     private Animation zombieattackAnimation;
@@ -48,6 +52,21 @@ public class LevelWorld extends Stage {
     private Animation zombierangemoveAnimation;
     private Animation zombierangeattackAnimation;
     private Animation zombierangespawnAnimation;
+
+    private Animation zombiedoctormoveAnimation;
+    private Animation zombiedoctorattackAnimation;
+    private Animation zombiedoctorspawnAnimation;
+
+    private Animation zombiepyromoveAnimation;
+    private Animation zombiepyroattackAnimation;
+    private Animation zombiepyrospawnAnimation;
+
+    private Animation zombiepudgemoveAnimation;
+    private Animation zombiepudgeattackAnimation;
+    private Animation zombiepudgespawnAnimation;
+
+
+    private Animation flameAnimation;
 
     private ArenaBorders northborder;
     private ArenaBorders southborder;
@@ -60,6 +79,9 @@ public class LevelWorld extends Stage {
     private Body body;
 
     private int randomzombietype;
+
+    private HPcircle hPcircle;
+
 
     private float spawntimer = 1;
     private float beforespawn;
@@ -77,8 +99,11 @@ public class LevelWorld extends Stage {
         bots = new HashMap<Integer, Bot>();
         moveAnimation = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_atlas.png"), 6260, 206), 20, 3);
         moveAnimation_icegun = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_icegun_atlas.png"), 6260, 206), 20, 3);
+        moveAnimation_thrower = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_firegun_atlas.png"), 6260, 206), 20, 3);
         reloadAnimation = new Animation(new TextureRegion(new Texture("android/assets/hero/heroreload_atlas.png"), 6440, 217), 20, 1);
-        reloadAnimation_icegun = new Animation(new TextureRegion(new Texture("android/assets/hero/heroreload_icegun_atlas.png"), 6440, 217), 20, 1);
+        reloadAnimation_icegun = new Animation(new TextureRegion(new Texture("android/assets/hero/heroreload_icegun_atlas.png"), 6440, 217), 20, 1.5f);
+        reloadAnimation_thrower = new Animation(new TextureRegion(new Texture("android/assets/hero/heroreload_firegun_atlas.png"), 6440, 217), 20, 1.5f);
+        moveAnimation_pistol = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_pistol.png"), 5160, 220), 20, 3);
 
         zombiemoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/zombie/zombiemove_atlas.png"), 256, 64), 4, 0.5f);
         zombiespawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/zombie/zombiespawn_atlas.png"), 128, 64), 2, 1f);
@@ -88,17 +113,40 @@ public class LevelWorld extends Stage {
         zombierangespawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/rangezombie/zombiespawn_range_atlas.png"), 128, 64), 2, 1f);
         zombierangeattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/rangezombie/zombieattack_range_atlas.png"), 128, 64), 2, 1f);
 
+        zombiedoctormoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/doctorzombie/zombiemove_doctor.png"), 256, 64), 4, 0.5f);
+        zombiedoctorspawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/doctorzombie/zombiespawn_doctor.png"), 128, 64), 2, 1f);
+        zombiedoctorattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/doctorzombie/zombieattack_doctor.png"), 128, 64), 2, 1f);
+
+        zombiepyromoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/pyrozombie/zombiemove_pyro.png"), 256, 64), 4, 0.5f);
+        zombiepyrospawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/pyrozombie/zombiespawn_pyro.png"), 128, 64), 2, 1f);
+        zombiepyroattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/pyrozombie/zombieattack_pyro.png"), 128, 64), 2, 1f);
+
+        zombiepudgemoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/pudge/zombiemove_pudge.png"), 256, 64), 4, 0.5f);
+        zombiepudgespawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/pudge/zombiespawn_pudge.png"), 128, 64), 2, 1f);
+        zombiepudgeattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/pudge/zombieattack_pudge.png"), 128, 64), 2, 1f);
+
+        flameAnimation = new Animation((new TextureRegion(new Texture("android/assets/fire_animation.png"), 1200, 62)), 12, 1f);
+
         southborder = new ArenaBorders((new Texture("android/assets/arenaborders.png")), 0, 0, 1145, 0, physicsWorld, BorderType.HORIZONTAL);
         northborder = new ArenaBorders((new Texture("android/assets/arenaborders.png")), 0, 616, 1145, 616, physicsWorld, BorderType.HORIZONTAL);
         westborder = new ArenaBorders((new Texture("android/assets/arenaborders.png")), 0, 0, 0, 614, physicsWorld, BorderType.VERTICAL);
         eastborder = new ArenaBorders((new Texture("android/assets/arenaborders.png")), 1145, 0, 1145, 616, physicsWorld, BorderType.VERTICAL);
+        int rndtemp = (int)Math.random()* 3;
+        switch (rndtemp)
+        {
+            case 0: background = new ImageActor(new Texture("android/assets/background5.jpg"),0,0);
+                break;
+            case 1: background = new ImageActor(new Texture("android/assets/background6.jpg"),0,0);
+                break;
+            default: background = new ImageActor(new Texture("android/assets/background6.jpg"),0,0);
+        }
 
-        background = new ImageActor(new Texture("android/assets/background5.jpg"),0,0);
        // worldBorders = new Rectangle(0, 0, this.getWidth(), this.getHeight());
         addActor(background);
      //   player = new Player(new Texture("android/assets/hero.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 100, 60, 60, 70); //50/30 default w/h
         player = new Player(new Texture("android/assets/hero.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 100, 60, 60, 70, physicsWorld); //50/30 default w/h
-       // arenaBorders = new ArenaBorders(new Texture("android/assets/arenaborders.png"), 0, 0, 1145, 616, physicsWorld);
+       hPcircle = new HPcircle(new Texture("android/assets/100.png"), 0, 0, 70, 70, this);
+       /// / arenaBorders = new ArenaBorders(new Texture("android/assets/arenaborders.png"), 0, 0, 1145, 616, physicsWorld);
 /*
 
        BodyDef def = new BodyDef();
@@ -135,6 +183,7 @@ public class LevelWorld extends Stage {
       //  bots[0] = bot;
       //  bots[1] = bot1;
         //bot.setOrigin(bot.getWidth() / 2, bot.getHeight() /2);
+        addActor(hPcircle);
         addActor(player);
         addActor(player.getShootingPoint());
         addActor(northborder);
@@ -189,6 +238,10 @@ public class LevelWorld extends Stage {
     {
         return moveAnimation;
     }
+    public Animation getMoveAnimation_thrower()
+    {
+        return moveAnimation_thrower;
+    }
     public Animation getMoveAnimation_icegun()
     {
         return moveAnimation_icegun;
@@ -220,9 +273,62 @@ public class LevelWorld extends Stage {
         return zombierangespawnAnimation;
     }
 
+    public Animation getZombieDoctorMoveAnimation()
+    {
+        return zombiedoctormoveAnimation;
+    }
+    public Animation getZombieDoctorAttackAnimation()
+    {
+        return zombiedoctorattackAnimation;
+    }
+    public Animation getZombieDoctorSpawnAnimation()
+    {
+        return zombiedoctorspawnAnimation;
+    }
+
+    public Animation getZombiePyroMoveAnimation()
+    {
+        return zombiepyromoveAnimation;
+    }
+    public Animation getZombiePyroAttackAnimation()
+    {
+        return zombiepyroattackAnimation;
+    }
+    public Animation getZombiePyroSpawnAnimation()
+    {
+        return zombiepyrospawnAnimation;
+    }
+
+    public Animation getZombiePudgeMoveAnimation()
+    {
+        return zombiepudgemoveAnimation;
+    }
+    public Animation getZombiePudgeAttackAnimation()
+    {
+        return zombiepudgeattackAnimation;
+    }
+    public Animation getZombiePudgeSpawnAnimation()
+    {
+        return zombiepudgespawnAnimation;
+    }
+
+    public Animation getFlameAnimation()
+    {
+        return flameAnimation;
+    }
+
     public Animation getReloadAnimation()
     {
-        return reloadAnimation;
+        switch (getPlayer().getCurrentWeapon()) {
+            case ASSAULTRIFLE:
+            {return reloadAnimation;}
+            case ICERIFLE:
+            {return reloadAnimation_icegun ;}
+            case FLAMETHROWER:
+            {return reloadAnimation_thrower;}
+            default:
+                return reloadAnimation;
+        }
     }
 
     public void playerUpdate(Animation animation, float delta)
@@ -252,7 +358,7 @@ public class LevelWorld extends Stage {
                 case ATTACKING:
                     bots.get(i - 1).setTexture(zombieattackAnimation.getFrame());
                     break;
-
+                        case FREEZED: break;
                 default:
                     bots.get(i - 1).setTexture(zombiemoveAnimation.getFrame()); break;
             }
@@ -274,9 +380,79 @@ public class LevelWorld extends Stage {
                     case ATTACKING:
                         bots.get(i - 1).setTexture(zombierangeattackAnimation.getFrame());
                         break;
+                    case FREEZED: break;
 
                     default:
                         bots.get(i - 1).setTexture(zombierangemoveAnimation.getFrame()); break;
+                }
+                break;
+            case DOCTOR:
+                switch (objectState) {
+                    case MOVING:
+                        bots.get(i - 1).setTexture(zombiedoctormoveAnimation.getFrame());
+                        break;
+
+                    case SPAWNING:
+                        if (zombiedoctorspawnAnimation.isFinishedOnce() != true) {
+                            bots.get(i - 1).setTexture(zombiedoctorspawnAnimation.getFrame());
+                        } else {
+                            bots.get(i - 1).setCurrentState(ObjectState.MOVING);
+                        }
+                        break;
+                    case FREEZED: break;
+
+                    case ATTACKING:
+                        bots.get(i - 1).setTexture(zombiedoctorattackAnimation.getFrame());
+                        break;
+
+                    default:
+                        bots.get(i - 1).setTexture(zombiedoctormoveAnimation.getFrame()); break;
+                }
+                break;
+            case PYRO:
+                switch (objectState) {
+                    case MOVING:
+                        bots.get(i - 1).setTexture(zombiepyromoveAnimation.getFrame());
+                        break;
+
+                    case SPAWNING:
+                        if (zombiepyrospawnAnimation.isFinishedOnce() != true) {
+                            bots.get(i - 1).setTexture(zombiepyrospawnAnimation.getFrame());
+                        } else {
+                            bots.get(i - 1).setCurrentState(ObjectState.MOVING);
+                        }
+                        break;
+                    case FREEZED: break;
+
+                    case ATTACKING:
+                        bots.get(i - 1).setTexture(zombiepyroattackAnimation.getFrame());
+                        break;
+
+                    default:
+                        bots.get(i - 1).setTexture(zombiepyromoveAnimation.getFrame()); break;
+                }
+                break;
+            case PUDGE:
+                switch (objectState) {
+                    case MOVING:
+                        bots.get(i - 1).setTexture(zombiepudgemoveAnimation.getFrame());
+                        break;
+
+                    case SPAWNING:
+                        if (zombiepudgespawnAnimation.isFinishedOnce() != true) {
+                            bots.get(i - 1).setTexture(zombiepudgespawnAnimation.getFrame());
+                        } else {
+                            bots.get(i - 1).setCurrentState(ObjectState.MOVING);
+                        }
+                        break;
+                    case FREEZED: break;
+
+                    case ATTACKING:
+                        bots.get(i - 1).setTexture(zombiepudgeattackAnimation.getFrame());
+                        break;
+
+                    default:
+                        bots.get(i - 1).setTexture(zombiepudgemoveAnimation.getFrame()); break;
                 }
                 break;
         }
@@ -295,12 +471,23 @@ public class LevelWorld extends Stage {
     }
 
 
+    public HPcircle getHPcircle() {
+        return hPcircle;
+    }
+    public Animation getReloadAnimation_icegun() {
+        return reloadAnimation_icegun;
+    }
+    public Animation getReloadAnimation_thrower(){return reloadAnimation_thrower;}
+
+
+
+
     public void spawnbot(float delta)
     {
-        randomzombietype = (int)(Math.random() * 2 + 1);
+        randomzombietype = (int)(Math.random() * 5 + 1);
         switch (randomzombietype) {
             case 1: {
-                bot = new Bot(zombiespawnAnimation.getFrame(), (float) Math.random() * 1145, (float) Math.random() * 616, 64, 64, 60, 70, physicsWorld, BotType.ZOMBIE);
+                bot = new Bot(zombiespawnAnimation.getFrame(), (float) Math.random() * 1145, (float) Math.random() * 616, 64, 64, 60, 70, physicsWorld, BotType.ZOMBIE, this);
                 // beforespawn += delta;
                 //if(beforespawn<=spawntimer)
                 //bot.setCurrentState(ObjectState.SPAWNING);
@@ -321,7 +508,7 @@ public class LevelWorld extends Stage {
             }
             // botArray.size++;
             case 2:
-                bot = new Bot(zombierangespawnAnimation.getFrame(), (float) (Math.random() * 1100 + 15), (float) (Math.random() * 590 + 15), 64, 64, 60, 70, physicsWorld, BotType.ZOMBIE_RANGE);
+                bot = new Bot(zombierangespawnAnimation.getFrame(), (float) (Math.random() * 1100 + 15), (float) (Math.random() * 590 + 15), 64, 64, 60, 70, physicsWorld, BotType.ZOMBIE_RANGE, this);
                 zombierangespawnAnimation.setFinishedOnce(false);
                 botArray.add(bot);
                 bots.put(botscurrentcount, botArray.get(botscurrentcount));
@@ -329,8 +516,33 @@ public class LevelWorld extends Stage {
                 botscurrentcount++;
                 botscount++;
                 break;
+            case 3:
+                bot = new Bot(zombiedoctorspawnAnimation.getFrame(), (float) (Math.random() * 1100 + 15), (float) (Math.random() * 590 + 15), 64, 64, 60, 70, physicsWorld, BotType.DOCTOR, this);
+                zombiedoctorspawnAnimation.setFinishedOnce(false);
+                botArray.add(bot);
+                bots.put(botscurrentcount, botArray.get(botscurrentcount));
+                addActor(botArray.get(botscurrentcount));
+                botscurrentcount++;
+                botscount++;
+                break;
+            case 4:
+                bot = new Bot(zombiepyrospawnAnimation.getFrame(), (float) (Math.random() * 1100 + 15), (float) (Math.random() * 590 + 15), 64, 64, 60, 70, physicsWorld, BotType.PYRO, this);
+                zombiepyrospawnAnimation.setFinishedOnce(false);
+                botArray.add(bot);
+                bots.put(botscurrentcount, botArray.get(botscurrentcount));
+                addActor(botArray.get(botscurrentcount));
+                botscurrentcount++;
+                botscount++;
+            case 5:
+                bot = new Bot(zombiepudgespawnAnimation.getFrame(), (float) (Math.random() * 1100 + 15), (float) (Math.random() * 590 + 15), 64, 64, 60, 70, physicsWorld, BotType.PUDGE, this);
+                zombiepudgespawnAnimation.setFinishedOnce(false);
+                botArray.add(bot);
+                bots.put(botscurrentcount, botArray.get(botscurrentcount));
+                addActor(botArray.get(botscurrentcount));
+                botscurrentcount++;
+                botscount++;
             default:
-                bot = new Bot(zombierangespawnAnimation.getFrame(), (float) (Math.random() * 1100 + 15), (float) (Math.random() * 590 + 15), 64, 64, 60, 70, physicsWorld, BotType.ZOMBIE_RANGE);
+                bot = new Bot(zombierangespawnAnimation.getFrame(), (float) (Math.random() * 1100 + 15), (float) (Math.random() * 590 + 15), 64, 64, 60, 70, physicsWorld, BotType.ZOMBIE_RANGE, this);
                 zombierangespawnAnimation.setFinishedOnce(false);
                 botArray.add(bot);
                 bots.put(botscurrentcount, botArray.get(botscurrentcount));

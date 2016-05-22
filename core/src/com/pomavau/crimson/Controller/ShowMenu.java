@@ -10,7 +10,8 @@ import com.pomavau.crimson.crimsonTD;
  */
 public class ShowMenu extends ClickListener {
     Group group;
-
+    Group group2;
+    Group group3;
     public ShowMenu (Group group)
     {
         /*
@@ -22,8 +23,18 @@ public class ShowMenu extends ClickListener {
         */
         this.group = group;
     }
+    public ShowMenu (Group group, Group group2, Group group3)
+    {
+        this.group = group;
+        this.group2 = group2;
+        this.group3 = group3;
+    }
 
     public void clicked(InputEvent event, float x, float y) {
         crimsonTD.getInstance().showMenu(group);
+        if(group2 != null && group3 != null)
+        {
+
+        }
     }
 }

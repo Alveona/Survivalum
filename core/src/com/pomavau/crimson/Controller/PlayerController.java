@@ -54,16 +54,34 @@ public class PlayerController implements InputProcessor {
                             crimsonTD.getInstance().getLeftTouchpadKnobY() * player.getMovementStep()
                     );
         }
+        //System.out.format("FORWARD: %b, BACKWARD: %b\r\n", movesForward(), movesBackward());
         if(movementControlStyle == MovementControlStyle.BUTTONS) {
             //player.setMovementDirection(getMovementDirection());
             // player.setRotationDirection(getRotationDirection());
-            if (movesForward() && player.getRotation() > 270 && player.getRotation() < 360) {
-                player.getBody().setLinearVelocity((float) ((player.getX() + player.getMovementStep()) * Math.cos(player.getRotation())), (float) ((player.getY() + player.getMovementStep()) * Math.sin(player.getRotation())));
-            }
-            else
-            {
-                player.getBody().setLinearVelocity((float) ((player.getX() - player.getMovementStep()) * Math.cos(player.getRotation())), (float) ((player.getY() - player.getMovementStep()) * Math.sin(player.getRotation())));
+            //&& player.getRotation() > 270 && player.getRotation() < 360
+            if (movesForward()) {
+                player.getBody().setLinearVelocity((float)((player.getX() + player.getMovementStep()) * Math.cos(Math.toRadians(player.getRotation()))), (float) ((player.getY() + player.getMovementStep()) * Math.sin(Math.toRadians(player.getRotation()))));
+                //player.getBody().setLinearVelocity((float) (player.getX() + player.getMovementStep()), (float) (player.getY() + player.getMovementStep()));
 
+            }
+            else {
+                if (movesBackward()) {
+                    player.getBody().setLinearVelocity(-(float) ((player.getX() + player.getMovementStep()) * Math.cos(Math.toRadians(player.getRotation()))), -(float) ((player.getY() + player.getMovementStep()) * Math.sin(Math.toRadians(player.getRotation()))));
+                    // player.getBody().setLinearVelocity((float) (player.getX() - player.getMovementStep()), (float) (player.getY() - player.getMovementStep()));
+                } else {
+                    player.getBody().setLinearVelocity(0, 0);
+                }
+            }
+            if(rotatesRight())
+            {
+                //player.setRotation(player.getRotation() - 5);
+                player.getBody().setTransform(player.getPosition(), (float) Math.toRadians((player.getRotation() - 5)));
+
+            }
+            if(rotatesLeft())
+            {
+                //player.setRotation(player.getRotation() + 5);
+                player.getBody().setTransform(player.getPosition(), (float) Math.toRadians((player.getRotation() + 5)));
             }
         }
         /*

@@ -6,5 +6,6 @@ package com.pomavau.crimson.Controller;
 public enum BulletType {
     BULLET,
     ICEBALL,
-    FIREBALL
+    FIREBALL,
+    FLAME
 }

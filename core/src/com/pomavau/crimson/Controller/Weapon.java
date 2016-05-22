@@ -6,6 +6,7 @@ package com.pomavau.crimson.Controller;
 public enum Weapon {
     ASSAULTRIFLE,
     FIRERIFLE,
+    FLAMETHROWER,
     ICERIFLE,
     SHOTGUN,
     PISTOL

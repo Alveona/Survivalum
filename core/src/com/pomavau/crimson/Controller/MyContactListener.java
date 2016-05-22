@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.WorldManifold;
 import com.badlogic.gdx.utils.Array;
 import com.pomavau.crimson.Model.Bot;
+import com.pomavau.crimson.crimsonTD;
 
 import java.util.ArrayList;
 
@@ -117,34 +118,49 @@ public class MyContactListener implements ContactListener {
 				//bodiesToDelete.add(body2);
     		 //body2.setActive(false);
     		  //world.destroyBody(body2);
-			  			world.step(0, 0, 0);
+
 
 
 			  //System.out.println(customUserDataA.getBot()==null);
-			  if(customUserDataA.getBot()!=null)
-			  {
-
+			  //if(customUserDataA.getBot()!=null)
+			//  {
+				  //System.out.println(customUserDataB.getBullet().getBulletType() == BulletType.ICEBALL);
 				  if(customUserDataB.getBullet().getBulletType() == BulletType.ICEBALL)
 				  {
+
 					  customUserDataA.getBot().setCurrentState(ObjectState.FREEZED);
 					  customUserDataA.getBot().setTimefreezed(0);
 
 				  }
-			  }
+			//  }
+			 world.step(0, 0, 0);
+			  if(customUserDataB.getBullet().getBulletType() != BulletType.FLAME)
 			  body2.setActive(false);
 			  customUserDataB.getBullet().setVisible(false);
 			  if(customUserDataA.getBot() != null) {
-				  customUserDataA.getBot().setCurrentHP(customUserDataA.getBot().getCurrentHP() - 40);
+				  switch (customUserDataB.getBullet().getBulletType())
+				  {
+
+					  case FLAME: customUserDataA.getBot().setCurrentHP(customUserDataA.getBot().getCurrentHP() - 100);
+						  break;
+					  default:
+						  customUserDataA.getBot().setCurrentHP(customUserDataA.getBot().getCurrentHP() - 40);
+						  customUserDataA.getBot().getBlood().makeBlood();
+					  break;
+				  }
+				 // customUserDataA.getBot().setCurrentHP(customUserDataA.getBot().getCurrentHP() - 40);
+				  crimsonTD.getInstance().setScore(crimsonTD.getInstance().getScore() + 10);
 				  if (customUserDataA.getBot().getCurrentHP() <= 0) {
 					  customUserDataA.getBot().setVisible(false);
 						body1.setActive(false);
 					  	customUserDataA.getBot().setCurrentState(ObjectState.DISABLED);
-					  //world.destroyBody(body1);
+					  crimsonTD.getInstance().setScore(crimsonTD.getInstance().getScore() + 40);
+					 // world.destroyBody(body1);
 					  //body1 = null;
 				  }
 			  }
 
-			  //world.destroyBody(body2);
+			 // world.destroyBody(body2);
 			  //body2 = null;
 
 			  //removeBodiesFromArray(bodiesToDelete);

@@ -13,6 +13,9 @@ public class Animation {
     private float maxFrameTime;
     private float currentFrameTime;
     private int frameCount;
+
+
+
     private int frame;
     private boolean animationFinishedAtLeastOnce = false;
     private boolean loop = true;
@@ -67,6 +70,9 @@ public class Animation {
     public TextureRegion getFrame()
     {
         return frames.get(frame);
+    }
+    public void setFrame(int frame) {
+        this.frame = frame;
     }
 
     public int getFrameCount(){return frameCount;}

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -60,9 +61,12 @@ public class Player extends ImageActor {
     private Weapon currentWeapon;
 
 
+    private int scorescount = 0;
 
-    private int currentHP = 50000;
-    private int maxHP = 50000;
+    private int maxHP = 50;  //DEFAULT: 50k
+    private int currentHP = maxHP;
+
+
 
     public Player(Texture image, float x, float y, float width, float height, float originX, float originY, World world) {
         super(image, x, y, width, height);
@@ -75,6 +79,7 @@ public class Player extends ImageActor {
         shootingPoint = new Point(x, y, world);
         currentWeapon = Weapon.ASSAULTRIFLE;
         //currentWeapon = Weapon.ICERIFLE;
+        currentWeapon = Weapon.FLAMETHROWER;
         //setOrigin(getWidth()/2, getHeight()/2);
 
     }
@@ -104,7 +109,10 @@ public class Player extends ImageActor {
         poly.dispose();
         //box.getLocalCenter().set(getOriginX(), getOriginY());
         customUserData = new CustomUserData("player", this);
-        loader.attachFixture(box, "player", fixtureDef, 95, customUserData);
+        Filter f = new Filter();
+        f.groupIndex = -1;
+
+        loader.attachFixture(box, "player", fixtureDef, 95, customUserData, -1);
         //Fixture abc = loader.attachFixture(box, "player", fixtureDef, 95);
         playerOrigin = loader.getOrigin("player", 95).cpy();
         setOrigin(playerOrigin.x, playerOrigin.y);
@@ -112,6 +120,7 @@ public class Player extends ImageActor {
         setPosition(playerPos.x, playerPos.y);
         //box.getPosition().x = getX() + getWidth() / 2;
         //box.getPosition().y = getY() + getWidth() / 2;
+
     }
 
     public void act1(float delta) {
@@ -192,12 +201,13 @@ public class Player extends ImageActor {
 
         setRotation((float) Math.toDegrees(box.getAngle()));
         //setPosition(box.getPosition().x-getOriginX(), box.getPosition().y-getOriginY());
-        setPosition(box.getPosition().x - getWidth() / 2 + 15, box.getPosition().y - getHeight() / 2 + 8);
+        setPosition(box.getPosition().x - getWidth() / 2+15, box.getPosition().y - getHeight() / 2+8); //+15 +8
         if(crimsonTD.getInstance().getRightTouchpadKnobX() == 0
                 && crimsonTD.getInstance().getRightTouchpadKnobY() == 0)
             box.setAngularVelocity(0);
         shootingPoint.setPosition(getX() + getWidth(), getY() + getHeight());
 
+        //System.out.println(currentWeapon);
     }
 
 
@@ -349,4 +359,22 @@ public class Player extends ImageActor {
     public void setCurrentHP(int currentHP) {
         this.currentHP = currentHP;
     }
+
+
+    public int getScorescount() {
+        return scorescount;
+    }
+
+    public void setScorescount(int scorescount) {
+        this.scorescount = scorescount;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
+    }
+
 }

@@ -10,10 +10,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.pomavau.crimson.Controller.GameDifficulty;
 import com.pomavau.crimson.Controller.MovementControlStyle;
+import com.pomavau.crimson.Controller.Weapon;
 import com.pomavau.crimson.Screens.GameScreen;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class crimsonTD extends Game {
 	private float ppuX, ppuY;
@@ -28,6 +31,8 @@ public class crimsonTD extends Game {
 	private static crimsonTD instance = new crimsonTD();
 	private boolean firstlaunch = true;
 
+	private boolean bloodEnabled;
+	Scanner choosePlatform;
 
 	public static crimsonTD getInstance() {
 		return instance;
@@ -43,23 +48,34 @@ public class crimsonTD extends Game {
 
 	@Override
 	public void create() {
-
+	choosePlatform = new Scanner(System.in);
+		System.out.println("CHOOSE YOUR PLATFORM:\n1 - PC\n2 - ANDROID/IOS");
+		switch (choosePlatform.nextInt())
+		{
+			case 1: setMovementControlStyle(MovementControlStyle.BUTTONS); break;
+			case 2: setMovementControlStyle(MovementControlStyle.JOYPAD); break;
+		}
 		//setMovementControlStyle(MovementControlStyle.BUTTONS);
-		setMovementControlStyle(MovementControlStyle.JOYPAD);
+		//setMovementControlStyle(MovementControlStyle.JOYPAD);
 		ppuX = Gdx.graphics.getWidth()/1145;
 		ppuY = Gdx.graphics.getHeight()/616;
 		loadGraphics();
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 		font = new BitmapFont();
-		menuScreen = new com.pomavau.crimson.Screens.MainMenuScreen(batch);
+		try {
+			menuScreen = new com.pomavau.crimson.Screens.MainMenuScreen(batch);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		try {
 			gameScreen = new com.pomavau.crimson.Screens.GameScreen(batch, shape, font, textureRegions);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-
 
 
 		setScreen(menuScreen);
@@ -96,11 +112,14 @@ public class crimsonTD extends Game {
 		if(firstlaunch)
 		{
 			setScreen(gameScreen);
+			firstlaunch = false;
 		}
 		else {
 			try {
 				gameScreen = new com.pomavau.crimson.Screens.GameScreen(batch, shape, font, textureRegions);
 			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			setScreen(gameScreen);
@@ -173,4 +192,55 @@ public class crimsonTD extends Game {
 	{
 		gameScreen.setGameDifficulty(gameDifficulty);
 	}
+
+	public void setScore(int scorescount)
+	{
+		gameScreen.getWorld().getPlayer().setScorescount(scorescount);
+	}
+	public int getScore()
+	{
+		return gameScreen.getWorld().getPlayer().getScorescount();
+	}
+
+	public void setWeapon(Weapon currentweapon)
+	{
+		gameScreen.getWorld().getPlayer().setCurrentWeapon(currentweapon);
+	}
+	public Weapon getWeapon()
+	{
+		return gameScreen.getWorld().getPlayer().getCurrentWeapon();
+	}
+	public void setInventoryCurrentChoose(int choose)
+	{
+		gameScreen.setInventoryCurrentChoose(choose);
+	}
+	public int getInventoryCurrentChoose()
+	{
+		return gameScreen.getInventoryCurrentChoose();
+	}
+	public void applyWeapon()
+	{
+		gameScreen.appleWeapon();
+	}
+	public void disposingScreens()
+	{
+		gameScreen.dispose();
+	}
+
+	public void showDeathScreen() throws IOException {
+		gameScreen.deathScreen();
+	}
+
+	public boolean isBloodEnabled() {
+		return bloodEnabled;
+	}
+
+	public void setBloodEnabled(boolean bloodEnabled) {
+		this.bloodEnabled = bloodEnabled;
+	}
+	public Group getSettingScreen()
+	{
+		return menuScreen.getSettingScreen();
+	}
+
 }
