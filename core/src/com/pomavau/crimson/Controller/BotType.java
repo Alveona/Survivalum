@@ -11,5 +11,6 @@ public enum BotType {
     PUDGE,
     DOCTOR,
     PYRO,
-    WITCH
+    WITCH,
+    HULK
 }

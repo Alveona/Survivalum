@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
@@ -165,6 +166,9 @@ public class GameScreen implements Screen {
     private ImageActor inventoryLeft;
     private ImageActor inventoryRight;
     private FontActor inventoryApplystring;
+    private ImageActor rifleInfo;
+    private ImageActor iceInfo;
+    private ImageActor flameInfo;
     private Group ApplyInvGroup;
     private Group inventoryScreen;
 
@@ -174,6 +178,8 @@ public class GameScreen implements Screen {
 
     private Drawable touchBackground;
     private Drawable touchKnob;
+
+    private Group transparentGroup;
 
     private Bullet bullet;
     private int bulletSpeed = 300; //d:300
@@ -333,6 +339,13 @@ public class GameScreen implements Screen {
         inventoryRight.addListener(new InventoryIncrease());
         inventoryLeft.addListener(new InventoryDecrease());
 
+        rifleInfo = new ImageActor(new Texture("android//assets//mainmenu//InventoryInfo_RIFLE.png"), 386, 616 - 443);
+        rifleInfo.setVisible(false);
+        iceInfo = new ImageActor(new Texture("android//assets//mainmenu//InventoryInfo_ICEGUN.png"), 386, 616 - 443);
+        iceInfo.setVisible(false);
+        flameInfo = new ImageActor(new Texture("android//assets//mainmenu//InventoryInfo_THROWER.png"), 386, 616 - 443);
+        flameInfo.setVisible(false);
+
         bullet = new Bullet(new Texture("android/assets/fire1.png"), world.getPlayer().getX(), world.getPlayer().getY(), 100f, 62f, world.getPhysicsWorld(), BulletType.FLAME);
         bullet.getBox().setActive(false);
 
@@ -347,6 +360,9 @@ public class GameScreen implements Screen {
         inventoryScreen.addActor(ApplyInvGroup);
         inventoryScreen.addActor(inventoryLeft);
         inventoryScreen.addActor(inventoryRight);
+        inventoryScreen.addActor(rifleInfo);
+        inventoryScreen.addActor(iceInfo);
+        inventoryScreen.addActor(flameInfo);
         ApplyInvGroup.addListener(new ApplyWeapon(inventoryCurrentChoose, inventoryScreen));
         //inventoryButton.addListener(new ShowMenu(inventoryScreen));
 
@@ -552,6 +568,15 @@ public class GameScreen implements Screen {
         inventoryButtonGroup.addActor(riflesignmiddle);
         inventoryButtonGroup.addActor(stringInventory);
         inventoryButtonGroup.addListener(new ShowMenu(inventoryScreen));
+/*
+        transparentGroup = new Group();
+        transparentGroup.addActor(bulletsCounter);
+        transparentGroup.addActor(scoresBG);
+        transparentGroup.addActor(stringScoresCount);
+        transparentGroup.addActor(stringScore);
+        transparentGroup.addActor(pauseButton);
+        transparentGroup.addActor(inventoryButtonGroup);*/
+        //inventoryButtonGroup.addAction(Actions.alpha(0.5f));
         UIstage.addActor(FPSlabel);
         if(crimsonTD.getInstance().getMovementControlStyle() == MovementControlStyle.JOYPAD) {
             UIstage.addActor(touchpadLeft);
@@ -560,10 +585,8 @@ public class GameScreen implements Screen {
         UIstage.addActor(pauseButton);
         UIstage.addActor(pauseScreen);
         UIstage.addActor(bulletsCounter);
-        //UIstage.addActor(inventoryButton);
         UIstage.addActor(inventoryScreen);
         UIstage.addActor(scoresBG);
-       // UIstage.addActor(stringInventory);
         UIstage.addActor(inventoryButtonGroup);
         UIstage.addActor(stringScore);
         UIstage.addActor(stringScoresCount);
@@ -572,6 +595,7 @@ public class GameScreen implements Screen {
         UIstage.addActor(rifleEnabled);
         UIstage.addActor(icegunEnabled);
         UIstage.addActor(throwerEnabled);
+//        UIstage.addActor(transparentGroup);
         pauseButton.toFront();
         world.setBackgroundtoBack();
         //Multiplexer filling
@@ -587,6 +611,7 @@ public class GameScreen implements Screen {
         debugRenderer.SHAPE_NOT_AWAKE.set(new Color(Color.RED));
         debugRenderer.SHAPE_KINEMATIC.set(new Color(Color.RED));
         debugRenderer.VELOCITY_COLOR.set(new Color(Color.RED));
+        //transparentGroup.addAction(Actions.alpha(0.5f));
 
     }
 
@@ -743,7 +768,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
+    //System.out.println(twoActorsCross(world.getPlayer(), bulletsCounter));
         if (!inventoryScreen.isVisible() && !pauseScreen.isVisible() && !deathScreen.isVisible()) {
             spawningBots(delta);
             isBotNearPlayer();
@@ -828,17 +853,27 @@ public class GameScreen implements Screen {
                 icegunhud.setVisible(false);
                 // firegunhud.setVisible(false);
                 throwerhud.setVisible(false);
+                rifleInfo.setVisible(true);
+                iceInfo.setVisible(false);
+                flameInfo.setVisible(false);
                 break;
             case 2:
                 icegunhud.setVisible(true);
                 m4a4hud.setVisible(false);
                 //   firegunhud.setVisible(false);
                 throwerhud.setVisible(false);
+                rifleInfo.setVisible(false);
+                iceInfo.setVisible(true);
+                flameInfo.setVisible(false);
                 break;
             case 3:
                 icegunhud.setVisible(false);
                 m4a4hud.setVisible(false);
                 throwerhud.setVisible(true);
+                rifleInfo.setVisible(false);
+                iceInfo.setVisible(false);
+                flameInfo.setVisible(true);
+                break;
         }
         if(isReloading == false){
         switch (world.getPlayer().getCurrentWeapon()) {
@@ -1057,6 +1092,14 @@ public class GameScreen implements Screen {
         world.getZombiePudgeAttackAnimation().update(delta);
         world.getZombiePudgeSpawnAnimation().update(delta);
 
+        world.getZombieHulkMoveAnimation().update(delta);
+        world.getZombieHulkAttackAnimation().update(delta);
+        world.getZombieHulkSpawnAnimation().update(delta);
+
+        world.getZombieWitchMoveAnimation().update(delta);
+        world.getZombieWitchAttackAnimation().update(delta);
+        world.getZombieWitchSpawnAnimation().update(delta);
+
         world.getMoveAnimation_thrower().update(delta);
         world.getReloadAnimation_thrower().update(delta);
         world.getFlameAnimation().update(delta);
@@ -1143,6 +1186,8 @@ public class GameScreen implements Screen {
             {
                 leaderboards[i] = Integer.valueOf(br.readLine());
             }*/
+        sc = new Scanner("android//assets//stats//stats.txt");
+           // sc.reset();
         System.out.println(sc.hasNextInt());
             if(sc.hasNextInt()) {
                 leaderboards[i] = Integer.valueOf(sc.nextInt());
@@ -1271,6 +1316,20 @@ public class GameScreen implements Screen {
             crimsonTD.getInstance().setWeapon(Weapon.FLAMETHROWER);
             crimsonTD.getInstance().applyWeapon();
         }
+    }
+    public void transparencyController()
+    {
+       // if(world.getPlayer().getPosition().x > bulletsCounter.getX() && world.getPlayer().getPosition().x > bulletsCounter.getX());
+    }
+    public boolean twoActorsCross(ImageActor actor1, Group actor2)
+    {
+        if(actor1.getX() > actor2.getX() && actor1.getY() > actor2.getY()
+                && actor1.getX() + actor1.getWidth() < actor2.getX() + actor2.getWidth()
+                && actor1.getY() + actor1.getHeight() < actor2.getY() + actor2.getHeight())
+        {
+            return true;
+        }
+        return false;
     }
 }
 

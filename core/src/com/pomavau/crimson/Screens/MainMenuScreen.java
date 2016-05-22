@@ -69,6 +69,7 @@ public class MainMenuScreen implements Screen{
     private FontActor stringMAXTIME;
     private FontActor MAXTIME;
     private FontActor FAVWEAPON;
+    private FontActor statStingOK;
     private Group statScreen;
     //options screen;
     private ImageActor settBG;
@@ -191,6 +192,7 @@ public class MainMenuScreen implements Screen{
         MAXTIME = new FontActor("android//assets//nasalization-rg.ttf", 30, fontColorWhite, "08.47.2", 639, 616 - 209);
         FAVWEAPON = new FontActor("android//assets//nasalization-rg.ttf", 24, fontColorWhite, "ICERIFLE", 642, 616 - 257);
         //stringOK = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "EXIT", 530f, 616 - 483);
+        statStingOK = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "APPLY", 510.7f, 616 - 484);
         statScreen = new Group();
         statScreen.addActor(statBG);
         statScreen.addActor(stringSTATISTIC);
@@ -204,8 +206,10 @@ public class MainMenuScreen implements Screen{
         statScreen.addActor(stringLB4);
         statScreen.addActor(MAXTIME);
         statScreen.addActor(FAVWEAPON);
+        statScreen.addActor(statStingOK);
         statScreen.setVisible(false);
         ratesButton.addListener(new ShowStatistics(statScreen, stringLB1, stringLB2, stringLB3, stringLB4));
+        statOK.addListener(new ShowMenu(statScreen));
 
         settBG = new ImageActor(new Texture("android//assets//Menu3.png"), 384, 616-534);
         settOK = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btn.png"), 473, 616 - 533);
@@ -283,6 +287,7 @@ public class MainMenuScreen implements Screen{
         settingScreen.addActor(settOKString);
 
         settingsButton.addListener(new ShowMenu(settingScreen));
+        settOK.addListener(new ShowMenu(settingScreen));
 
         stage = new Stage(new ScreenViewport(camera), batch);
         stage.addActor(background);

@@ -1,5 +1,6 @@
 package com.pomavau.crimson.View;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,7 +12,7 @@ import com.pomavau.crimson.crimsonTD;
  */
 public class ImageActor extends Actor {
     protected TextureRegion img;
-
+    private Color color;
 
     public ImageActor(TextureRegion img, float x, float y, float width, float height) {
         this.img = img;
@@ -35,6 +36,8 @@ public class ImageActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         //batch.draw(img, getX(), getY(), getWidth(), getHeight());
+        color = getColor();
+        batch.setColor(color.r, color.g, color.b, color.a*parentAlpha);
         batch.draw(img, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
 

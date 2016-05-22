@@ -65,6 +65,14 @@ public class LevelWorld extends Stage {
     private Animation zombiepudgeattackAnimation;
     private Animation zombiepudgespawnAnimation;
 
+    private Animation zombiehulkmoveAnimation;
+    private Animation zombiehulkattackAnimation;
+    private Animation zombiehulkspawnAnimation;
+
+    private Animation zombiewitchmoveAnimation;
+    private Animation zombiewitchattackAnimation;
+    private Animation zombiewitchspawnAnimation;
+
 
     private Animation flameAnimation;
 
@@ -124,6 +132,14 @@ public class LevelWorld extends Stage {
         zombiepudgemoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/pudge/zombiemove_pudge.png"), 256, 64), 4, 0.5f);
         zombiepudgespawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/pudge/zombiespawn_pudge.png"), 128, 64), 2, 1f);
         zombiepudgeattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/pudge/zombieattack_pudge.png"), 128, 64), 2, 1f);
+
+        zombiehulkmoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/hulk/zombiemove_hulk.png"), 256, 64), 4, 0.5f);
+        zombiehulkspawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/hulk/zombiespawn_hulk.png"), 128, 64), 2, 1f);
+        zombiehulkattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/hulk/zombieattack_hulk.png"), 128, 64), 2, 1f);
+
+        zombiewitchmoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/witch/zombiemove_witch.png"), 256, 64), 4, 0.5f);
+        zombiewitchspawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/witch/zombiespawn_witch.png"), 128, 64), 2, 1f);
+        zombiewitchattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/witch/zombieattack_witch.png"), 128, 64), 2, 1f);
 
         flameAnimation = new Animation((new TextureRegion(new Texture("android/assets/fire_animation.png"), 1200, 62)), 12, 1f);
 
@@ -312,6 +328,32 @@ public class LevelWorld extends Stage {
         return zombiepudgespawnAnimation;
     }
 
+    public Animation getZombieHulkMoveAnimation()
+    {
+        return zombiehulkmoveAnimation;
+    }
+    public Animation getZombieHulkAttackAnimation()
+    {
+        return zombiehulkattackAnimation;
+    }
+    public Animation getZombieHulkSpawnAnimation()
+    {
+        return zombiehulkspawnAnimation;
+    }
+
+    public Animation getZombieWitchMoveAnimation()
+    {
+        return zombiewitchmoveAnimation;
+    }
+    public Animation getZombieWitchAttackAnimation()
+    {
+        return zombiewitchattackAnimation;
+    }
+    public Animation getZombieWitchSpawnAnimation()
+    {
+        return zombiewitchspawnAnimation;
+    }
+
     public Animation getFlameAnimation()
     {
         return flameAnimation;
@@ -455,6 +497,52 @@ public class LevelWorld extends Stage {
                         bots.get(i - 1).setTexture(zombiepudgemoveAnimation.getFrame()); break;
                 }
                 break;
+            case HULK:
+                switch (objectState) {
+                    case MOVING:
+                        bots.get(i - 1).setTexture(zombiehulkmoveAnimation.getFrame());
+                        break;
+
+                    case SPAWNING:
+                        if (zombiehulkspawnAnimation.isFinishedOnce() != true) {
+                            bots.get(i - 1).setTexture(zombiehulkspawnAnimation.getFrame());
+                        } else {
+                            bots.get(i - 1).setCurrentState(ObjectState.MOVING);
+                        }
+                        break;
+                    case FREEZED: break;
+
+                    case ATTACKING:
+                        bots.get(i - 1).setTexture(zombiehulkattackAnimation.getFrame());
+                        break;
+
+                    default:
+                        bots.get(i - 1).setTexture(zombiehulkmoveAnimation.getFrame()); break;
+                }
+                break;
+            case WITCH:
+                switch (objectState) {
+                    case MOVING:
+                        bots.get(i - 1).setTexture(zombiewitchmoveAnimation.getFrame());
+                        break;
+
+                    case SPAWNING:
+                        if (zombiewitchspawnAnimation.isFinishedOnce() != true) {
+                            bots.get(i - 1).setTexture(zombiewitchspawnAnimation.getFrame());
+                        } else {
+                            bots.get(i - 1).setCurrentState(ObjectState.MOVING);
+                        }
+                        break;
+                    case FREEZED: break;
+
+                    case ATTACKING:
+                        bots.get(i - 1).setTexture(zombiewitchattackAnimation.getFrame());
+                        break;
+
+                    default:
+                        bots.get(i - 1).setTexture(zombiewitchmoveAnimation.getFrame()); break;
+                }
+                break;
         }
 
         //botArray.get(i).setTexture(zombiemoveAnimation.getFrame());
@@ -484,7 +572,7 @@ public class LevelWorld extends Stage {
 
     public void spawnbot(float delta)
     {
-        randomzombietype = (int)(Math.random() * 5 + 1);
+        randomzombietype = (int)(Math.random() * 6 + 1);
         switch (randomzombietype) {
             case 1: {
                 bot = new Bot(zombiespawnAnimation.getFrame(), (float) Math.random() * 1145, (float) Math.random() * 616, 64, 64, 60, 70, physicsWorld, BotType.ZOMBIE, this);
@@ -536,6 +624,22 @@ public class LevelWorld extends Stage {
             case 5:
                 bot = new Bot(zombiepudgespawnAnimation.getFrame(), (float) (Math.random() * 1100 + 15), (float) (Math.random() * 590 + 15), 64, 64, 60, 70, physicsWorld, BotType.PUDGE, this);
                 zombiepudgespawnAnimation.setFinishedOnce(false);
+                botArray.add(bot);
+                bots.put(botscurrentcount, botArray.get(botscurrentcount));
+                addActor(botArray.get(botscurrentcount));
+                botscurrentcount++;
+                botscount++;
+            case 6:
+                bot = new Bot(zombiehulkspawnAnimation.getFrame(), (float) (Math.random() * 1100 + 15), (float) (Math.random() * 590 + 15), 64, 64, 60, 70, physicsWorld, BotType.HULK, this);
+                zombiehulkspawnAnimation.setFinishedOnce(false);
+                botArray.add(bot);
+                bots.put(botscurrentcount, botArray.get(botscurrentcount));
+                addActor(botArray.get(botscurrentcount));
+                botscurrentcount++;
+                botscount++;
+            case 7:
+                bot = new Bot(zombiewitchspawnAnimation.getFrame(), (float) (Math.random() * 1100 + 15), (float) (Math.random() * 590 + 15), 64, 64, 60, 70, physicsWorld, BotType.WITCH, this);
+                zombiewitchspawnAnimation.setFinishedOnce(false);
                 botArray.add(bot);
                 bots.put(botscurrentcount, botArray.get(botscurrentcount));
                 addActor(botArray.get(botscurrentcount));

@@ -162,6 +162,8 @@ public void createBodyZombie(com.badlogic.gdx.physics.box2d.World world){
             case DOCTOR: createBodyZombie(world); break;
             case PYRO: createBodyZombie(world); break;
             case PUDGE: createBodyPudge(world); break;
+            case HULK: createBodyZombie(world); break;
+            case WITCH: createBodyZombie(world); break;
         }
         box.setUserData(new String("bot"));
         this.levelworld = levelworld;

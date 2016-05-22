@@ -1,6 +1,19 @@
 android {
-    buildToolsVersion '21.0.2'
-    compileSdkVersion 21
+    compileSdkVersion 23
+    buildToolsVersion '23.0.3'
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 23
+        multiDexEnabled true
+    }
+    buildTypes{
+        debug{
+            multiDexEnabled true
+        }
+        release{
+            multiDexEnabled true
+        }
+    }
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -14,6 +27,7 @@ android {
 
         instrumentTest.setRoot('tests')
     }
+
 }
 // called every time gradle gets executed, takes the native dependencies of
 // the natives configuration, and extracts them to the proper libs/ folders
@@ -111,4 +125,6 @@ idea {
     }
 }
 dependencies {
+    compile 'com.android.support:multidex:1.0.0'
+
 }

@@ -31,7 +31,7 @@ public class crimsonTD extends Game {
 	private static crimsonTD instance = new crimsonTD();
 	private boolean firstlaunch = true;
 
-	private boolean bloodEnabled;
+	private boolean bloodEnabled = true;
 	Scanner choosePlatform;
 
 	public static crimsonTD getInstance() {

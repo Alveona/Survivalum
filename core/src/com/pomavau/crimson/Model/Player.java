@@ -63,7 +63,7 @@ public class Player extends ImageActor {
 
     private int scorescount = 0;
 
-    private int maxHP = 50;  //DEFAULT: 50k
+    private int maxHP = 25000;  //DEFAULT: 50k
     private int currentHP = maxHP;
 
 
