@@ -18,6 +18,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.pomavau.crimson.crimsonTD;
 
 import java.util.HashMap;
 
@@ -105,63 +106,63 @@ public class LevelWorld extends Stage {
         botsArray = new Bot[botscount];
         botArray = new Array<Bot>();
         bots = new HashMap<Integer, Bot>();
-        moveAnimation = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_atlas.png"), 6260, 206), 20, 3);
-        moveAnimation_icegun = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_icegun_atlas.png"), 6260, 206), 20, 3);
-        moveAnimation_thrower = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_firegun_atlas.png"), 6260, 206), 20, 3);
-        reloadAnimation = new Animation(new TextureRegion(new Texture("android/assets/hero/heroreload_atlas.png"), 6440, 217), 20, 1);
-        reloadAnimation_icegun = new Animation(new TextureRegion(new Texture("android/assets/hero/heroreload_icegun_atlas.png"), 6440, 217), 20, 1.5f);
-        reloadAnimation_thrower = new Animation(new TextureRegion(new Texture("android/assets/hero/heroreload_firegun_atlas.png"), 6440, 217), 20, 1.5f);
-        moveAnimation_pistol = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_pistol.png"), 5160, 220), 20, 3);
+        moveAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hero/heromove_atlas.png")), 6260, 206), 20, 3);
+        moveAnimation_icegun = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hero/heromove_icegun_atlas.png")), 6260, 206), 20, 3);
+        moveAnimation_thrower = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hero/heromove_firegun_atlas.png")), 6260, 206), 20, 3);
+        reloadAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hero/heroreload_atlas.png")), 6440, 217), 20, 1);
+        reloadAnimation_icegun = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hero/heroreload_icegun_atlas.png")), 6440, 217), 20, 1.5f);
+        reloadAnimation_thrower = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hero/heroreload_firegun_atlas.png")), 6440, 217), 20, 1.5f);
+        moveAnimation_pistol = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hero/heromove_pistol.png")), 5160, 220), 20, 3);
 
-        zombiemoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/zombie/zombiemove_atlas.png"), 256, 64), 4, 0.5f);
-        zombiespawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/zombie/zombiespawn_atlas.png"), 128, 64), 2, 1f);
-        zombieattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/zombie/zombieattack_atlas.png"), 128, 64), 2, 0.5f);
+        zombiemoveAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("zombie/zombiemove_atlas.png")), 256, 64), 4, 0.5f);
+        zombiespawnAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("zombie/zombiespawn_atlas.png")), 128, 64), 2, 1f);
+        zombieattackAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("zombie/zombieattack_atlas.png")), 128, 64), 2, 0.5f);
 
-        zombierangemoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/rangezombie/zombiemove_range_atlas.png"), 256, 64), 4, 0.5f);
-        zombierangespawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/rangezombie/zombiespawn_range_atlas.png"), 128, 64), 2, 1f);
-        zombierangeattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/rangezombie/zombieattack_range_atlas.png"), 128, 64), 2, 1f);
+        zombierangemoveAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("rangezombie/zombiemove_range_atlas.png")), 256, 64), 4, 0.5f);
+        zombierangespawnAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("rangezombie/zombiespawn_range_atlas.png")), 128, 64), 2, 1f);
+        zombierangeattackAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("rangezombie/zombieattack_range_atlas.png")), 128, 64), 2, 1f);
 
-        zombiedoctormoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/doctorzombie/zombiemove_doctor.png"), 256, 64), 4, 0.5f);
-        zombiedoctorspawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/doctorzombie/zombiespawn_doctor.png"), 128, 64), 2, 1f);
-        zombiedoctorattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/doctorzombie/zombieattack_doctor.png"), 128, 64), 2, 1f);
+        zombiedoctormoveAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("doctorzombie/zombiemove_doctor.png")), 256, 64), 4, 0.5f);
+        zombiedoctorspawnAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("doctorzombie/zombiespawn_doctor.png")), 128, 64), 2, 1f);
+        zombiedoctorattackAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("doctorzombie/zombieattack_doctor.png")), 128, 64), 2, 1f);
 
-        zombiepyromoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/pyrozombie/zombiemove_pyro.png"), 256, 64), 4, 0.5f);
-        zombiepyrospawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/pyrozombie/zombiespawn_pyro.png"), 128, 64), 2, 1f);
-        zombiepyroattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/pyrozombie/zombieattack_pyro.png"), 128, 64), 2, 1f);
+        zombiepyromoveAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("pyrozombie/zombiemove_pyro.png")), 256, 64), 4, 0.5f);
+        zombiepyrospawnAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("pyrozombie/zombiespawn_pyro.png")), 128, 64), 2, 1f);
+        zombiepyroattackAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("pyrozombie/zombieattack_pyro.png")), 128, 64), 2, 1f);
 
-        zombiepudgemoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/pudge/zombiemove_pudge.png"), 256, 64), 4, 0.5f);
-        zombiepudgespawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/pudge/zombiespawn_pudge.png"), 128, 64), 2, 1f);
-        zombiepudgeattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/pudge/zombieattack_pudge.png"), 128, 64), 2, 1f);
+        zombiepudgemoveAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("pudge/zombiemove_pudge.png")), 256, 64), 4, 0.5f);
+        zombiepudgespawnAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("pudge/zombiespawn_pudge.png")), 128, 64), 2, 1f);
+        zombiepudgeattackAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("pudge/zombieattack_pudge.png")), 128, 64), 2, 1f);
 
-        zombiehulkmoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/hulk/zombiemove_hulk.png"), 256, 64), 4, 0.5f);
-        zombiehulkspawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/hulk/zombiespawn_hulk.png"), 128, 64), 2, 1f);
-        zombiehulkattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/hulk/zombieattack_hulk.png"), 128, 64), 2, 1f);
+        zombiehulkmoveAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hulk/zombiemove_hulk.png")), 256, 64), 4, 0.5f);
+        zombiehulkspawnAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hulk/zombiespawn_hulk.png")), 128, 64), 2, 1f);
+        zombiehulkattackAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hulk/zombieattack_hulk.png")), 128, 64), 2, 1f);
 
-        zombiewitchmoveAnimation = new Animation(new TextureRegion(new Texture("android/assets/witch/zombiemove_witch.png"), 256, 64), 4, 0.5f);
-        zombiewitchspawnAnimation = new Animation(new TextureRegion(new Texture("android/assets/witch/zombiespawn_witch.png"), 128, 64), 2, 1f);
-        zombiewitchattackAnimation = new Animation(new TextureRegion(new Texture("android/assets/witch/zombieattack_witch.png"), 128, 64), 2, 1f);
+        zombiewitchmoveAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("witch/zombiemove_witch.png")), 256, 64), 4, 0.5f);
+        zombiewitchspawnAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("witch/zombiespawn_witch.png")), 128, 64), 2, 1f);
+        zombiewitchattackAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("witch/zombieattack_witch.png")), 128, 64), 2, 1f);
 
-        flameAnimation = new Animation((new TextureRegion(new Texture("android/assets/fire_animation.png"), 1200, 62)), 12, 1f);
+        flameAnimation = new Animation((new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("fire_animation.png")), 1200, 62)), 12, 1f);
 
-        southborder = new ArenaBorders((new Texture("android/assets/arenaborders.png")), 0, 0, 1145, 0, physicsWorld, BorderType.HORIZONTAL);
-        northborder = new ArenaBorders((new Texture("android/assets/arenaborders.png")), 0, 616, 1145, 616, physicsWorld, BorderType.HORIZONTAL);
-        westborder = new ArenaBorders((new Texture("android/assets/arenaborders.png")), 0, 0, 0, 614, physicsWorld, BorderType.VERTICAL);
-        eastborder = new ArenaBorders((new Texture("android/assets/arenaborders.png")), 1145, 0, 1145, 616, physicsWorld, BorderType.VERTICAL);
+        southborder = new ArenaBorders((new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png"))), 0, 0, 1145, 0, physicsWorld, BorderType.HORIZONTAL);
+        northborder = new ArenaBorders((new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png"))), 0, 616, 1145, 616, physicsWorld, BorderType.HORIZONTAL);
+        westborder = new ArenaBorders((new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png"))), 0, 0, 0, 614, physicsWorld, BorderType.VERTICAL);
+        eastborder = new ArenaBorders((new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png"))), 1145, 0, 1145, 616, physicsWorld, BorderType.VERTICAL);
         int rndtemp = (int)Math.random()* 3;
         switch (rndtemp)
         {
-            case 0: background = new ImageActor(new Texture("android/assets/background5.jpg"),0,0);
+            case 0: background = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("background5.jpg")),0,0);
                 break;
-            case 1: background = new ImageActor(new Texture("android/assets/background6.jpg"),0,0);
+            case 1: background = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("background6.jpg")),0,0);
                 break;
-            default: background = new ImageActor(new Texture("android/assets/background6.jpg"),0,0);
+            default: background = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("background6.jpg")),0,0);
         }
 
        // worldBorders = new Rectangle(0, 0, this.getWidth(), this.getHeight());
         addActor(background);
      //   player = new Player(new Texture("android/assets/hero.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 100, 60, 60, 70); //50/30 default w/h
-        player = new Player(new Texture("android/assets/hero.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 100, 60, 60, 70, physicsWorld); //50/30 default w/h
-       hPcircle = new HPcircle(new Texture("android/assets/100.png"), 0, 0, 70, 70, this);
+        player = new Player(new Texture(crimsonTD.getInstance().resolvePath("hero.png")), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 100, 60, 60, 70, physicsWorld); //50/30 default w/h
+       hPcircle = new HPcircle(new Texture(crimsonTD.getInstance().resolvePath("100.png")), 0, 0, 70, 70, this);
        /// / arenaBorders = new ArenaBorders(new Texture("android/assets/arenaborders.png"), 0, 0, 1145, 616, physicsWorld);
 /*
 

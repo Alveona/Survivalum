@@ -14,7 +14,7 @@ public class Blood extends ImageActor {
     LevelWorld world;
     public Blood(Texture image, float x, float y, float width, float height, LevelWorld world) {
         super(image, x, y, width, height);
-        bloodAnimation = new Animation(new TextureRegion(new Texture("android/assets/blood.png"), 330, 45), 6, 0.5f);
+        bloodAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("blood.png")), 330, 45), 6, 0.5f);
         this.world = world;
         img = bloodAnimation.getFrame();
         setVisible(false);

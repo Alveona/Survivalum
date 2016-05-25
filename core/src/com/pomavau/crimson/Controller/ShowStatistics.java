@@ -28,7 +28,7 @@ public class ShowStatistics  extends ClickListener{
         this.LB2 = LB2;
         this.LB3 = LB3;
         this.LB4 = LB4;
-        sc = new Scanner(new File("android//assets//stats//stats_strings.txt"));
+        sc = new Scanner(new File(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")));
 
     }
 
@@ -39,7 +39,7 @@ public class ShowStatistics  extends ClickListener{
         if(group.isVisible() == true)
         {
             try {
-                sc = new Scanner(new File("android//assets//stats//stats_strings.txt"));
+                sc = new Scanner(new File(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

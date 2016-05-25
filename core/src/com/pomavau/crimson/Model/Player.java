@@ -84,7 +84,7 @@ public class Player extends ImageActor {
 
     }
     public void createBody(World world){
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/bodyproject.json"));
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(crimsonTD.getInstance().resolvePath("bodyproject.json")));
         BodyDef bodyDef = new BodyDef();
       //  bodyDef.position.x = getX()+getWidth()/2;
        // bodyDef.position.y = getY()+getHeight()/2;

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.pomavau.crimson.Controller.Animation;
 import com.pomavau.crimson.Controller.BorderType;
 import com.pomavau.crimson.View.ImageActor;
+import com.pomavau.crimson.crimsonTD;
 
 /**
  * Created by Pomavau on 17.05.16.
@@ -15,7 +16,7 @@ public class HPcircle extends ImageActor {
     float temp;
     public HPcircle(Texture image, float x, float y, float width, float height, LevelWorld world) {
         super(image, x, y, width, height);
-        circleAnimation = new Animation(new TextureRegion(new Texture("android/assets/hpCircle.png"), 5050, 202), 25, 0);
+        circleAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("hpCircle.png")), 5050, 202), 25, 0);
         this.world = world;
         img = circleAnimation.getFrame();
     }

@@ -10,6 +10,7 @@ import com.pomavau.crimson.Controller.BulletType;
 import com.pomavau.crimson.Controller.CustomUserData;
 import com.pomavau.crimson.View.ImageActor;
 import com.badlogic.gdx.graphics.Texture;
+import com.pomavau.crimson.crimsonTD;
 
 import static com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody;
 import static com.badlogic.gdx.physics.box2d.BodyDef.BodyType.KinematicBody;
@@ -64,7 +65,7 @@ public class Bullet extends ImageActor {
     }
 
     public void createBodyBullet(com.badlogic.gdx.physics.box2d.World world){
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/bodyproject.json"));
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(crimsonTD.getInstance().resolvePath("bodyproject.json")));
         BodyDef bodyDef = new BodyDef();
         //bodyDef.position.x = getX()+getWidth()/2;
         //bodyDef.position.y = getY()+getHeight()/2;
@@ -99,7 +100,7 @@ public class Bullet extends ImageActor {
 
     }
     public void createBodyIceball(com.badlogic.gdx.physics.box2d.World world){
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/bodyproject.json"));
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(crimsonTD.getInstance().resolvePath("bodyproject.json")));
         BodyDef bodyDef = new BodyDef();
         //bodyDef.position.x = getX()+getWidth()/2;
         //bodyDef.position.y = getY()+getHeight()/2;
@@ -133,7 +134,7 @@ public class Bullet extends ImageActor {
 
     }
     public void createBodyFire(com.badlogic.gdx.physics.box2d.World world){
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/bodyproject.json"));
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(crimsonTD.getInstance().resolvePath("bodyproject.json")));
         BodyDef bodyDef = new BodyDef();
         //bodyDef.position.x = getX()+getWidth()/2;
         //bodyDef.position.y = getY()+getHeight()/2;

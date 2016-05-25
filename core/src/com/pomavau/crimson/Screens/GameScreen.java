@@ -262,13 +262,13 @@ public class GameScreen implements Screen {
         }
         debugRenderer = new Box2DDebugRenderer();
         phworld = new PhWorld();
-        animation = new Animation(new TextureRegion(new Texture("android/assets/hero/heromove_atlas.png"), 1565, 824), 5, 3);
+       // animation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("heromove_atlas.png")), 1565, 824), 5, 3);
         bullets = new Array<Bullet>();
         font = new BitmapFont();
         camera = new OrthographicCamera();
         this.textureRegions = textureRegions;
-        TextureRegion region;
-        region = textureRegions.get(0);
+     //   TextureRegion region;
+      //  region = textureRegions.get(0);
         world = new LevelWorld(new ScreenViewport(camera), batch);
         switch (world.getPlayer().getCurrentWeapon()) {
             case ASSAULTRIFLE:
@@ -289,24 +289,24 @@ public class GameScreen implements Screen {
         fontColorBlue = new Color(0, 0.494f, 0.73f, 1f);
         fontColorWhite = new Color(0.62f, 0.658f, 0.67f, 1f);
 
-        stringInventory = new FontActor("android//assets//nasalization-rg.ttf", 28, fontColorWhite, "INVENTORY", 115, 616 - 24);
-        riflesignleft = new ImageActor(new Texture("android//assets//inventory_bg_rifle.png"), 133, (float) (616 - 65.5));
-        riflesignright = new ImageActor(new Texture("android//assets//inventory_bg_rifle.png"), 234, (float) (616 - 65.5));
-        riflesignmiddle = new ImageActor(new Texture("android//assets//inventory_bg_rifle.png"), 184, (float) (616 - 65.5));
+        stringInventory = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 28, fontColorWhite, "INVENTORY", 115, 616 - 24);
+        riflesignleft = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("inventory_bg_rifle.png")), 133, (float) (616 - 65.5));
+        riflesignright = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("inventory_bg_rifle.png")), 234, (float) (616 - 65.5));
+        riflesignmiddle = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("inventory_bg_rifle.png")), 184, (float) (616 - 65.5));
 
-        stringScore = new FontActor("android//assets//nasalization-rg.ttf", 24, fontColorWhite, "SCORE:", 431, 616 - 7);
-        stringScoresCount = new FontActor("android//assets//nasalization-rg.ttf", 30, fontColorWhite, String.format("%06d", 0), 542, 616 - 6);
+        stringScore = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "SCORE:", 431, 616 - 7);
+        stringScoresCount = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 30, fontColorWhite, String.format("%06d", 0), 542, 616 - 6);
 
 
-        pauseButton = new ImageActor(new Texture("android/assets/gamescreen_btnPause.png"), 0, world.getHeight(), 75, 75);
-        pauseBG = new ImageActor(new Texture("android//assets//Menu3.png"), 384, 616 - 534);
-        stringPause = new FontActor("android//assets//nasalization-rg.ttf", 48, fontColorBlue, "PAUSE", 487, 616-169);
-        stringresumebutton = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "RESUME", 487, 616-258);
-        stringexitbutton = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "EXIT", 526, 616-409);
-        stringoptionsbutton = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "OPTIONS", 484, (float)(616-334.5));
-        resumebutton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btn.png"),467, 616-308 );
-        optionsbutton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btn.png"),467, 616-384 );
-        exitbutton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btn.png"),467, 616-459 );
+        pauseButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("/gamescreen_btnPause.png")), 0, world.getHeight(), 75, 75);
+        pauseBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("Menu3.png")), 384, 616 - 534);
+        stringPause = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 48, fontColorBlue, "PAUSE", 487, 616-169);
+        stringresumebutton = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "RESUME", 487, 616-258);
+        stringexitbutton = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "EXIT", 526, 616-409);
+        stringoptionsbutton = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "OPTIONS", 484, (float)(616-334.5));
+        resumebutton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")),467, 616-308 );
+        optionsbutton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")),467, 616-384 );
+        exitbutton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")),467, 616-459 );
         pauseScreen = new Group();
         pauseScreen.setVisible(false);
         pauseScreen.addActor(pauseBG);
@@ -322,31 +322,31 @@ public class GameScreen implements Screen {
         resumebutton.addListener(new ShowMenu(pauseScreen));
         exitbutton.addListener(new MoveToMenu());
 
-        //inventoryButton = new ImageActor(new Texture("android//assets//gamescreen_bulletsCount.png"), 325, (int)world.getHeight(), 75, 165);
-        inventoryButton = new ImageActor(new Texture("android//assets//gamescreen_btnInventory.png"), 100, (int) world.getHeight());
-        inventoryApply = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btn.png"), 473, 616 - 533);
-        inventoryBG = new ImageActor(new Texture("android//assets//mainmenu//InventoryMenu2.png"), 346, 616 - 534);
-        inventorySlot = new ImageActor(new Texture("android//assets//mainmenu//InventorySlot.png"), 507, 616 - 282);
-        m4a4hud = new ImageActor(new Texture("android//assets//mainmenu//m4a4_hud2.png"), 519, 616 - 266, 113, 75);
-        icegunhud = new ImageActor(new Texture("android//assets//mainmenu//icegun_hud.png"), 519, 616 - 266, 113, 75);
-        throwerhud = new ImageActor(new Texture("android//assets//mainmenu//firegun_hud.png"), 519, 616 - 266, 113, 75);
-        inventoryApplystring = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "APPLY", 510.7f, 616 - 484);
+        //inventoryButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("gamescreen_bulletsCount.png"), 325, (int)world.getHeight(), 75, 165);
+        inventoryButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("gamescreen_btnInventory.png")), 100, (int) world.getHeight());
+        inventoryApply = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")), 473, 616 - 533);
+        inventoryBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png")), 346, 616 - 534);
+        inventorySlot = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventorySlot.png")), 507, 616 - 282);
+        m4a4hud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//m4a4_hud2.png")), 519, 616 - 266, 113, 75);
+        icegunhud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//icegun_hud.png")), 519, 616 - 266, 113, 75);
+        throwerhud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//firegun_hud.png")), 519, 616 - 266, 113, 75);
+        inventoryApplystring = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "APPLY", 510.7f, 616 - 484);
         ApplyInvGroup = new Group();
         ApplyInvGroup.addActor(inventoryApply);
         ApplyInvGroup.addActor(inventoryApplystring);
-        inventoryLeft = new ImageActor(new Texture("android//assets//mainmenu//inventory_btnleft.png"), 413, 616 - 265);
-        inventoryRight = new ImageActor(new Texture("android//assets//mainmenu//inventory_btnright.png"), 663, 616 - 265);
+        inventoryLeft = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//inventory_btnleft.png")), 413, 616 - 265);
+        inventoryRight = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//inventory_btnright.png")), 663, 616 - 265);
         inventoryRight.addListener(new InventoryIncrease());
         inventoryLeft.addListener(new InventoryDecrease());
 
-        rifleInfo = new ImageActor(new Texture("android//assets//mainmenu//InventoryInfo_RIFLE.png"), 386, 616 - 443);
+        rifleInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryInfo_RIFLE.png")), 386, 616 - 443);
         rifleInfo.setVisible(false);
-        iceInfo = new ImageActor(new Texture("android//assets//mainmenu//InventoryInfo_ICEGUN.png"), 386, 616 - 443);
+        iceInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryInfo_ICEGUN.png")), 386, 616 - 443);
         iceInfo.setVisible(false);
-        flameInfo = new ImageActor(new Texture("android//assets//mainmenu//InventoryInfo_THROWER.png"), 386, 616 - 443);
+        flameInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryInfo_THROWER.png")), 386, 616 - 443);
         flameInfo.setVisible(false);
 
-        bullet = new Bullet(new Texture("android/assets/fire1.png"), world.getPlayer().getX(), world.getPlayer().getY(), 100f, 62f, world.getPhysicsWorld(), BulletType.FLAME);
+        bullet = new Bullet(new Texture(crimsonTD.getInstance().resolvePath("/fire1.png")), world.getPlayer().getX(), world.getPlayer().getY(), 100f, 62f, world.getPhysicsWorld(), BulletType.FLAME);
         bullet.getBox().setActive(false);
 
         inventoryScreen = new Group();
@@ -366,24 +366,24 @@ public class GameScreen implements Screen {
         ApplyInvGroup.addListener(new ApplyWeapon(inventoryCurrentChoose, inventoryScreen));
         //inventoryButton.addListener(new ShowMenu(inventoryScreen));
 
-        deathBG = new ImageActor(new Texture("android//assets//mainmenu//InventoryMenu2.png"), 346, 616 - 534);
-        deathButton = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btn.png"), 473, 616 - 533);
-        deathIcon = new ImageActor(new Texture("android//assets//mainmenu//deathIcon.png"),  551, 616-208);
-        deathLB1 = new FontActor("android//assets//nasalization-rg.ttf", 24, fontColorWhite, "1. ", 406, 616 - 308);
-        deathLB2 = new FontActor("android//assets//nasalization-rg.ttf", 24, fontColorWhite, "2. ", 406, 616 - 342);
-        deathLB3 = new FontActor("android//assets//nasalization-rg.ttf", 24, fontColorWhite, "3. ", 406, 616 - 378);
-        deathLB4 = new FontActor("android//assets//nasalization-rg.ttf", 24, fontColorWhite, "4. ", 406, 616 - 414);
-        deathstring = new FontActor("android//assets//nasalization-rg.ttf", 48, fontColorBlue, "YOU'RE DEAD", 406, 616-209);
-        deathstringLB = new FontActor("android//assets//nasalization-rg.ttf", 30, fontColorBlue, "LEADERBOARDS:", 440, 616-265);
-        deathstringApply = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "EXIT", 530f, 616 - 483);
+        deathBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png")), 346, 616 - 534);
+        deathButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")), 473, 616 - 533);
+        deathIcon = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//deathIcon.png")),  551, 616-208);
+        deathLB1 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "1. ", 406, 616 - 308);
+        deathLB2 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "2. ", 406, 616 - 342);
+        deathLB3 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "3. ", 406, 616 - 378);
+        deathLB4 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "4. ", 406, 616 - 414);
+        deathstring = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 48, fontColorBlue, "YOU'RE DEAD", 406, 616-209);
+        deathstringLB = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 30, fontColorBlue, "LEADERBOARDS:", 440, 616-265);
+        deathstringApply = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "EXIT", 530f, 616 - 483);
         ApplyDeathGroup = new Group();
         ApplyDeathGroup.addActor(deathButton);
         ApplyDeathGroup.addActor(deathstringApply);
         ApplyDeathGroup.addListener(new MoveToMenu());
-        sc = new Scanner(new File("android//assets//stats//stats.txt"));
-        //sc = new Scanner("android//assets//stats//stats.txt");
-     //   br = new BufferedReader(new FileReader(new File("android//assets//stats//stats.txt")));
-        fw = new FileWriter(new File("android//assets//stats//stats.txt"), true);
+        sc = new Scanner(new File(crimsonTD.getInstance().resolvePath("stats//stats.txt")));
+        //sc = new Scanner(crimsonTD.getInstance().resolvePath("stats//stats.txt");
+     //   br = new BufferedReader(new FileReader(new File(crimsonTD.getInstance().resolvePath("stats//stats.txt")));
+        fw = new FileWriter(new File(crimsonTD.getInstance().resolvePath("stats//stats.txt")), true);
 /*
         fw.append("350\n" +
                 "75\n" +
@@ -397,10 +397,10 @@ public class GameScreen implements Screen {
                 "450");
         fw.close();
         */
-       // deathstringApply = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btn.png"), 473, 616 - 533);
-        rifleEnabled = new ImageActor(new Texture("android//assets//rifle_enabled.png"), 79, 616 - 145);
-        icegunEnabled = new ImageActor(new Texture("android//assets//icegun_enabled.png"), 79, 616 - 145);
-        throwerEnabled = new ImageActor(new Texture("android//assets//falmethrower_enabled.png"), 79, 616 - 145);
+       // deathstringApply = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), 473, 616 - 533);
+        rifleEnabled = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("rifle_enabled.png")), 79, 616 - 145);
+        icegunEnabled = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("icegun_enabled.png")), 79, 616 - 145);
+        throwerEnabled = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("falmethrower_enabled.png")), 79, 616 - 145);
 
         deathScreen = new Group();
         deathScreen.addActor(deathBG);
@@ -416,31 +416,31 @@ public class GameScreen implements Screen {
         deathScreen.setVisible(false);
 
         settingsScreen = new Group();
-        settBG = new ImageActor(new Texture("android//assets//Menu3.png"), 384, 616-534);
-        settOK = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_btn.png"), 473, 616 - 533);
-        stringOPTIONS = new FontActor("android//assets//nasalization-rg.ttf", 48, fontColorBlue, "OPTIONS", 460.7f, 616-152);
-        stringBLOOD = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorBlue, "BLOOD:", 504, 616-204);
-        stringSFXSOUND = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorBlue, "SFX SOUND:", 457, 616-286);
-        stringMUSIC = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorBlue, "MUSIC:", 501, 616-371);
-        stBloodON_E = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_enabled.png"), 437, 616 - 280);
-        stBloodON_D = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_disabled.png"), 437, 616 - 280);
-        stBloodOFF_E = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_enabled.png"), 582, 616 - 280);
-        stBloodOFF_D = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_disabled.png"), 582, 616 - 280);
-        stSFXON_E = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_enabled.png"), 437, 616 - 363);
-        stSFXON_D = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_disabled.png"), 437, 616 - 363);
-        stSFXOFF_E = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_enabled.png"), 582, 616 - 363);
-        stSFXOFF_D = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_disabled.png"), 582, 616 - 363);
-        stMusicON_E = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_enabled.png"), 437, 616 - 450);
-        stMusicON_D = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_disabled.png"), 437, 616 - 450);
-        stMusicOFF_E = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_enabled.png"), 582, 616 - 450);
-        stMusicOFF_D = new ImageActor(new Texture("android//assets//mainmenu//mainmenu_settings_disabled.png"), 582, 616 - 450);
-        stBloodON_string = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "ON", 464, 616 - 244);
-        stBloodOFF_string = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "OFF", 607.5f, 616 - 244);
-        stSFXON_string = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "ON", 464, 616 - 326);
-        stSFXOFF_string = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "OFF", 607.5f, 616 - 326);
-        stMusicON_string = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "ON", 464, 616 - 414);
-        stMusicOFF_string = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "OFF", 607.5f, 616 - 414);
-        settOKString = new FontActor("android//assets//nasalization-rg.ttf", 36, fontColorWhite, "APPLY", 510.7f, 616 - 484);
+        settBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("Menu3.png")), 384, 616-534);
+        settOK = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")), 473, 616 - 533);
+        stringOPTIONS = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 48, fontColorBlue, "OPTIONS", 460.7f, 616-152);
+        stringBLOOD = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "BLOOD:", 504, 616-204);
+        stringSFXSOUND = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "SFX SOUND:", 457, 616-286);
+        stringMUSIC = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "MUSIC:", 501, 616-371);
+        stBloodON_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 437, 616 - 280);
+        stBloodON_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 437, 616 - 280);
+        stBloodOFF_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 582, 616 - 280);
+        stBloodOFF_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 582, 616 - 280);
+        stSFXON_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 437, 616 - 363);
+        stSFXON_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 437, 616 - 363);
+        stSFXOFF_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 582, 616 - 363);
+        stSFXOFF_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 582, 616 - 363);
+        stMusicON_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 437, 616 - 450);
+        stMusicON_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 437, 616 - 450);
+        stMusicOFF_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 582, 616 - 450);
+        stMusicOFF_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 582, 616 - 450);
+        stBloodON_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "ON", 464, 616 - 244);
+        stBloodOFF_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "OFF", 607.5f, 616 - 244);
+        stSFXON_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "ON", 464, 616 - 326);
+        stSFXOFF_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "OFF", 607.5f, 616 - 326);
+        stMusicON_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "ON", 464, 616 - 414);
+        stMusicOFF_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "OFF", 607.5f, 616 - 414);
+        settOKString = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "APPLY", 510.7f, 616 - 484);
 
         stBloodON = new Group();
         stBloodON.addActor(stBloodON_E);
@@ -512,40 +512,40 @@ public class GameScreen implements Screen {
 
         bulletsCounter = new Group();
 
-                bulletsCounterBG = new ImageActor(new Texture("android//assets//gamescreen_bulletsCount.png"), 1145 - 117, (int) world.getHeight() / 2);
+                bulletsCounterBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("gamescreen_bulletsCount.png")), 1145 - 117, (int) world.getHeight() / 2);
                 bulletsCounterCountersRifle = new ImageActor[30];
                 lastBulletY = (int) bulletsCounterBG.getY() + 18;
                 bulletsCounter.addActor(bulletsCounterBG);
                 for (int i = 0; i < bulletsCounterCountersRifle.length; i++) {
-                    // bulletsCounterCounters[i] = new ImageActor(new Texture("android//assets//bullet.png"), bulletsCounterBG.getWidth() / 2, bulletsCounterBG.getHeight() + 10);
-                    bulletsCounterCountersRifle[i] = new ImageActor(new Texture("android//assets//bullet.png"), 1145 - bulletsCounterBG.getWidth() / 2, lastBulletY + 7, 25, 5);
+                    // bulletsCounterCounters[i] = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("bullet.png"), bulletsCounterBG.getWidth() / 2, bulletsCounterBG.getHeight() + 10);
+                    bulletsCounterCountersRifle[i] = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("bullet.png")), 1145 - bulletsCounterBG.getWidth() / 2, lastBulletY + 7, 25, 5);
                     lastBulletY = (int) bulletsCounterCountersRifle[i].getY();
                     bulletsCounter.addActor(bulletsCounterCountersRifle[i]);
                 }
 
-                //bulletsCounterBG = new ImageActor(new Texture("android//assets//gamescreen_bulletsCount.png"), 1145 - 117, (int) world.getHeight() / 2);
+                //bulletsCounterBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("gamescreen_bulletsCount.png"), 1145 - 117, (int) world.getHeight() / 2);
                 bulletsCounterCountersIcegun = new ImageActor[5];
                 lastBulletY = (int) bulletsCounterBG.getY() - 10;
                 bulletsCounter.addActor(bulletsCounterBG);
                 for (int i = 0; i < bulletsCounterCountersIcegun.length; i++) {
-                    // bulletsCounterCounters[i] = new ImageActor(new Texture("android//assets//bullet.png"), bulletsCounterBG.getWidth() / 2, bulletsCounterBG.getHeight() + 10);
-                    bulletsCounterCountersIcegun[i] = new ImageActor(new Texture("android//assets//Iceball.png"), 1145 - bulletsCounterBG.getWidth() / 2, lastBulletY + 40, 40, 40);
+                    // bulletsCounterCounters[i] = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("bullet.png"), bulletsCounterBG.getWidth() / 2, bulletsCounterBG.getHeight() + 10);
+                    bulletsCounterCountersIcegun[i] = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("Iceball.png")), 1145 - bulletsCounterBG.getWidth() / 2, lastBulletY + 40, 40, 40);
                     lastBulletY = (int) bulletsCounterCountersIcegun[i].getY();
                     bulletsCounter.addActor(bulletsCounterCountersIcegun[i]);
                 }
 
-                bulletsCounterCountersThrower = new FlameTank(new Texture("android//assets//arenaborders.png"), 1145 - bulletsCounterBG.getWidth() / 2, lastBulletY - 120, 58, 98);
+                bulletsCounterCountersThrower = new FlameTank(new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png")), 1145 - bulletsCounterBG.getWidth() / 2, lastBulletY - 120, 58, 98);
                 bulletsCounter.addActor(bulletsCounterCountersThrower);
 
 
 
         bulletsCounterBG.toBack();
-        scoresBG = new ImageActor(new Texture("android//assets//gamescreen_scores.png"), 411, 616 - 43);
+        scoresBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("gamescreen_scores.png")), 411, 616 - 43);
         batch = new SpriteBatch();
         // touchpads
         touchpadSkin = new Skin();
-        touchpadSkin.add("touchBackground", new Texture("android//assets//joypad//touchBackgroundnew.png"));
-        touchpadSkin.add("touchKnob", new Texture("android//assets//joypad//touchKnobnew.png"));
+        touchpadSkin.add("touchBackground", new Texture(crimsonTD.getInstance().resolvePath("joypad//touchBackgroundnew.png")));
+        touchpadSkin.add("touchKnob", new Texture(crimsonTD.getInstance().resolvePath("joypad//touchKnobnew.png")));
         touchpadStyle = new Touchpad.TouchpadStyle();
         touchBackground = touchpadSkin.getDrawable("touchBackground");
         touchKnob = touchpadSkin.getDrawable("touchKnob");
@@ -617,17 +617,17 @@ public class GameScreen implements Screen {
 
     private void shot() {
 
-        // bullet = new ImageActor (new Texture("android/assets/bullet.png"), (int)(world.getPlayer().getX() + world.getPlayer().getWidth()*Math.cos((double)(world.getPlayer().getRotation()))),(int)(world.getPlayer().getY() + world.getPlayer().getHeight()*Math.sin((double)(world.getPlayer().getRotation()))), 14 , 3);
-        // bullet = new ImageActor(new Texture("android/assets/bullet.png"), world.getPlayer().getX(), world.getPlayer().getY(), 14, 3);
+        // bullet = new ImageActor (new Texture(crimsonTD.getInstance().resolvePath("/bullet.png"), (int)(world.getPlayer().getX() + world.getPlayer().getWidth()*Math.cos((double)(world.getPlayer().getRotation()))),(int)(world.getPlayer().getY() + world.getPlayer().getHeight()*Math.sin((double)(world.getPlayer().getRotation()))), 14 , 3);
+        // bullet = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("/bullet.png"), world.getPlayer().getX(), world.getPlayer().getY(), 14, 3);
         switch (world.getPlayer().getCurrentWeapon()) {
             case ASSAULTRIFLE:/*
-                bullet = new Bullet(new Texture("android/assets/bullet.png"),
+                bullet = new Bullet(new Texture(crimsonTD.getInstance().resolvePath("/bullet.png"),
                         world.getPlayer().getX(),
                         world.getPlayer().getY(),
                         14f, 3f,
                         world.getPhysicsWorld(),
                         BulletType.BULLET); //DEFAULT : 14X3*/
-                bullet = new Bullet((new Texture("android/assets/bullet.png")),
+                bullet = new Bullet((new Texture(crimsonTD.getInstance().resolvePath("/bullet.png"))),
                         world.getPlayer().getX() + world.getPlayer().getOriginX()
                                 + 70 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
                                 + 10 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation())),
@@ -640,7 +640,7 @@ public class GameScreen implements Screen {
 
                 );
                /*
-                bullet = new Bullet(new Texture("android/assets/fire1.png"),
+                bullet = new Bullet(new Texture(crimsonTD.getInstance().resolvePath("/fire1.png"),
                         world.getPlayer().getX(),
                         world.getPlayer().getY(),
                         100f, 62f,
@@ -649,8 +649,8 @@ public class GameScreen implements Screen {
                         */
                 break;
             case ICERIFLE:
-                //bullet = new Bullet(new Texture("android/assets/Iceball.png"), world.getPlayer().getX(), world.getPlayer().getY(), 12, 12, world.getPhysicsWorld(), BulletType.ICEBALL);
-                bullet = new Bullet((new Texture("android/assets/Iceball.png")),
+                //bullet = new Bullet(new Texture(crimsonTD.getInstance().resolvePath("/Iceball.png"), world.getPlayer().getX(), world.getPlayer().getY(), 12, 12, world.getPhysicsWorld(), BulletType.ICEBALL);
+                bullet = new Bullet((new Texture(crimsonTD.getInstance().resolvePath("/Iceball.png"))),
                         world.getPlayer().getX() + world.getPlayer().getOriginX()
                                 + 70 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
                                 + 10 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation())),
@@ -1169,7 +1169,7 @@ public class GameScreen implements Screen {
             fw.append(Integer.toString(100 * i) + "\r\n");
         }
        */
-        //fw = new FileWriter(new File("android//assets//stats//stats.txt"), true);
+        //fw = new FileWriter(new File(crimsonTD.getInstance().resolvePath("stats//stats.txt"), true);
 
         //THERE WAS FILEWRITER
 
@@ -1186,7 +1186,7 @@ public class GameScreen implements Screen {
             {
                 leaderboards[i] = Integer.valueOf(br.readLine());
             }*/
-        sc = new Scanner("android//assets//stats//stats.txt");
+        sc = new Scanner(crimsonTD.getInstance().resolvePath("stats//stats.txt"));
            // sc.reset();
         System.out.println(sc.hasNextInt());
             if(sc.hasNextInt()) {
@@ -1210,7 +1210,7 @@ public class GameScreen implements Screen {
         }
         Arrays.sort(leaderboards);
 
-        fw = new FileWriter(new File("android//assets//stats//stats.txt"));
+        fw = new FileWriter(new File(crimsonTD.getInstance().resolvePath("stats//stats.txt")));
 
         for(int i = 0; i <leaderboards.length; i++)
         {
@@ -1242,7 +1242,7 @@ public class GameScreen implements Screen {
             System.out.println(leaderboards[i]);
         }
 
-        sc = new Scanner(new File("android//assets//stats//stats_strings.txt"));
+        sc = new Scanner(new File(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")));
         for(int i = 0; i < deathLB.length; i++)
         {
             if(sc.hasNextLine())
@@ -1279,7 +1279,7 @@ public class GameScreen implements Screen {
                 break;
         }
 
-        fw = new FileWriter(new File("android//assets//stats//stats_strings.txt"));
+        fw = new FileWriter(new File(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")));
         fw.append(deathLB1.getText() + "\n"
                 +deathLB2.getText() + "\n"
                 +deathLB3.getText() + "\n"

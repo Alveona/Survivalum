@@ -2,17 +2,15 @@ android {
     compileSdkVersion 23
     buildToolsVersion '23.0.3'
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 8
         targetSdkVersion 23
         multiDexEnabled true
     }
-    buildTypes{
-        debug{
-            multiDexEnabled true
-        }
-        release{
-            multiDexEnabled true
-        }
+    dexOptions {
+            incremental true
+            javaMaxHeapSize "2048M"
+            jumboMode = true
+
     }
     sourceSets {
         main {
@@ -125,6 +123,10 @@ idea {
     }
 }
 dependencies {
-    compile 'com.android.support:multidex:1.0.0'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:multidex:1.0.1'
+    //
+    //classpath 'com.android.tools.build:gradle:2.1.0'
 
 }
+

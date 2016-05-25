@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.pomavau.crimson.Controller.Animation;
 import com.pomavau.crimson.View.ImageActor;
+import com.pomavau.crimson.crimsonTD;
 
 /**
  * Created by Pomavau on 19.05.16.
@@ -14,7 +15,7 @@ public class FlameTank extends ImageActor{
     float temp;
     public FlameTank(Texture image, float x, float y, float width, float height) {
         super(image, x, y, width, height);
-        tankAnimation = new Animation(new TextureRegion(new Texture("android/assets/flametank.png"), 348, 49), 12, 0);
+        tankAnimation = new Animation(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("flametank.png")), 348, 49), 12, 0);
         this.world = world;
         img = tankAnimation.getFrame();
     }

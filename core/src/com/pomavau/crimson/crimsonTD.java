@@ -1,5 +1,6 @@
 package com.pomavau.crimson;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -49,14 +50,16 @@ public class crimsonTD extends Game {
 	@Override
 	public void create() {
 	choosePlatform = new Scanner(System.in);
+		/*
 		System.out.println("CHOOSE YOUR PLATFORM:\n1 - PC\n2 - ANDROID/IOS");
 		switch (choosePlatform.nextInt())
 		{
 			case 1: setMovementControlStyle(MovementControlStyle.BUTTONS); break;
 			case 2: setMovementControlStyle(MovementControlStyle.JOYPAD); break;
-		}
+		}*/
 		//setMovementControlStyle(MovementControlStyle.BUTTONS);
 		//setMovementControlStyle(MovementControlStyle.JOYPAD);
+		setMovementControlStyle(MovementControlStyle.JOYPAD);
 		ppuX = Gdx.graphics.getWidth()/1145;
 		ppuY = Gdx.graphics.getHeight()/616;
 		loadGraphics();
@@ -83,8 +86,9 @@ public class crimsonTD extends Game {
 	}
 
 	private void loadGraphics() {
+		/*
 		textureRegions = new HashMap<Integer, TextureRegion>();
-		Texture atlas = new Texture("android/assets/hero/heromove_atlas.png");
+		Texture atlas = new Texture(resolvePath("heromove_atlas.png"));
 		//southnortheastwest
 		textureRegions.put(0, new TextureRegion(atlas, 0, 0, 313, 206));
 		textureRegions.put(1, new TextureRegion(atlas, 313, 0, 313, 206));
@@ -105,7 +109,7 @@ public class crimsonTD extends Game {
 		textureRegions.put(16, new TextureRegion(atlas, 313, 618, 313, 206));
 		textureRegions.put(17, new TextureRegion(atlas, 626, 618, 313, 206));
 		textureRegions.put(18, new TextureRegion(atlas, 939, 618, 313, 206));
-		textureRegions.put(19, new TextureRegion(atlas, 1252, 618, 313, 206));
+		textureRegions.put(19, new TextureRegion(atlas, 1252, 618, 313, 206));*/
 
 	}
 	public void showGame() {
@@ -136,6 +140,17 @@ public class crimsonTD extends Game {
 		else {group.setVisible(true); }
 
 		//System.out.println("screen status changed");
+	}
+
+	public String resolvePath (String fileName){
+		if(Gdx.app.getType() == Application.ApplicationType.iOS || Gdx.app.getType() == Application.ApplicationType.Android)
+		{
+			return fileName;
+		}
+		else
+		{
+			return String.format("android/assets/%s", fileName);
+		}
 	}
 
 	public boolean getMenuVisibility(Group group)

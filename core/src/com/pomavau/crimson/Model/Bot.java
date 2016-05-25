@@ -88,7 +88,7 @@ public class Bot extends ImageActor {
 */
 public void createBodyZombie(com.badlogic.gdx.physics.box2d.World world){
     phworld = world;
-    BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/bodyproject.json"));
+    BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(crimsonTD.getInstance().resolvePath("bodyproject.json")));
     BodyDef bodyDef = new BodyDef();
     bodyDef.position.x = getX();
     bodyDef.position.y = getY();
@@ -118,7 +118,7 @@ public void createBodyZombie(com.badlogic.gdx.physics.box2d.World world){
 }
     public void createBodyPudge(com.badlogic.gdx.physics.box2d.World world){
         phworld = world;
-        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("android/assets/bodyproject.json"));
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(crimsonTD.getInstance().resolvePath("bodyproject.json")));
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.x = getX();
         bodyDef.position.y = getY();
@@ -167,9 +167,9 @@ public void createBodyZombie(com.badlogic.gdx.physics.box2d.World world){
         }
         box.setUserData(new String("bot"));
         this.levelworld = levelworld;
-        iceblock = new ImageActor(new Texture("android//assets//iceblock.png"), 0, 0, 85, 85);
+        iceblock = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("iceblock.png")), 0, 0, 85, 85);
         iceblock.setVisible(false);
-        blood = new Blood(new Texture("android//assets//arenaborders.png"), 0, 0, 55, 45, levelworld);
+        blood = new Blood(new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png")), 0, 0, 55, 45, levelworld);
     }
 
 
