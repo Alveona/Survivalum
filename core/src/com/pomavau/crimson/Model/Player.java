@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.utils.Array;
 import com.pomavau.crimson.Controller.Animation;
 import com.pomavau.crimson.Controller.BodyEditorLoader;
 import com.pomavau.crimson.Controller.CustomUserData;
@@ -60,6 +61,10 @@ public class Player extends ImageActor {
     private Point shootingPoint;
     private Weapon currentWeapon;
 
+    private int currentXP;
+    private int reqXP;
+    private int currentLVL;
+    private Array<Integer> XPScale;
 
     private int scorescount = 0;
 
@@ -79,9 +84,11 @@ public class Player extends ImageActor {
         shootingPoint = new Point(x, y, world);
         currentWeapon = Weapon.ASSAULTRIFLE;
         //currentWeapon = Weapon.ICERIFLE;
-        currentWeapon = Weapon.FLAMETHROWER;
+        //currentWeapon = Weapon.FLAMETHROWER;
         //setOrigin(getWidth()/2, getHeight()/2);
-
+        XPScale = new Array<Integer>();
+        XPScale.add(1000);
+        XPScale.add(1000);
     }
     public void createBody(World world){
         BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(crimsonTD.getInstance().resolvePath("bodyproject.json")));
@@ -377,4 +384,15 @@ public class Player extends ImageActor {
         this.maxHP = maxHP;
     }
 
+    public void XPScaleAdd(Array<Integer> array)
+    {
+        array.add(array.get(array.size - 1) + array.get(array.size - 2));
+    }
+
+    public void LvLup()
+    {
+        currentXP = 0;
+        reqXP = XPScale.get(currentLVL + 1);
+        currentLVL++;
+    }
 }

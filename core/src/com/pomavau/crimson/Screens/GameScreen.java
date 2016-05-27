@@ -39,6 +39,7 @@ import com.pomavau.crimson.Controller.MovementControlStyle;
 import com.pomavau.crimson.Controller.ObjectState;
 import com.pomavau.crimson.Controller.PlayerController;
 import com.pomavau.crimson.Controller.BotController;
+import com.pomavau.crimson.Controller.SetReloading;
 import com.pomavau.crimson.Controller.SettingsController;
 import com.pomavau.crimson.Controller.SettingsType;
 import com.pomavau.crimson.Controller.ShowMenu;
@@ -568,7 +569,9 @@ public class GameScreen implements Screen {
         inventoryButtonGroup.addActor(riflesignmiddle);
         inventoryButtonGroup.addActor(stringInventory);
         inventoryButtonGroup.addListener(new ShowMenu(inventoryScreen));
-/*
+
+        bulletsCounter.addListener(new SetReloading());
+        /*
         transparentGroup = new Group();
         transparentGroup.addActor(bulletsCounter);
         transparentGroup.addActor(scoresBG);
@@ -1330,6 +1333,10 @@ public class GameScreen implements Screen {
             return true;
         }
         return false;
+    }
+    public void setReloading(boolean toSet)
+    {
+        isReloading = toSet;
     }
 }
 

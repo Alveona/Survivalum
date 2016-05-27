@@ -57,9 +57,9 @@ public class crimsonTD extends Game {
 			case 1: setMovementControlStyle(MovementControlStyle.BUTTONS); break;
 			case 2: setMovementControlStyle(MovementControlStyle.JOYPAD); break;
 		}*/
-		//setMovementControlStyle(MovementControlStyle.BUTTONS);
+		setMovementControlStyle(MovementControlStyle.BUTTONS);
 		//setMovementControlStyle(MovementControlStyle.JOYPAD);
-		setMovementControlStyle(MovementControlStyle.JOYPAD);
+		//setMovementControlStyle(MovementControlStyle.JOYPAD);
 		ppuX = Gdx.graphics.getWidth()/1145;
 		ppuY = Gdx.graphics.getHeight()/616;
 		loadGraphics();
@@ -256,6 +256,11 @@ public class crimsonTD extends Game {
 	public Group getSettingScreen()
 	{
 		return menuScreen.getSettingScreen();
+	}
+
+	public void setReloading(boolean toSet)
+	{
+		gameScreen.setReloading(toSet);
 	}
 
 }
