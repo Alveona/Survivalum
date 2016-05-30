@@ -37,6 +37,7 @@ import com.pomavau.crimson.Controller.InventoryIncrease;
 import com.pomavau.crimson.Controller.MoveToMenu;
 import com.pomavau.crimson.Controller.MovementControlStyle;
 import com.pomavau.crimson.Controller.ObjectState;
+import com.pomavau.crimson.Controller.PerkType;
 import com.pomavau.crimson.Controller.PlayerController;
 import com.pomavau.crimson.Controller.BotController;
 import com.pomavau.crimson.Controller.SetReloading;
@@ -48,6 +49,7 @@ import com.pomavau.crimson.Model.Bullet;
 import com.pomavau.crimson.Model.FlameTank;
 import com.pomavau.crimson.Model.HPcircle;
 import com.pomavau.crimson.Model.LevelWorld;
+import com.pomavau.crimson.Model.Perk;
 import com.pomavau.crimson.Model.PhWorld;
 import com.pomavau.crimson.View.FontActor;
 import com.pomavau.crimson.View.ImageActor;
@@ -158,6 +160,23 @@ public class GameScreen implements Screen {
     private ImageActor inventoryButton;
     private ImageActor inventoryBG;
     private ImageActor inventorySlot;
+
+    //perks screen
+    private ImageActor perksBG;
+    private ImageActor perksApply;
+    private Group perksScreen;
+    private Perk perkMS;
+    private Perk perkSS;
+    private Perk perkRS;
+    private Perk perkLvL;
+    private Perk perkAmmo;
+    private Perk perkFifty;
+    private Perk perkFreeze;
+    private Perk perkCamera;
+    private Perk perkInvul;
+    private Perk perkHeal;
+    private Perk perkDeath;
+
 
     private ImageActor m4a4hud;
     private ImageActor icegunhud;
@@ -496,6 +515,72 @@ public class GameScreen implements Screen {
         settingsScreen.setVisible(false);
         settOK.addListener(new ShowMenu(settingsScreen));
 
+        //PERKS
+        perksBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png")), 346, 616 - 534);
+        perksApply =  new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")), 473, 616 - 533);
+        perkMS = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_ms.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_ms_d.png"))),
+                0, 0 , PerkType.MSUP);
+        perkMS.setVisible(false);
+        perkSS = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_ss.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_ss_d.png"))),
+                0, 0 , PerkType.SSUP);
+        perkSS.setVisible(false);
+        perkRS = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_rs.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_rs_d.png"))),
+                0, 0 , PerkType.RSUP);
+        perkRS.setVisible(false);
+        perkLvL = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_lvl.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_lvl_d.png"))),
+                0, 0 , PerkType.LVLUP);
+        perkLvL.setVisible(false);
+        perkAmmo = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_reload.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_reload_d.png"))),
+                0, 0 , PerkType.INFAMMO);
+        perkAmmo.setVisible(false);
+        perkFifty = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_fifty.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_fifty_d.png"))),
+                0, 0 , PerkType.FIFTYFIFTY);
+        perkFifty.setVisible(false);
+        perkFifty = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_fifty.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_fifty_d.png"))),
+                0, 0 , PerkType.FIFTYFIFTY);
+        perkFifty.setVisible(false);
+        perkFreeze = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_freeze.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_freeze_d.png"))),
+                0, 0 , PerkType.FREEZE);
+        perkFreeze.setVisible(false);
+        perkCamera = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_camera.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_camera_d.png"))),
+                0, 0 , PerkType.ZOOM);
+        perkCamera.setVisible(false);
+        perkInvul = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_invul.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_invul_d.png"))),
+                0, 0 , PerkType.INVUL);
+        perkInvul.setVisible(false);
+        perkHeal = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_heal.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_heal_d.png"))),
+                0, 0 , PerkType.HEAL);
+        perkHeal.setVisible(false);
+        perkDeath = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_death.png"))),
+                new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_death_d.png"))),
+                0, 0 , PerkType.DEATH);
+        perkDeath.setVisible(false);
+        perksScreen = new Group();
+        perksScreen.addActor(perksBG);
+        perksScreen.addActor(perksApply);
+        perksScreen.addActor(perkMS);
+        perksScreen.addActor(perkSS);
+        perksScreen.addActor(perkRS);
+        perksScreen.addActor(perkLvL);
+        perksScreen.addActor(perkAmmo);
+        perksScreen.addActor(perkFifty);
+        perksScreen.addActor(perkFreeze);
+        perksScreen.addActor(perkCamera);
+        perksScreen.addActor(perkInvul);
+        perksScreen.addActor(perkHeal);
+        perksScreen.addActor(perkDeath);
+        perksScreen.setVisible(false);
         //settingsButton.addListener(new ShowMenu(settingsScreen));
         //settingsScreen = crimsonTD.getInstance().getSettingScreen();
 
@@ -729,7 +814,7 @@ public class GameScreen implements Screen {
         if(isReloading)
         {
             timereloading+= delta;
-            System.out.println(timereloading);
+            //System.out.println(timereloading);
         }
         if(timereloading >= reloadtimer) {
             isReloading = false;
@@ -1047,7 +1132,7 @@ public class GameScreen implements Screen {
     }
 
     public void setInventoryCurrentChoose(int choose) {
-        System.out.println("CHOOSED "+choose);
+       // System.out.println("CHOOSED "+choose);
         inventoryCurrentChoose = choose;
     }
 
@@ -1191,7 +1276,7 @@ public class GameScreen implements Screen {
             }*/
         sc = new Scanner(crimsonTD.getInstance().resolvePath("stats//stats.txt"));
            // sc.reset();
-        System.out.println(sc.hasNextInt());
+       // System.out.println(sc.hasNextInt());
             if(sc.hasNextInt()) {
                 leaderboards[i] = Integer.valueOf(sc.nextInt());
             }
@@ -1242,7 +1327,7 @@ public class GameScreen implements Screen {
         }
         for(int i = 0; i < leaderboards.length; i++)
         {
-            System.out.println(leaderboards[i]);
+          //  System.out.println(leaderboards[i]);
         }
 
         sc = new Scanner(new File(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")));
@@ -1337,6 +1422,11 @@ public class GameScreen implements Screen {
     public void setReloading(boolean toSet)
     {
         isReloading = toSet;
+    }
+
+    public void LvlUp()
+    {
+
     }
 }
 

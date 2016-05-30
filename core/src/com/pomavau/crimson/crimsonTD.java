@@ -263,4 +263,26 @@ public class crimsonTD extends Game {
 		gameScreen.setReloading(toSet);
 	}
 
+	public int getCurrentXP() {
+		return gameScreen.getWorld().getPlayer().getCurrentXP();
+	}
+
+	public void setCurrentXP(int currentXP) {
+		gameScreen.getWorld().getPlayer().setCurrentXP(currentXP);
+	}
+
+	public void LvlUp()
+	{
+		gameScreen.getWorld().getPlayer().LvLup();
+		gameScreen.LvlUp();
+	}
+
+	public int getReqXP() {
+		return gameScreen.getWorld().getPlayer().getReqXP();
+
+	}
+
+	public void setReqXP(int reqXP) {
+		gameScreen.getWorld().getPlayer().setReqXP(reqXP);
+	}
 }

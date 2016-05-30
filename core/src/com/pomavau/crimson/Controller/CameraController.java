@@ -153,9 +153,9 @@ public class CameraController implements InputProcessor {
                 movesDown() && camera.position.y - step > cameraBorders.getY() ? -step : 0,
                 0);
                 */
-        camera.zoom += zoomIn() ? zoomAmount : 0;
-        camera.zoom -= zoomOut() && camera.zoom > zoomAmount ? zoomAmount : 0;
-
+       // camera.zoom += zoomIn() ? zoomAmount : 0;
+       // camera.zoom -= zoomOut() && camera.zoom > zoomAmount ? zoomAmount : 0;
+       // camera.zoom = 1.15f;
         //if ((camera.position.x + step > cameraBorders.getX() + cameraBorders.getWidth()) && (camera.position.y + step > cameraBorders.getY() + cameraBorders.getHeight()))
         //if(isBlocked == false)
        // camera.position.set(world.getPlayer().getX(), world.getPlayer().getY(), 0);

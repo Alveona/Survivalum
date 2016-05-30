@@ -61,9 +61,10 @@ public class Player extends ImageActor {
     private Point shootingPoint;
     private Weapon currentWeapon;
 
-    private int currentXP;
+    private int currentXP = 0;
+
     private int reqXP;
-    private int currentLVL;
+    private int currentLVL = 1;
     private Array<Integer> XPScale;
 
     private int scorescount = 0;
@@ -89,6 +90,7 @@ public class Player extends ImageActor {
         XPScale = new Array<Integer>();
         XPScale.add(1000);
         XPScale.add(1000);
+        reqXP = XPScale.get(XPScale.size - 1);
     }
     public void createBody(World world){
         BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal(crimsonTD.getInstance().resolvePath("bodyproject.json")));
@@ -214,6 +216,8 @@ public class Player extends ImageActor {
             box.setAngularVelocity(0);
         shootingPoint.setPosition(getX() + getWidth(), getY() + getHeight());
 
+        if (currentXP > reqXP)
+            LvLup();
         //System.out.println(currentWeapon);
     }
 
@@ -392,7 +396,43 @@ public class Player extends ImageActor {
     public void LvLup()
     {
         currentXP = 0;
+        XPScaleAdd(XPScale);
         reqXP = XPScale.get(currentLVL + 1);
         currentLVL++;
+        System.out.format("Level Up! Current LVL: %d", currentLVL);
     }
+
+
+    public int getCurrentXP() {
+        return currentXP;
+    }
+
+    public void setCurrentXP(int currentXP) {
+        this.currentXP = currentXP;
+    }
+
+
+
+    public int getReqXP() {
+        return reqXP;
+    }
+
+    public void setReqXP(int reqXP) {
+        this.reqXP = reqXP;
+    }
+
+
+    public void Perk_MS()
+    {
+        movementStep *= 1.1;
+    }
+    public void Perk_RS()
+    {
+        rotationStep *= 1.15;
+    }
+    public void Perk_LvlUP()
+    {
+        LvLup();
+    }
+
 }

@@ -155,6 +155,8 @@ public class MyContactListener implements ContactListener {
 						body1.setActive(false);
 					  	customUserDataA.getBot().setCurrentState(ObjectState.DISABLED);
 					  crimsonTD.getInstance().setScore(crimsonTD.getInstance().getScore() + 40);
+					  crimsonTD.getInstance().setCurrentXP(crimsonTD.getInstance().getCurrentXP() + 100);
+					  System.out.format("\r\nCurrent XP: %d, ReqXP: %d\r\n", crimsonTD.getInstance().getCurrentXP(), crimsonTD.getInstance().getReqXP());
 					 // world.destroyBody(body1);
 					  //body1 = null;
 				  }
