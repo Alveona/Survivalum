@@ -217,7 +217,7 @@ public class Player extends ImageActor {
         shootingPoint.setPosition(getX() + getWidth(), getY() + getHeight());
 
         if (currentXP > reqXP)
-            LvLup();
+            crimsonTD.getInstance().LvlUp();
         //System.out.println(currentWeapon);
     }
 

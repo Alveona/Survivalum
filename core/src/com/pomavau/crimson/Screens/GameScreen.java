@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -38,6 +39,7 @@ import com.pomavau.crimson.Controller.MoveToMenu;
 import com.pomavau.crimson.Controller.MovementControlStyle;
 import com.pomavau.crimson.Controller.ObjectState;
 import com.pomavau.crimson.Controller.PerkType;
+import com.pomavau.crimson.Controller.PerksClick;
 import com.pomavau.crimson.Controller.PlayerController;
 import com.pomavau.crimson.Controller.BotController;
 import com.pomavau.crimson.Controller.SetReloading;
@@ -176,7 +178,12 @@ public class GameScreen implements Screen {
     private Perk perkInvul;
     private Perk perkHeal;
     private Perk perkDeath;
-
+    private Array<Perk> perkArray;
+    private Vector2 perkPos1;
+    private Vector2 perkPos2;
+    private Vector2 perkPos3;
+    private int randomPerk;
+    private int randomTemp;
 
     private ImageActor m4a4hud;
     private ImageActor icegunhud;
@@ -566,6 +573,22 @@ public class GameScreen implements Screen {
                 new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_death_d.png"))),
                 0, 0 , PerkType.DEATH);
         perkDeath.setVisible(false);
+        perkArray = new Array<Perk>();
+        perkArray.add(perkMS);
+        perkArray.add(perkSS);
+        perkArray.add(perkRS);
+        perkArray.add(perkLvL);
+        perkArray.add(perkAmmo);
+        perkArray.add(perkFifty);
+        perkArray.add(perkFreeze);
+        perkArray.add(perkCamera);
+        perkArray.add(perkInvul);
+        perkArray.add(perkHeal);
+        perkArray.add(perkDeath);
+        for(int i = 0; i < perkArray.size - 1; i++)
+        {
+            perkArray.get(i).addListener(new PerksClick(perkArray.get(i)));
+        }
         perksScreen = new Group();
         perksScreen.addActor(perksBG);
         perksScreen.addActor(perksApply);
@@ -581,6 +604,9 @@ public class GameScreen implements Screen {
         perksScreen.addActor(perkHeal);
         perksScreen.addActor(perkDeath);
         perksScreen.setVisible(false);
+        perkPos1 = new Vector2(389, 616 - 308);
+        perkPos2 = new Vector2(514, 616 - 308);
+        perkPos3 = new Vector2(641, 616 - 308);
         //settingsButton.addListener(new ShowMenu(settingsScreen));
         //settingsScreen = crimsonTD.getInstance().getSettingScreen();
 
@@ -683,6 +709,7 @@ public class GameScreen implements Screen {
         UIstage.addActor(rifleEnabled);
         UIstage.addActor(icegunEnabled);
         UIstage.addActor(throwerEnabled);
+        UIstage.addActor(perksScreen);
 //        UIstage.addActor(transparentGroup);
         pauseButton.toFront();
         world.setBackgroundtoBack();
@@ -870,7 +897,7 @@ public class GameScreen implements Screen {
         }
         world.getReloadAnimation().setFinishedOnce(true);
         //isBotNearPlayer();
-        if (!inventoryScreen.isVisible() && !pauseScreen.isVisible()  && !deathScreen.isVisible()) {
+        if (!inventoryScreen.isVisible() && !pauseScreen.isVisible()  && !deathScreen.isVisible() && !perksScreen.isVisible()) {
         world.getPhysicsWorld().step(delta, 6, 2);}
         currentBot++;
         if (currentBot > world.getBotscount() - 1)
@@ -882,7 +909,7 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.R) && bulletsLeft != bulletsCountDefault || bulletsLeft == 0) {
             isReloading = true;
         }
-        if (!inventoryScreen.isVisible() && !pauseScreen.isVisible() && !deathScreen.isVisible())
+        if (!inventoryScreen.isVisible() && !pauseScreen.isVisible() && !deathScreen.isVisible() && !perksScreen.isVisible())
         animationsUpdate(delta);
 
         switch (world.getPlayer().getCurrentWeapon()) {
@@ -1033,7 +1060,7 @@ public class GameScreen implements Screen {
         world.draw();
         UIstage.draw();
         //world.getHPcircle().setVisible(false);
-        if (!inventoryScreen.isVisible() && !pauseScreen.isVisible()) {
+        if (!inventoryScreen.isVisible() && !pauseScreen.isVisible() && !perksScreen.isVisible()) {
             world.act(Gdx.graphics.getDeltaTime());
             UIstage.act(Gdx.graphics.getDeltaTime());
             world.getPhysicsWorld().step(0, 0 ,0);
@@ -1426,7 +1453,23 @@ public class GameScreen implements Screen {
 
     public void LvlUp()
     {
-
+        perksScreen.setVisible(true);
+        randomPerk = (int)(Math.random() * 11);
+        randomTemp = randomPerk;
+        perkArray.get(randomPerk).setVisible(true);
+        perkArray.get(randomPerk).setPosition(perkPos1.x, perkPos1.y);
+        randomPerk = (int)(Math.random() * 11);
+        while (randomTemp == randomPerk)
+            randomPerk = (int)(Math.random() * 11);
+        randomTemp = randomPerk;
+        perkArray.get(randomPerk).setVisible(true);
+        perkArray.get(randomPerk).setPosition(perkPos2.x, perkPos2.y);
+        randomPerk = (int)(Math.random() * 11);
+        while (randomTemp == randomPerk)
+            randomPerk = (int)(Math.random() * 11);
+        randomTemp = randomPerk;
+        perkArray.get(randomPerk).setVisible(true);
+        perkArray.get(randomPerk).setPosition(perkPos3.x, perkPos3.y);
     }
 }
 
