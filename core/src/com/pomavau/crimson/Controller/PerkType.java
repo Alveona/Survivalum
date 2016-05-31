@@ -14,5 +14,6 @@ public enum PerkType {
     ZOOM,
     INVUL,
     HEAL,
-    DEATH
+    DEATH,
+    NULL
 }

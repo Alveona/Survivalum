@@ -233,6 +233,10 @@ public class LevelWorld extends Stage {
         return bots;
     }
 */
+    public Array<Bot> getBotArray()
+    {
+        return botArray;
+    }
     public float getWidth () {
         return 960;
         //return background.getWidth();

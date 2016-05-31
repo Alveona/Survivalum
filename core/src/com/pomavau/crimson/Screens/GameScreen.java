@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.pomavau.crimson.Controller.Animation;
+import com.pomavau.crimson.Controller.ApplyPerk;
 import com.pomavau.crimson.Controller.ApplyWeapon;
 import com.pomavau.crimson.Controller.BulletType;
 import com.pomavau.crimson.Controller.CameraController;
@@ -178,6 +179,9 @@ public class GameScreen implements Screen {
     private Perk perkInvul;
     private Perk perkHeal;
     private Perk perkDeath;
+    private Perk perkEnabled1;
+    private Perk perkEnabled2;
+    private Perk perkEnabled3;
     private Array<Perk> perkArray;
     private Vector2 perkPos1;
     private Vector2 perkPos2;
@@ -585,10 +589,18 @@ public class GameScreen implements Screen {
         perkArray.add(perkInvul);
         perkArray.add(perkHeal);
         perkArray.add(perkDeath);
+        /*
         for(int i = 0; i < perkArray.size - 1; i++)
         {
             perkArray.get(i).addListener(new PerksClick(perkArray.get(i)));
-        }
+        }*/
+        perkEnabled1 = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png"))), new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png"))), 0, 0, PerkType.NULL);
+        perkEnabled2 = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png"))), new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png"))), 0, 0, PerkType.NULL);
+        perkEnabled3 = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png"))), new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("arenaborders.png"))), 0, 0, PerkType.NULL);
+        perkEnabled1.setVisible(false);
+        perkEnabled2.setVisible(false);
+        perkEnabled3.setVisible(false);
+
         perksScreen = new Group();
         perksScreen.addActor(perksBG);
         perksScreen.addActor(perksApply);
@@ -603,7 +615,11 @@ public class GameScreen implements Screen {
         perksScreen.addActor(perkInvul);
         perksScreen.addActor(perkHeal);
         perksScreen.addActor(perkDeath);
+        perksScreen.addActor(perkEnabled1);
+        perksScreen.addActor(perkEnabled2);
+        perksScreen.addActor(perkEnabled3);
         perksScreen.setVisible(false);
+        perksApply.addListener(new ApplyPerk(perksScreen));
         perkPos1 = new Vector2(389, 616 - 308);
         perkPos2 = new Vector2(514, 616 - 308);
         perkPos3 = new Vector2(641, 616 - 308);
@@ -884,7 +900,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
     //System.out.println(twoActorsCross(world.getPlayer(), bulletsCounter));
-        if (!inventoryScreen.isVisible() && !pauseScreen.isVisible() && !deathScreen.isVisible()) {
+        if (!inventoryScreen.isVisible() && !pauseScreen.isVisible() && !deathScreen.isVisible() && !perksScreen.isVisible()) {
             spawningBots(delta);
             isBotNearPlayer();
             try {
@@ -1456,20 +1472,45 @@ public class GameScreen implements Screen {
         perksScreen.setVisible(true);
         randomPerk = (int)(Math.random() * 11);
         randomTemp = randomPerk;
-        perkArray.get(randomPerk).setVisible(true);
-        perkArray.get(randomPerk).setPosition(perkPos1.x, perkPos1.y);
+        perkEnabled1 = perkArray.get(randomPerk);
+        perkEnabled1.setVisible(true);
+        perkEnabled1.setPosition(perkPos1.x, perkPos1.y);
+       // perkArray.get(randomPerk).setVisible(true);
+        //perkArray.get(randomPerk).setPosition(perkPos1.x, perkPos1.y);
         randomPerk = (int)(Math.random() * 11);
         while (randomTemp == randomPerk)
             randomPerk = (int)(Math.random() * 11);
         randomTemp = randomPerk;
-        perkArray.get(randomPerk).setVisible(true);
-        perkArray.get(randomPerk).setPosition(perkPos2.x, perkPos2.y);
+        perkEnabled2 = perkArray.get(randomPerk);
+        perkEnabled2.setVisible(true);
+        perkEnabled2.setPosition(perkPos2.x, perkPos2.y);
+        //perkArray.get(randomPerk).setVisible(true);
+        //perkArray.get(randomPerk).setPosition(perkPos2.x, perkPos2.y);
         randomPerk = (int)(Math.random() * 11);
         while (randomTemp == randomPerk)
             randomPerk = (int)(Math.random() * 11);
         randomTemp = randomPerk;
-        perkArray.get(randomPerk).setVisible(true);
-        perkArray.get(randomPerk).setPosition(perkPos3.x, perkPos3.y);
+        perkEnabled3 = perkArray.get(randomPerk);
+        perkEnabled3.setVisible(true);
+        perkEnabled3.setPosition(perkPos3.x, perkPos3.y);
+// perkArray.get(randomPerk).setVisible(true);
+        // perkArray.get(randomPerk).setPosition(perkPos3.x, perkPos3.y);
+        perkEnabled1.addListener(new PerksClick(perkEnabled1, perkEnabled2, perkEnabled3));
+        perkEnabled2.addListener(new PerksClick(perkEnabled2, perkEnabled1, perkEnabled3));
+        perkEnabled3.addListener(new PerksClick(perkEnabled3, perkEnabled2, perkEnabled1));
+
+    }
+    public Array<Perk> getPerkArray()
+    {
+        return perkArray;
+    }
+    public void ClosingPerksScreen()
+    {
+        for(int i = 0; i < perkArray.size - 1; i++)
+            perkArray.get(i).setVisible(false);
+        perkEnabled1.setVisible(false);
+        perkEnabled2.setVisible(false);
+        perkEnabled3.setVisible(false);
     }
 }
 

@@ -9,12 +9,20 @@ import com.pomavau.crimson.crimsonTD;
  * Created by Pomavau on 31.05.16.
  */
 public class PerksClick extends ClickListener {
-    private Perk perk;
-    public PerksClick(Perk perk)
+    private Perk perkE;
+    private Perk perkD1;
+    private Perk perkD2;
+    public PerksClick(Perk perkE, Perk perkD1, Perk perkD2)
     {
-        this.perk = perk;
+        this.perkE = perkE;
+        this.perkD1 = perkD1;
+        this.perkD2 = perkD2;
     }
     public void clicked(InputEvent event, float x, float y) {
-      perk.changeState();
+      perkE.changeState(ObjectState.ON);
+        perkD1.changeState(ObjectState.OFF);
+        perkD2.changeState(ObjectState.OFF);
+
+        crimsonTD.getInstance().setPerkEnabled(perkE);
     }
 }

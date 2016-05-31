@@ -9,9 +9,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.utils.Array;
 import com.pomavau.crimson.Controller.GameDifficulty;
 import com.pomavau.crimson.Controller.MovementControlStyle;
+import com.pomavau.crimson.Controller.ObjectState;
 import com.pomavau.crimson.Controller.Weapon;
+import com.pomavau.crimson.Model.Perk;
 import com.pomavau.crimson.Screens.GameScreen;
 
 import java.io.FileNotFoundException;
@@ -31,6 +34,8 @@ public class crimsonTD extends Game {
 	private BitmapFont font;
 	private static crimsonTD instance = new crimsonTD();
 	private boolean firstlaunch = true;
+
+	private Perk perkEnabled;
 
 	private boolean bloodEnabled = true;
 	Scanner choosePlatform;
@@ -284,5 +289,42 @@ public class crimsonTD extends Game {
 
 	public void setReqXP(int reqXP) {
 		gameScreen.getWorld().getPlayer().setReqXP(reqXP);
+	}
+
+
+	public Perk getPerkEnabled() {
+		return perkEnabled;
+	}
+
+	public void setPerkEnabled(Perk perkEnabled) {
+		this.perkEnabled = perkEnabled;
+	}
+
+	public void Perk_MS()
+	{
+		gameScreen.getWorld().getPlayer().Perk_MS();
+	}
+	public void Perk_RS()
+	{
+		gameScreen.getWorld().getPlayer().Perk_RS();
+	}
+	public void Perk_LVLUP()
+	{
+		LvlUp();
+	}
+	public Array<Perk> getPerkArray()
+	{
+		return gameScreen.getPerkArray();
+	}
+	public void ClosingPerksScreen()
+	{
+		gameScreen.ClosingPerksScreen();
+	}
+	public void Perk_Freeze()
+	{
+		for(int i =0; i < gameScreen.getWorld().getBotArray().size - 1; i ++ )
+		{
+			gameScreen.getWorld().getBotArray().get(i).setState(ObjectState.FREEZED);
+		}
 	}
 }

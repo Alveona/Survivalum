@@ -12,6 +12,11 @@ import com.pomavau.crimson.View.ImageActor;
 public class Perk extends ImageActor {
     private TextureRegion textureE;
     private TextureRegion textureD;
+
+    public PerkType getPerkType() {
+        return perkType;
+    }
+
     private PerkType perkType;
 
     private ObjectState state = ObjectState.OFF;
@@ -24,19 +29,24 @@ public class Perk extends ImageActor {
         this.textureE = imageE;
     }
 
-    public void changeState()
+
+    public void changeState(ObjectState state)
     {
+        this.state = state;
+        /*
         if(state == ObjectState.OFF) {
             state = ObjectState.ON;
         }
         else {
             state = ObjectState.OFF;
         }
+        */
         if(state == ObjectState.OFF)
             this.img = textureD;
         if(state == ObjectState.ON)
             this.img = textureE;
-        System.out.println("CurrentState: " + state);
+        //System.out.println("CurrentState: " + state);
+
     }
 
     public ObjectState getState() {
