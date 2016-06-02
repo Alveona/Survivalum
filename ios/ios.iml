@@ -38,6 +38,5 @@
     <orderEntry type="library" exported="" name="gdx-box2d-1.7.2" level="project" />
     <orderEntry type="library" exported="" name="gdx-freetype-1.7.2" level="project" />
     <orderEntry type="library" exported="" name="robovm-objc-1.12.0" level="project" />
-    <orderEntry type="library" exported="" name="ios.ios-1.0" level="project" />
   </component>
 </module>

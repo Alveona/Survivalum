@@ -17,7 +17,7 @@ public class ApplyPerk extends ClickListener {
         this.group = group;
     }
     public void clicked(InputEvent event, float x, float y) {
-        crimsonTD.getInstance().showMenu(group);
+
         perk = crimsonTD.getInstance().getPerkEnabled();
         if(perk != null) {
             switch (perk.getPerkType()) {
@@ -28,13 +28,20 @@ public class ApplyPerk extends ClickListener {
                     crimsonTD.getInstance().Perk_RS();
                     break;
                 case LVLUP:
+                    crimsonTD.getInstance().ClosingPerksScreen();
                     crimsonTD.getInstance().Perk_LVLUP();
                     break;
                 case FREEZE:
                     crimsonTD.getInstance().Perk_Freeze();
                     break;
+                case INVUL:
+                    crimsonTD.getInstance().Perk_Invul();
+                    break;
+                case INFAMMO:
+                    crimsonTD.getInstance().Perk_Ammo();
+                    break;
             }
-
+            crimsonTD.getInstance().showMenu(group);
             //crimsonTD.getInstance().getPerkArray().get(i).setVisible(false);
             perk.changeState(ObjectState.OFF);
             crimsonTD.getInstance().ClosingPerksScreen();

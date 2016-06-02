@@ -66,7 +66,7 @@ public class Bot extends ImageActor {
     }
 
     private float timefreezed;
-    private float freezetimer = 1.5f;
+    private float freezetimer = 5f;
 
     private boolean isspawned = false;
 

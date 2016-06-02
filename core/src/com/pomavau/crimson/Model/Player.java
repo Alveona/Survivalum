@@ -61,6 +61,13 @@ public class Player extends ImageActor {
     private Point shootingPoint;
     private Weapon currentWeapon;
 
+    private boolean invul = false;
+    private boolean infammo = false;
+    private float invultimer;
+    private float infammotimer;
+    private float invulMax = 15;
+    private float infammoMax = 20;
+
     private int currentXP = 0;
 
     private int reqXP;
@@ -132,79 +139,6 @@ public class Player extends ImageActor {
 
     }
 
-    public void act1(float delta) {
-        if (speededUp) delta*=3;
-
-        switch (rotationDirection){
-            case LEFT:
-                box.setAngularVelocity((float) Math.toRadians(rotationStep));
-                break;
-            case RIGHT:
-                box.setAngularVelocity((float) -Math.toRadians(rotationStep));
-                break;
-        }
-        switch (movementDirection){
-            case FORWARD:
-                //box.applyAngularImpulse(movementStep*delta, true);
-                box.setLinearVelocity(movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI) * 100* crimsonTD.getInstance().getLeftTouchpadKnobX(), movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI) * 100* crimsonTD.getInstance().getLeftTouchpadKnobY());
-                break;
-            case BACKWARD:
-
-                /*if (isBlockedY == false)
-                moveBy(-movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), -movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI));
-                */
-               // box.setLinearVelocity(-movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), -movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI));
-            /*    if(isBlockedY == false && isBlockedX == false) {
-                    moveBy(-movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI) * 100, -movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI)* 100);
-                }
-                else
-                {
-                    if(isBlockedX == true)
-                        moveBy(0, -movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI));
-                    if (isBlockedY == true)
-                        moveBy(-movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), 0);
-
-                }*/
-               //box.setLinearVelocity(getPosition());
-                currentState = ObjectState.MOVING;
-               // if(currentState != ObjectState.)
-                box.setLinearVelocity(-movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI) * 100 * crimsonTD.getInstance().getLeftTouchpadKnobX(), -movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI)* 100 * crimsonTD.getInstance().getLeftTouchpadKnobY());
-                //box.getPosition().x = getX();
-                //box.getPosition().y = getY();
-
-                //box.applyLinearImpulse(-movementStep * delta * (float) Math.cos(getRotation() / 180 * Math.PI), -movementStep * delta * (float) Math.sin(getRotation() / 180 * Math.PI), getX(), getY(), true);
-                //box.applyLinearImpulse(box.getLinearVelocity(), box.getLinearVelocity(), true);
-
-                //System.out.println(box.getLinearVelocity());
-                //box.applyAngularImpulse(movementStep, true);
-                break;
-            default:
-                box.setLinearVelocity(0, 0);
-        }
-
-        /*
-        if(currentState == ObjectState.STAYING)
-        {
-            box.setLinearVelocity(0, 0);
-        }
-        if ((getRotation() <= 45 && getRotation() >= 0) || (getRotation() >= 315 && getRotation() <= 360))
-            setViewDirection(Direction.RIGHT);
-        if ((getRotation() <= 135 && getRotation() >= 90) || (getRotation() >= 90 && getRotation() <= 45))
-            setViewDirection(Direction.FORWARD);
-        if ((getRotation() <= 180 && getRotation() >= 135) || (getRotation() >= 180 && getRotation() <= 225))
-            setViewDirection(Direction.LEFT);
-        if ((getRotation() <= 315 && getRotation() >= 270) || (getRotation() >= 225 && getRotation() <= 270))
-            setViewDirection(Direction.BACKWARD);*/
-       // setPosition(box.getPosition().x, box.getPosition().y);
-        setRotation((float) Math.toDegrees(box.getAngle()));
-        setX(box.getPosition().x);
-        setY(box.getPosition().y);
-        //box.getPosition().x = getX();
-        //box.getPosition().y = getY();
-       // box.setUserData("pl");
-        //System.out.println("PlayerX: " +getX()+"/BoxX: "  +box.getPosition().x + "PlayerY: " +getY()+"/BoxY: "  +box.getPosition().y + " BoxAngle: " + box.getAngle());
-        //System.out.println(crimsonTD.getInstance().getLeftTouchpadKnobX());
-    }
 
     public void act(float delta) {
 
@@ -219,6 +153,19 @@ public class Player extends ImageActor {
         if (currentXP > reqXP)
             crimsonTD.getInstance().LvlUp();
         //System.out.println(currentWeapon);
+
+        if(invul == true)
+            invultimer += delta;
+        if(invultimer >= invulMax) {
+            invul = false;
+            invultimer = 0;
+        }
+        if(infammo == true)
+            infammotimer += delta;
+        if(infammotimer >= infammoMax) {
+            infammo = false;
+            infammotimer = 0;
+        }
     }
 
 
@@ -435,4 +382,23 @@ public class Player extends ImageActor {
         LvLup();
     }
 
+
+
+    public boolean isInvul() {
+        return invul;
+    }
+
+    public void setInvul(boolean invul) {
+        this.invul = invul;
+    }
+
+
+
+    public boolean isInfammo() {
+        return infammo;
+    }
+
+    public void setInfammo(boolean infammo) {
+        this.infammo = infammo;
+    }
 }

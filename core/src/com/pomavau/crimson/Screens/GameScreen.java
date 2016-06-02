@@ -825,6 +825,7 @@ public class GameScreen implements Screen {
         }
         bullet.rotateBy(-world.getPlayer().getRotationStep());
         bullet.setRotation((360 + world.getPlayer().getRotation()) % 360);
+        if(!world.getPlayer().isInfammo())
         bulletsLeft--;
         switch(world.getPlayer().getCurrentWeapon()) {
             case ASSAULTRIFLE: if (bulletsLeft >= 0)
@@ -966,14 +967,6 @@ public class GameScreen implements Screen {
             cameraController.update(world);
             botController.update(world);
         }
-     /*
-       FPSbuilder = new StringBuilder();
-        FPSbuilder.append(" FPS: ").append(Gdx.graphics.getFramesPerSecond()); //fps label
-        FPSlabel.setText(FPSbuilder);*/
-
-
-
-
 
         world.getPlayer().rotateBy(touchpadRight.getKnobPercentX() * -5);
         world.getPlayer().setBoxRotation((float) Math.toRadians(touchpadRight.getKnobPercentX() * -5));
@@ -991,7 +984,6 @@ public class GameScreen implements Screen {
             case 2:
                 icegunhud.setVisible(true);
                 m4a4hud.setVisible(false);
-                //   firegunhud.setVisible(false);
                 throwerhud.setVisible(false);
                 rifleInfo.setVisible(false);
                 iceInfo.setVisible(true);
@@ -1011,7 +1003,6 @@ public class GameScreen implements Screen {
             case ASSAULTRIFLE:
                 if (Gdx.input.isKeyPressed(Input.Keys.Q) || (touchpadRight.getKnobPercentX() != 0) || touchpadRight.getKnobPercentY() != 0) { //System.out.println("Shooting..");
                     if (TimeUtils.nanoTime() - shotTime > 100000000 && bulletsLeft != 0) {      // default: 200000000
-                        //System.out.println("Shooting..");
                         shot();
                     }
                 }
@@ -1019,22 +1010,19 @@ public class GameScreen implements Screen {
             case ICERIFLE:
                 if (Gdx.input.isKeyPressed(Input.Keys.Q) || (touchpadRight.getKnobPercentX() != 0) || touchpadRight.getKnobPercentY() != 0) { //System.out.println("Shooting..");
                     if (TimeUtils.nanoTime() - shotTime > 1000000000 && bulletsLeft != 0) {      // default: 200000000
-                        //System.out.println("Shooting..");
                         shot();
                     }
                 }break;
             case FLAMETHROWER:
                 if (Gdx.input.isKeyPressed(Input.Keys.Q) || (touchpadRight.getKnobPercentX() != 0) || touchpadRight.getKnobPercentY() != 0) { //System.out.println("Shooting..");
                     if (TimeUtils.nanoTime() - shotTime > 1000000000 && bulletsLeft != 0) {      // default: 200000000
-                        //System.out.println("Shooting..");
                         shot();
                     }
                 }break;
         }}
 
         for (int i = 0; i < bullets.size; i++) {
-            // System.out.println("Shooting..");
-            //bullets.get(i).setY(bullets.get(i).getY() + 10);
+
             if(bullets.get(i).getBulletType() == BulletType.FLAME || world.getPlayer().getCurrentWeapon() == Weapon.FLAMETHROWER) {
                 bullets.get(i).setTexture(world.getFlameAnimation().getFrame());
                 if((Gdx.input.isKeyPressed(Input.Keys.Q) || (touchpadRight.getKnobPercentX() != 0) || touchpadRight.getKnobPercentY() != 0) && bulletsLeft > 0) {
@@ -1049,7 +1037,6 @@ public class GameScreen implements Screen {
 
                 }
             }
-            //System.out.println(bullets.get(i).getBox());
             if(bullets.get(i).getBulletType() != BulletType.FLAME) {
                 bullets.get(i).moveBy(bulletSpeed * delta * (float) Math.cos(bullets.get(i).getRotation() / 180 * Math.PI), bulletSpeed * delta * (float) Math.sin(bullets.get(i).getRotation() / 180 * Math.PI));
             }
@@ -1065,7 +1052,6 @@ public class GameScreen implements Screen {
                 );
                 bullets.get(i).setRotation(world.getPlayer().getRotation());
             }
-            //bullets.get(i).getBox().setLinearVelocity(bulletSpeed * delta *(float) Math.cos(Math.toRadians(bullets.get(i).getRotation())), bulletSpeed *delta * (float) Math.sin(Math.toRadians(bullets.get(i).getRotation())));
             if (bullets.get(i).getY() >= 1000) {
                 bullets.get(i).remove();
                 bullets.get(i).getBox().setActive(false);
@@ -1075,7 +1061,6 @@ public class GameScreen implements Screen {
         }
         world.draw();
         UIstage.draw();
-        //world.getHPcircle().setVisible(false);
         if (!inventoryScreen.isVisible() && !pauseScreen.isVisible() && !perksScreen.isVisible()) {
             world.act(Gdx.graphics.getDeltaTime());
             UIstage.act(Gdx.graphics.getDeltaTime());
@@ -1139,14 +1124,11 @@ public class GameScreen implements Screen {
 
 
         for (int i = 1; i < world.getBotscount(); i++) {
-            //System.out.println((Math.abs(world.getBotbyIndex(i).getX() - world.getPlayer().getX()))+ " " + (Math.abs(world.getBotbyIndex(i).getY() - world.getPlayer().getY())));
             if ((Math.abs(world.getBotbyIndex(i).getX() - world.getPlayer().getX()) < 70) && (Math.abs(world.getBotbyIndex(i).getY() - world.getPlayer().getY()) < 70) && world.getBotbyIndex(i).getCurrentState() != ObjectState.DISABLED) {
                 world.getBotbyIndex(i).setNearplayer(true);
             } else {
                 world.getBotbyIndex(i).setNearplayer(false);
             }
-
-            //System.out.println("BOT # " + i + " NEAR PLAYER?: "+world.getBotbyIndex(i).isNearPlayer());
         }
 
     }
@@ -1158,12 +1140,12 @@ public class GameScreen implements Screen {
     public void botsAttacking() throws IOException {
         for (int i = 1; i < world.getBotscount(); i++) {
             if (world.getBotbyIndex(i).getCurrentState() == ObjectState.ATTACKING) {
+                if(!world.getPlayer().isInvul())
                 world.getPlayer().setCurrentHP(world.getPlayer().getCurrentHP() - 10);
                 if (world.getPlayer().getCurrentHP() <= 0)
                     crimsonTD.getInstance().showDeathScreen();
             }
         }
-        //System.out.println(world.getPlayer().getCurrentHP());
     }
 
     public GameDifficulty getGameDifficulty() {

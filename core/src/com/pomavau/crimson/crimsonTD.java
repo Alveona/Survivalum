@@ -324,7 +324,32 @@ public class crimsonTD extends Game {
 	{
 		for(int i =0; i < gameScreen.getWorld().getBotArray().size - 1; i ++ )
 		{
+			if(gameScreen.getWorld().getBotArray().get(i).isVisible())
 			gameScreen.getWorld().getBotArray().get(i).setState(ObjectState.FREEZED);
 		}
+	}
+	public void Perk_Invul()
+	{
+		setInvul(true);
+	}
+	public void Perk_Ammo()
+	{
+		setInfAmmo(true);
+	}
+	public boolean isInfAmmo()
+	{
+		return gameScreen.getWorld().getPlayer().isInfammo();
+	}
+	public void setInfAmmo(boolean infAmmo)
+	{
+		gameScreen.getWorld().getPlayer().setInfammo(infAmmo);
+	}
+	public boolean isInvul()
+	{
+		return gameScreen.getWorld().getPlayer().isInvul();
+	}
+	public void setInvul(boolean invul)
+	{
+		gameScreen.getWorld().getPlayer().setInvul(invul);
 	}
 }

@@ -2,31 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf9f5af-a46f-46d4-b099-0aa09d25c1d5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ApplyPerk.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ApplyPerks.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/View/AnimationLGDX.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/ios_ios_1_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/Player$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/View/AnimationLGDX.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ios/build/classes/main/com/pomavau/crimson/IOSLauncher.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ios/build/libs/ios-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ios/build/tmp/jar/MANIFEST.MF" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Controller/PerkType.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Controller/PerkType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Controller/PerksClick.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Controller/PerksClick.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/LevelWorld$1.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/LevelWorld$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/LevelWorld.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/LevelWorld.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/Perk.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/Perk.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Screens/GameScreen$1.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Screens/GameScreen$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Controller/ApplyPerk$1.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Controller/ApplyPerk$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Controller/ApplyPerk.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Controller/ApplyPerk.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/Bot.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/Bot.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/Player.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Model/Player.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Screens/GameScreen.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/Screens/GameScreen.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/crimsonTD.class" afterPath="$PROJECT_DIR$/core/build/classes/main/com/pomavau/crimson/crimsonTD.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/build/libs/desktop-1.0.jar" afterPath="$PROJECT_DIR$/desktop/build/libs/desktop-1.0.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/stats/stats.txt" afterPath="$PROJECT_DIR$/android/assets/stats/stats.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/stats/stats_strings.txt" afterPath="$PROJECT_DIR$/android/assets/stats/stats_strings.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/PerkType.java" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/PerkType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/PerksClick.java" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/PerksClick.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/LevelWorld.java" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/LevelWorld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Perk.java" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Perk.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/android.iml" afterPath="$PROJECT_DIR$/android/android.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/build/intermediates/assets/debug/stats/stats.txt" afterPath="$PROJECT_DIR$/android/build/intermediates/assets/debug/stats/stats.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/build/intermediates/assets/debug/stats/stats_strings.txt" afterPath="$PROJECT_DIR$/android/build/intermediates/assets/debug/stats/stats_strings.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterPath="$PROJECT_DIR$/android/build/intermediates/incremental/mergeDebugAssets/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/android/build/outputs/logs/manifest-merger-debug-report.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ApplyPerk.java" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ApplyPerk.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Bot.java" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Bot.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Player.java" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/GameScreen.java" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/GameScreen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/LoadingScreen.java" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/LoadingScreen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/pomavau/crimson/crimsonTD.java" afterPath="$PROJECT_DIR$/core/src/com/pomavau/crimson/crimsonTD.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ios/ios.iml" afterPath="$PROJECT_DIR$/ios/ios.iml" />
     </list>
     <ignored path="survivalum.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ApplyPerk.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="54" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
+              <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#452#453#0" expanded="true" />
@@ -68,51 +75,65 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SoundToggle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/SoundToggle.java">
+      <file leaf-file-name="GameScreen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/GameScreen.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <caret line="716" column="41" selection-start-line="716" selection-start-column="41" selection-end-line="716" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Weapon.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/Weapon.java">
+      <file leaf-file-name="LoadingScreen.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/LoadingScreen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3181818">
+              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyContactListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/MyContactListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+              <caret line="147" column="69" selection-start-line="147" selection-start-column="69" selection-end-line="147" selection-end-column="69" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ShowMenu.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ShowMenu.java">
+      <file leaf-file-name="crimsonTD.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/crimsonTD.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding />
+              <caret line="331" column="5" selection-start-line="331" selection-start-column="5" selection-end-line="331" selection-end-column="5" />
+              <folding>
+                <element signature="e#8786#8787#0" expanded="true" />
+                <element signature="e#8814#8815#0" expanded="true" />
+                <element signature="e#8837#8838#0" expanded="true" />
+                <element signature="e#8868#8869#0" expanded="true" />
+                <element signature="e#8927#8928#0" expanded="true" />
+                <element signature="e#8971#8972#0" expanded="true" />
+                <element signature="e#9031#9032#0" expanded="true" />
+                <element signature="e#9060#9061#0" expanded="true" />
+                <element signature="e#9117#9118#0" expanded="true" />
+                <element signature="e#9157#9158#0" expanded="true" />
+                <element signature="e#9213#9214#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettingsType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/SettingsType.java">
+      <file leaf-file-name="Bot.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Bot.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingsController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/SettingsController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <caret line="77" column="2" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -150,11 +171,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlayerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/PlayerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.4184783">
-              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="133" column="48" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -3170,7 +3191,6 @@
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/FlameTank.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/HPcircle.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/MainMenuScreen.java" />
-        <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Bot.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ShowStatistics.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/SetReloading.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/MyContactListener.java" />
@@ -3178,15 +3198,17 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ObjectState.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/ApplyPerkButton.java" />
-        <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Player.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ApplyPerks.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/PerkType.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/PerksClick.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Perk.java" />
-        <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/GameScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/LevelWorld.java" />
+        <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Bot.java" />
+        <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Player.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/crimsonTD.java" />
         <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ApplyPerk.java" />
+        <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/GameScreen.java" />
+        <option value="$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/LoadingScreen.java" />
       </list>
     </option>
   </component>
@@ -3227,7 +3249,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -3386,8 +3408,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -3797,7 +3819,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -3839,6 +3861,18 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ApplyPerk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#452#453#0" expanded="true" />
+            <element signature="e#486#487#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/BotType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3961,7 +3995,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3977,14 +4010,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="144" column="40" selection-start-line="144" selection-start-column="40" selection-end-line="144" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Bot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="171" column="94" selection-start-line="171" selection-start-column="94" selection-end-line="171" selection-end-column="94" />
           <folding />
         </state>
       </provider>
@@ -4013,26 +4038,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/MyContactListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="147" column="69" selection-start-line="147" selection-start-column="69" selection-end-line="147" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/CameraController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="157" column="30" selection-start-line="157" selection-start-column="30" selection-end-line="157" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/LoadingScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -4057,7 +4066,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="1" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4111,17 +4119,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="259" column="18" selection-start-line="259" selection-start-column="18" selection-end-line="259" selection-end-column="18" />
-          <folding>
-            <element signature="e#11242#11243#0" expanded="true" />
-            <element signature="e#11276#11277#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Perk.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4138,17 +4135,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/GameScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1484" column="38" selection-start-line="1484" selection-start-column="38" selection-end-line="1484" selection-end-column="38" />
-          <folding>
-            <element signature="e#71524#71525#0" expanded="true" />
-            <element signature="e#71556#71557#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/LevelWorld.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4156,45 +4142,6 @@
           <folding>
             <element signature="e#12499#12500#0" expanded="true" />
             <element signature="e#12530#12531#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/crimsonTD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.962963">
-          <caret line="326" column="83" selection-start-line="326" selection-start-column="83" selection-end-line="326" selection-end-column="83" />
-          <folding>
-            <element signature="e#6943#6944#0" expanded="true" />
-            <element signature="e#6995#6996#0" expanded="true" />
-            <element signature="e#7934#7935#0" expanded="true" />
-            <element signature="e#7990#7991#0" expanded="true" />
-            <element signature="e#8024#8025#0" expanded="true" />
-            <element signature="e#8049#8050#0" expanded="true" />
-            <element signature="e#8098#8099#0" expanded="true" />
-            <element signature="e#8135#8136#0" expanded="true" />
-            <element signature="e#8162#8163#0" expanded="true" />
-            <element signature="e#8212#8213#0" expanded="true" />
-            <element signature="e#8238#8239#0" expanded="true" />
-            <element signature="e#8288#8289#0" expanded="true" />
-            <element signature="e#8317#8318#0" expanded="true" />
-            <element signature="e#8331#8332#0" expanded="true" />
-            <element signature="e#8369#8370#0" expanded="true" />
-            <element signature="e#8408#8409#0" expanded="true" />
-            <element signature="e#8445#8446#0" expanded="true" />
-            <element signature="e#8483#8484#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ApplyPerk.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="54" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#452#453#0" expanded="true" />
-            <element signature="e#486#487#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4239,6 +4186,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="166" column="29" selection-start-line="166" selection-start-column="29" selection-end-line="166" selection-end-column="29" />
+          <folding>
+            <element signature="e#7495#7496#0" expanded="true" />
+            <element signature="e#7529#7530#0" expanded="true" />
+            <element signature="e#11176#11177#0" expanded="true" />
+            <element signature="e#11204#11205#0" expanded="true" />
+            <element signature="e#11247#11248#0" expanded="true" />
+            <element signature="e#11281#11282#0" expanded="true" />
+            <element signature="e#11317#11318#0" expanded="true" />
+            <element signature="e#11347#11348#0" expanded="true" />
+            <element signature="e#11394#11395#0" expanded="true" />
+            <element signature="e#11432#11433#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/ApplyPerk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#452#453#0" expanded="true" />
+            <element signature="e#486#487#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/MyContactListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="147" column="69" selection-start-line="147" selection-start-column="69" selection-end-line="147" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/crimsonTD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="331" column="5" selection-start-line="331" selection-start-column="5" selection-end-line="331" selection-end-column="5" />
+          <folding>
+            <element signature="e#8786#8787#0" expanded="true" />
+            <element signature="e#8814#8815#0" expanded="true" />
+            <element signature="e#8837#8838#0" expanded="true" />
+            <element signature="e#8868#8869#0" expanded="true" />
+            <element signature="e#8927#8928#0" expanded="true" />
+            <element signature="e#8971#8972#0" expanded="true" />
+            <element signature="e#9031#9032#0" expanded="true" />
+            <element signature="e#9060#9061#0" expanded="true" />
+            <element signature="e#9117#9118#0" expanded="true" />
+            <element signature="e#9157#9158#0" expanded="true" />
+            <element signature="e#9213#9214#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Model/Bot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="2" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/SetReloading.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4267,9 +4281,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Controller/PlayerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.4184783">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="133" column="48" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="48" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/GameScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="716" column="41" selection-start-line="716" selection-start-column="41" selection-end-line="716" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/pomavau/crimson/Screens/LoadingScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3181818">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
