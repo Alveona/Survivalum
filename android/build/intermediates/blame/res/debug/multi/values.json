@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/Pomavau/Documents/Android_Studio/survivalum/android/build/intermediates/res/merged/debug/values/values.xml",
+        "outputFile": "/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 97
                 },
                 "from": {
-                    "file": "/Users/Pomavau/Documents/Android_Studio/survivalum/android/res/values/strings.xml",
+                    "file": "/Users/pomavau/Documents/AndroidStudio/survivalum/android/res/values/strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -31,7 +31,7 @@
                     "endOffset": 560
                 },
                 "from": {
-                    "file": "/Users/Pomavau/Documents/Android_Studio/survivalum/android/res/values/styles.xml",
+                    "file": "/Users/pomavau/Documents/AndroidStudio/survivalum/android/res/values/styles.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

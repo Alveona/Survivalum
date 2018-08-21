@@ -1,5 +1,7 @@
 package com.pomavau.crimson.Controller;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -21,6 +23,7 @@ public class ShowStatistics  extends ClickListener{
     FontActor LB3;
     FontActor LB4;
     Scanner sc;
+    FileHandle statsfile;
 
     public ShowStatistics (Group group, FontActor LB1 , FontActor LB2, FontActor LB3, FontActor LB4) throws FileNotFoundException {
         this.group = group;
@@ -28,7 +31,9 @@ public class ShowStatistics  extends ClickListener{
         this.LB2 = LB2;
         this.LB3 = LB3;
         this.LB4 = LB4;
-        sc = new Scanner(new File(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")));
+        //sc = new Scanner(new File(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")));
+        //sc = new Scanner(new File(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")));
+        statsfile = new FileHandle(Gdx.files.internal(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")).path());
 
     }
 
@@ -38,20 +43,21 @@ public class ShowStatistics  extends ClickListener{
         FontActor[] LB = {LB1, LB2, LB3, LB4};
         if(group.isVisible() == true)
         {
-            try {
-                sc = new Scanner(new File(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            for(int i = 0; i < LB.length; i++)
-        {
-            if(sc.hasNextLine())
-            {
-                LB[i].update(sc.nextLine());
+
+                //sc = new Scanner(new File(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt")));
+                //sc = new Scanner(new File(Gdx.files.internal("stats//stats_strings.txt").path()));
+                statsfile = new FileHandle(crimsonTD.getInstance().resolvePath("stats//stats_strings.txt"));
+
+            //for(int i = 0; i < LB.length; i++)
+        //{
+
+
+               // LB[i].update(sc.nextLine());
+                LB[1].update(statsfile.readString());
                 //System.out.println(sc.next());
-            }
-        }
-        sc.close();
+
+       // }
+        //sc.close();
     }}
 }
 

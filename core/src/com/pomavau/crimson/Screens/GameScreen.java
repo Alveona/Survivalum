@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -261,7 +262,7 @@ public class GameScreen implements Screen {
     private Group settingsScreen;
     private GameDifficulty gameDifficulty = GameDifficulty.EASY;
 
-
+    private AssetManager assetManager;
 
 
     LevelWorld world;
@@ -276,10 +277,11 @@ public class GameScreen implements Screen {
     protected Label FPSlabel;
     private BitmapFont font;
 
-    HashMap<Integer, TextureRegion> textureRegions;
 
 
-    public GameScreen(SpriteBatch batch, ShapeRenderer shape, BitmapFont font, HashMap<Integer, TextureRegion> textureRegions) throws IOException {
+
+    public GameScreen(SpriteBatch batch, AssetManager assetManager) throws IOException {
+        this.assetManager = assetManager;
         switch (gameDifficulty) {
             case EASY:
                 spawntime = 5;
@@ -297,7 +299,7 @@ public class GameScreen implements Screen {
         bullets = new Array<Bullet>();
         font = new BitmapFont();
         camera = new OrthographicCamera();
-        this.textureRegions = textureRegions;
+
      //   TextureRegion region;
       //  region = textureRegions.get(0);
         world = new LevelWorld(new ScreenViewport(camera), batch);
@@ -329,15 +331,15 @@ public class GameScreen implements Screen {
         stringScoresCount = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 30, fontColorWhite, String.format("%06d", 0), 542, 616 - 6);
 
 
-        pauseButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("/gamescreen_btnPause.png")), 0, world.getHeight(), 75, 75);
-        pauseBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("Menu3.png")), 384, 616 - 534);
+        pauseButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("gamescreen_btnPause.png")), 0, world.getHeight(), 75, 75);
+        pauseBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("Menu.png"), Texture.class), 384, 616 - 534);
         stringPause = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 48, fontColorBlue, "PAUSE", 487, 616-169);
         stringresumebutton = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "RESUME", 487, 616-258);
         stringexitbutton = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "EXIT", 526, 616-409);
         stringoptionsbutton = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "OPTIONS", 484, (float)(616-334.5));
-        resumebutton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")),467, 616-308 );
-        optionsbutton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")),467, 616-384 );
-        exitbutton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")),467, 616-459 );
+        resumebutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class),467, 616-308 );
+        optionsbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class),467, 616-384 );
+        exitbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class),467, 616-459 );
         pauseScreen = new Group();
         pauseScreen.setVisible(false);
         pauseScreen.addActor(pauseBG);
@@ -355,8 +357,8 @@ public class GameScreen implements Screen {
 
         //inventoryButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("gamescreen_bulletsCount.png"), 325, (int)world.getHeight(), 75, 165);
         inventoryButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("gamescreen_btnInventory.png")), 100, (int) world.getHeight());
-        inventoryApply = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")), 473, 616 - 533);
-        inventoryBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png")), 346, 616 - 534);
+        inventoryApply = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class), 473, 616 - 533);
+        inventoryBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png"), Texture.class), 346, 616 - 534);
         inventorySlot = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventorySlot.png")), 507, 616 - 282);
         m4a4hud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//m4a4_hud2.png")), 519, 616 - 266, 113, 75);
         icegunhud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//icegun_hud.png")), 519, 616 - 266, 113, 75);
@@ -370,14 +372,14 @@ public class GameScreen implements Screen {
         inventoryRight.addListener(new InventoryIncrease());
         inventoryLeft.addListener(new InventoryDecrease());
 
-        rifleInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryInfo_RIFLE.png")), 386, 616 - 443);
+        rifleInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//inventoryInfo_RIFLE.png")), 386, 616 - 443);
         rifleInfo.setVisible(false);
-        iceInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryInfo_ICEGUN.png")), 386, 616 - 443);
+        iceInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//inventoryInfo_ICEGUN.png")), 386, 616 - 443);
         iceInfo.setVisible(false);
-        flameInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryInfo_THROWER.png")), 386, 616 - 443);
+        flameInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//inventoryInfo_THROWER.png")), 386, 616 - 443);
         flameInfo.setVisible(false);
 
-        bullet = new Bullet(new Texture(crimsonTD.getInstance().resolvePath("/fire1.png")), world.getPlayer().getX(), world.getPlayer().getY(), 100f, 62f, world.getPhysicsWorld(), BulletType.FLAME);
+        bullet = new Bullet(new Texture(crimsonTD.getInstance().resolvePath("fire1.png")), world.getPlayer().getX(), world.getPlayer().getY(), 100f, 62f, world.getPhysicsWorld(), BulletType.FLAME);
         bullet.getBox().setActive(false);
 
         inventoryScreen = new Group();
@@ -397,8 +399,8 @@ public class GameScreen implements Screen {
         ApplyInvGroup.addListener(new ApplyWeapon(inventoryCurrentChoose, inventoryScreen));
         //inventoryButton.addListener(new ShowMenu(inventoryScreen));
 
-        deathBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png")), 346, 616 - 534);
-        deathButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")), 473, 616 - 533);
+        deathBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png"), Texture.class), 346, 616 - 534);
+        deathButton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class), 473, 616 - 533);
         deathIcon = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//deathIcon.png")),  551, 616-208);
         deathLB1 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "1. ", 406, 616 - 308);
         deathLB2 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "2. ", 406, 616 - 342);
@@ -447,8 +449,8 @@ public class GameScreen implements Screen {
         deathScreen.setVisible(false);
 
         settingsScreen = new Group();
-        settBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("Menu3.png")), 384, 616-534);
-        settOK = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")), 473, 616 - 533);
+        settBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("Menu.png"), Texture.class), 384, 616-534);
+        settOK = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class), 473, 616 - 533);
         stringOPTIONS = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 48, fontColorBlue, "OPTIONS", 460.7f, 616-152);
         stringBLOOD = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "BLOOD:", 504, 616-204);
         stringSFXSOUND = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "SFX SOUND:", 457, 616-286);
@@ -527,8 +529,8 @@ public class GameScreen implements Screen {
         settOK.addListener(new ShowMenu(settingsScreen));
 
         //PERKS
-        perksBG = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png")), 346, 616 - 534);
-        perksApply =  new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png")), 473, 616 - 533);
+        perksBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png"), Texture.class), 346, 616 - 534);
+        perksApply =  new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class), 473, 616 - 533);
         perkMS = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_ms.png"))),
                 new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_ms_d.png"))),
                 0, 0 , PerkType.MSUP);
@@ -758,7 +760,7 @@ public class GameScreen implements Screen {
                         14f, 3f,
                         world.getPhysicsWorld(),
                         BulletType.BULLET); //DEFAULT : 14X3*/
-                bullet = new Bullet((new Texture(crimsonTD.getInstance().resolvePath("/bullet.png"))),
+                bullet = new Bullet((new Texture(crimsonTD.getInstance().resolvePath("bullet.png"))),
                         world.getPlayer().getX() + world.getPlayer().getOriginX()
                                 + 70 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
                                 + 10 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation())),
@@ -781,7 +783,7 @@ public class GameScreen implements Screen {
                 break;
             case ICERIFLE:
                 //bullet = new Bullet(new Texture(crimsonTD.getInstance().resolvePath("/Iceball.png"), world.getPlayer().getX(), world.getPlayer().getY(), 12, 12, world.getPhysicsWorld(), BulletType.ICEBALL);
-                bullet = new Bullet((new Texture(crimsonTD.getInstance().resolvePath("/Iceball.png"))),
+                bullet = new Bullet((new Texture(crimsonTD.getInstance().resolvePath("iceball.png"))),
                         world.getPlayer().getX() + world.getPlayer().getOriginX()
                                 + 70 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
                                 + 10 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation())),
@@ -1299,7 +1301,7 @@ public class GameScreen implements Screen {
             {
                 leaderboards[i] = Integer.valueOf(br.readLine());
             }*/
-        sc = new Scanner(crimsonTD.getInstance().resolvePath("stats//stats.txt"));
+        sc = new Scanner(crimsonTD.getInstance().resolvePath("stats/stats.txt"));
            // sc.reset();
        // System.out.println(sc.hasNextInt());
             if(sc.hasNextInt()) {
@@ -1323,7 +1325,7 @@ public class GameScreen implements Screen {
         }
         Arrays.sort(leaderboards);
 
-        fw = new FileWriter(new File(crimsonTD.getInstance().resolvePath("stats//stats.txt")));
+        fw = new FileWriter(new File(crimsonTD.getInstance().resolvePath("stats/stats.txt")));
 
         for(int i = 0; i <leaderboards.length; i++)
         {
@@ -1494,5 +1496,6 @@ public class GameScreen implements Screen {
         perkEnabled2.setVisible(false);
         perkEnabled3.setVisible(false);
     }
+
 }
 

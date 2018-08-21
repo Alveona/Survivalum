@@ -3,6 +3,7 @@ package com.pomavau.crimson;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +17,7 @@ import com.pomavau.crimson.Controller.ObjectState;
 import com.pomavau.crimson.Controller.Weapon;
 import com.pomavau.crimson.Model.Perk;
 import com.pomavau.crimson.Screens.GameScreen;
+import com.pomavau.crimson.Screens.LoadingScreen;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,12 +31,13 @@ public class crimsonTD extends Game {
 	private SpriteBatch batch;
 	private com.pomavau.crimson.Screens.MainMenuScreen menuScreen;
 	private com.pomavau.crimson.Screens.GameScreen gameScreen;
+	private LoadingScreen loadingScreen;
 	HashMap<Integer, TextureRegion> textureRegions;
 	private ShapeRenderer shape;
 	private BitmapFont font;
 	private static crimsonTD instance = new crimsonTD();
 	private boolean firstlaunch = true;
-
+	private AssetManager assetManager;
 	private Perk perkEnabled;
 
 	private boolean bloodEnabled = true;
@@ -54,7 +57,7 @@ public class crimsonTD extends Game {
 
 	@Override
 	public void create() {
-	choosePlatform = new Scanner(System.in);
+	//choosePlatform = new Scanner(System.in);
 		/*
 		System.out.println("CHOOSE YOUR PLATFORM:\n1 - PC\n2 - ANDROID/IOS");
 		switch (choosePlatform.nextInt())
@@ -67,26 +70,21 @@ public class crimsonTD extends Game {
 		//setMovementControlStyle(MovementControlStyle.JOYPAD);
 		ppuX = Gdx.graphics.getWidth()/1145;
 		ppuY = Gdx.graphics.getHeight()/616;
-		loadGraphics();
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 		font = new BitmapFont();
-		try {
-			menuScreen = new com.pomavau.crimson.Screens.MainMenuScreen(batch);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			gameScreen = new com.pomavau.crimson.Screens.GameScreen(batch, shape, font, textureRegions);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		assetManager = new AssetManager();
+		loadingScreen = new LoadingScreen(batch);
+		setScreen(loadingScreen);
+		assetManager = loadingScreen.getAssetManager();
+		//assetManager.finishLoading();
+		//createMenu();
 
 
-		setScreen(menuScreen);
+
+
+
+		//setScreen(menuScreen);
 		//setScreen(gameScreen);
 	}
 
@@ -124,13 +122,7 @@ public class crimsonTD extends Game {
 			firstlaunch = false;
 		}
 		else {
-			try {
-				gameScreen = new com.pomavau.crimson.Screens.GameScreen(batch, shape, font, textureRegions);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			createGameScreen();
 			setScreen(gameScreen);
 		}
 	}
@@ -154,7 +146,8 @@ public class crimsonTD extends Game {
 		}
 		else
 		{
-			return String.format("android/assets/%s", fileName);
+			return String.format("android//assets//%s", fileName);
+			//return String.format("%s", fileName);
 		}
 	}
 
@@ -167,6 +160,7 @@ public class crimsonTD extends Game {
 	public void render(){
 
 	super.render();
+
 	}
 
 	public float getPpuY() {
@@ -351,5 +345,24 @@ public class crimsonTD extends Game {
 	public void setInvul(boolean invul)
 	{
 		gameScreen.getWorld().getPlayer().setInvul(invul);
+	}
+	public void createMenuScreen()
+	{
+		try {
+			//if(assetManager.update())
+			menuScreen = new com.pomavau.crimson.Screens.MainMenuScreen(batch, assetManager);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	public void createGameScreen()
+	{
+		try {
+			gameScreen = new com.pomavau.crimson.Screens.GameScreen(batch, assetManager);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

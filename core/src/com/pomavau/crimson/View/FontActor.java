@@ -1,11 +1,15 @@
 package com.pomavau.crimson.View;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.pomavau.crimson.crimsonTD;
+
+import java.io.File;
 
 /**
  * Created by Pomavau on 15.05.16.
@@ -13,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class FontActor extends Actor{
     private BitmapFont font;
     private String text;
+
     private float x;
     private float y;
     FreeTypeFontGenerator generator;
@@ -21,12 +26,15 @@ public class FontActor extends Actor{
         {
             this.font = font;
             this.text = text;
+
             setPosition(x, y);
         }
 
     public FontActor(String pathToFont, int size, Color color, String text, float x, float y)
         {
-            generator = new FreeTypeFontGenerator(new FileHandle(pathToFont));
+            //generator = new FreeTypeFontGenerator(new FileHandle(pathToFont));
+            generator = new FreeTypeFontGenerator(Gdx.files.internal(pathToFont));
+            //generator = new FreeTypeFontGenerator(Gdx.files.internal(crimsonTD.getInstance().resolvePath(pathToFont)));
             parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
             parameter.size = size;
             parameter.color = color;

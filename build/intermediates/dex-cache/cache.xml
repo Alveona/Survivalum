@@ -2,32 +2,130 @@
 <items version="2" >
 
     <item
-        jar="/Users/Pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.7.2/275914cb71c76e4d3ce1e4037cf8a9cce8f7c842/gdx-box2d-1.7.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="275914cb71c76e4d3ce1e4037cf8a9cce8f7c842">
-        <dex dex="/Users/Pomavau/Documents/Android_Studio/CrimsonTD/android/build/intermediates/pre-dexed/debug/gdx-box2d-1.7.2-97145fa628ec2abe9ecad5101b5fc8e781e8a2f7.jar" />
+        is-multidex="true"
+        jar="/Users/pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.7.2/2bd5374e7a6b9ea051ad27bbcf3bdbc3313bdac3/gdx-freetype-1.7.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2bd5374e7a6b9ea051ad27bbcf3bdbc3313bdac3">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-freetype-1.7.2_5ccc2cd02f0402f23f095fcf00a2f71764cae912/classes.dex" />
     </item>
     <item
-        jar="/Users/Pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.7.2/ccf86a454b5ce7029c243da22f432f2edca0a34e/gdx-1.7.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
+        is-multidex="true"
+        jar="/Users/pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.7.2/ccf86a454b5ce7029c243da22f432f2edca0a34e/gdx-1.7.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
         sha1="ccf86a454b5ce7029c243da22f432f2edca0a34e">
-        <dex dex="/Users/Pomavau/Documents/Android_Studio/CrimsonTD/android/build/intermediates/pre-dexed/debug/gdx-1.7.2-2ca71d04ce0af5595b173b1a11ae486c5752dfe4.jar" />
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-1.7.2_2d5cdb4489404c7a473c1ebdfae8c1e54a1922b4/classes.dex" />
     </item>
     <item
-        jar="/Users/Pomavau/Documents/Android_Studio/CrimsonTD/core/build/libs/core-1.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="cc4975b98230dc53b2254dfd3114b10ece29e914">
-        <dex dex="/Users/Pomavau/Documents/Android_Studio/CrimsonTD/android/build/intermediates/pre-dexed/debug/core-1.0-3d22dc25d4bf6f7e4906152f74dec3e6decdf505.jar" />
+        is-multidex="true"
+        jar="/Users/pomavau/.android/build-cache/e28150d06eb066b0fb629c932c9fc7577b934286/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5d16843dfbe6335995b46d87b349e2cb2532a9f9/classes.dex" />
     </item>
     <item
-        jar="/Users/Pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.7.2/5211971f79423cda216422e62c1ec8684603c3b2/gdx-backend-android-1.7.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
+        is-multidex="true"
+        jar="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_eb481e6ecd9da3b1e4dc697a004ffe99c54e02ee/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a4f36c1756557b6db835a7b5cf79793eb3487bae">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_42498a3e2eaa696e8b8838c4a527bf58dd96848a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.7.2/275914cb71c76e4d3ce1e4037cf8a9cce8f7c842/gdx-box2d-1.7.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="275914cb71c76e4d3ce1e4037cf8a9cce8f7c842">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-box2d-1.7.2_46c04f4d7d9a9e56336ae8b3c270a74c55546929/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.7.2/2bd5374e7a6b9ea051ad27bbcf3bdbc3313bdac3/gdx-freetype-1.7.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2bd5374e7a6b9ea051ad27bbcf3bdbc3313bdac3">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-freetype-1.7.2_5ccc2cd02f0402f23f095fcf00a2f71764cae912/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a0c73e282094e56449948f038f7714d2237da0e9">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_42498a3e2eaa696e8b8838c4a527bf58dd96848a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.7.2/275914cb71c76e4d3ce1e4037cf8a9cce8f7c842/gdx-box2d-1.7.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="275914cb71c76e4d3ce1e4037cf8a9cce8f7c842">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-box2d-1.7.2_46c04f4d7d9a9e56336ae8b3c270a74c55546929/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.7.2/ccf86a454b5ce7029c243da22f432f2edca0a34e/gdx-1.7.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ccf86a454b5ce7029c243da22f432f2edca0a34e">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-1.7.2_2d5cdb4489404c7a473c1ebdfae8c1e54a1922b4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.7.2/5211971f79423cda216422e62c1ec8684603c3b2/gdx-backend-android-1.7.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
         sha1="5211971f79423cda216422e62c1ec8684603c3b2">
-        <dex dex="/Users/Pomavau/Documents/Android_Studio/CrimsonTD/android/build/intermediates/pre-dexed/debug/gdx-backend-android-1.7.2-2bfdb412066020958a8293573e338ad2a087a548.jar" />
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-backend-android-1.7.2_50dc80d231df535ec3045e5b5d4a75b09217968f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/pomavau/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.7.2/5211971f79423cda216422e62c1ec8684603c3b2/gdx-backend-android-1.7.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5211971f79423cda216422e62c1ec8684603c3b2">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-backend-android-1.7.2_50dc80d231df535ec3045e5b5d4a75b09217968f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_eb481e6ecd9da3b1e4dc697a004ffe99c54e02ee/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/pomavau/.android/build-cache/e28150d06eb066b0fb629c932c9fc7577b934286/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="/Users/pomavau/Documents/AndroidStudio/survivalum/android/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5d16843dfbe6335995b46d87b349e2cb2532a9f9/classes.dex" />
     </item>
 
 </items>
