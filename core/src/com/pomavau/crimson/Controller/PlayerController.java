@@ -60,9 +60,9 @@ public class PlayerController implements InputProcessor {
             // player.setRotationDirection(getRotationDirection());
             //&& player.getRotation() > 270 && player.getRotation() < 360
             if (movesForward()) {
-                player.getBody().setLinearVelocity((float)((player.getX() + player.getMovementStep()) * Math.cos(Math.toRadians(player.getRotation()))), (float) ((player.getY() + player.getMovementStep()) * Math.sin(Math.toRadians(player.getRotation()))));
-                //player.getBody().setLinearVelocity((float) (player.getX() + player.getMovementStep()), (float) (player.getY() + player.getMovementStep()));
-
+                player.getBody().setLinearVelocity(
+                        (float)((player.getX() + player.getMovementStep()) * Math.cos(Math.toRadians(player.getRotation()))),
+                        (float) ((player.getY() + player.getMovementStep()) * Math.sin(Math.toRadians(player.getRotation()))));
             }
             else {
                 if (movesBackward()) {

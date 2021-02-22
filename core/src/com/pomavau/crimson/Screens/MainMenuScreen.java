@@ -136,23 +136,23 @@ public class MainMenuScreen implements Screen{
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        music = assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//music.mp3"), Music.class);
+        music = assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/music.mp3"), Music.class);
         music.setLooping(true);
         music.play();
 
 
-        //musicButton = new ImageActor(assetManager.get("android//assets//mainmenu//mainmenu_btnMusic.png"), settingsBG.getX() + 120, settingsBG.getY() + 120);
+        //musicButton = new ImageActor(assetManager.get("android//assets//mainmenu/mainmenu_btnMusic.png"), settingsBG.getX() + 120, settingsBG.getY() + 120);
         background = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_art.png"), Texture.class), 0, 0, 1145 * crimsonTD.getInstance().getPpuX(), 616 * crimsonTD.getInstance().getPpuY());
-        backgroundBorder = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_bg.png"), Texture.class), 0, 0, 1145, 616);
-        playButton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btnPlay.png"), Texture.class), 325, 59); //557
-        settingsButton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btnSet.png"), Texture.class), 513, 59);
-        ratesButton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btnStat2.png"), Texture.class), 695, 59);
-        //titleText = new ImageActor(assetManager.get("android//assets//mainmenu//title.png"), 182, 616-224);
-        titleText = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//title2.png"), Texture.class), 54, 616-186);
+        backgroundBorder = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_bg.png"), Texture.class), 0, 0, 1145, 616);
+        playButton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btnPlay.png"), Texture.class), 325, 59); //557
+        settingsButton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btnSet.png"), Texture.class), 513, 59);
+        ratesButton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btnStat2.png"), Texture.class), 695, 59);
+        //titleText = new ImageActor(assetManager.get("android//assets//mainmenu/title.png"), 182, 616-224);
+        titleText = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/title2.png"), Texture.class), 54, 616-186);
         difficultyBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("Menu.png"), Texture.class), 384, 616-534);
-        easyDFbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class),467, 616-308 );
-        mediumDFbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class),467, 616-384 );
-        hardDFbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class),467, 616-459 );
+        easyDFbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class),467, 616-308 );
+        mediumDFbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class),467, 616-384 );
+        hardDFbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class),467, 616-459 );
 
         stringDifficulty = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 48, fontColorBlue, "DIFFICULTY", 428, 616-169);
         stringEasy = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "EASY", 517, 616-258);
@@ -181,12 +181,12 @@ public class MainMenuScreen implements Screen{
        // settingsButton.addListener(new ShowMenu(settingScreen));
 
 
-        statBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png"), Texture.class), 346, 616 - 534);
+        statBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/InventoryMenu2.png"), Texture.class), 346, 616 - 534);
         stringSTATISTIC = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 60, fontColorBlue, "STATISTICS", 400, 616-154);
         stringMAXTIME = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 30, fontColorBlue, "TIME RECORD:", 408, 616-207);
         stringFAVWEAPON = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 30, fontColorBlue, "FAV WEAPON:", 408, 616-254);
         stringLEADERBOADRS = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 30, fontColorBlue, "LEADERBOARDS:", 408, 616-297);
-        statOK = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class), 473, 616 - 533);
+        statOK = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class), 473, 616 - 533);
         stringLB1 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "1. ", 405, 616 - 329);
         stringLB2 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "2. ", 405, 616 - 363);
         stringLB3 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "3. ", 405, 616 - 397);
@@ -214,23 +214,23 @@ public class MainMenuScreen implements Screen{
         statOK.addListener(new ShowMenu(statScreen));
 
         settBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("Menu.png"), Texture.class), 384, 616-534);
-        settOK = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class), 473, 616 - 533);
+        settOK = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class), 473, 616 - 533);
         stringOPTIONS = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 48, fontColorBlue, "OPTIONS", 460.7f, 616-152);
         stringBLOOD = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "BLOOD:", 504, 616-204);
         stringSFXSOUND = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "SFX SOUND:", 457, 616-286);
         stringMUSIC = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "MUSIC:", 501, 616-371);
-        stBloodON_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png"), Texture.class), 437, 616 - 280);
-        stBloodON_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png"), Texture.class), 437, 616 - 280);
-        stBloodOFF_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png"), Texture.class), 582, 616 - 280);
-        stBloodOFF_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png"), Texture.class), 582, 616 - 280);
-        stSFXON_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png"), Texture.class), 437, 616 - 363);
-        stSFXON_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png"), Texture.class), 437, 616 - 363);
-        stSFXOFF_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png"), Texture.class), 582, 616 - 363);
-        stSFXOFF_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png"), Texture.class), 582, 616 - 363);
-        stMusicON_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png"), Texture.class), 437, 616 - 450);
-        stMusicON_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png"), Texture.class), 437, 616 - 450);
-        stMusicOFF_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png"), Texture.class), 582, 616 - 450);
-        stMusicOFF_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png"), Texture.class), 582, 616 - 450);
+        stBloodON_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png"), Texture.class), 437, 616 - 280);
+        stBloodON_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png"), Texture.class), 437, 616 - 280);
+        stBloodOFF_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png"), Texture.class), 582, 616 - 280);
+        stBloodOFF_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png"), Texture.class), 582, 616 - 280);
+        stSFXON_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png"), Texture.class), 437, 616 - 363);
+        stSFXON_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png"), Texture.class), 437, 616 - 363);
+        stSFXOFF_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png"), Texture.class), 582, 616 - 363);
+        stSFXOFF_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png"), Texture.class), 582, 616 - 363);
+        stMusicON_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png"), Texture.class), 437, 616 - 450);
+        stMusicON_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png"), Texture.class), 437, 616 - 450);
+        stMusicOFF_E = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png"), Texture.class), 582, 616 - 450);
+        stMusicOFF_D = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png"), Texture.class), 582, 616 - 450);
         stBloodON_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "ON", 464, 616 - 244);
         stBloodOFF_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "OFF", 607.5f, 616 - 244);
         stSFXON_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "ON", 464, 616 - 326);

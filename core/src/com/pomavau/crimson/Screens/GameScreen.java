@@ -337,9 +337,9 @@ public class GameScreen implements Screen {
         stringresumebutton = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "RESUME", 487, 616-258);
         stringexitbutton = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "EXIT", 526, 616-409);
         stringoptionsbutton = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "OPTIONS", 484, (float)(616-334.5));
-        resumebutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class),467, 616-308 );
-        optionsbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class),467, 616-384 );
-        exitbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class),467, 616-459 );
+        resumebutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class),467, 616-308 );
+        optionsbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class),467, 616-384 );
+        exitbutton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class),467, 616-459 );
         pauseScreen = new Group();
         pauseScreen.setVisible(false);
         pauseScreen.addActor(pauseBG);
@@ -357,26 +357,26 @@ public class GameScreen implements Screen {
 
         //inventoryButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("gamescreen_bulletsCount.png"), 325, (int)world.getHeight(), 75, 165);
         inventoryButton = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("gamescreen_btnInventory.png")), 100, (int) world.getHeight());
-        inventoryApply = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class), 473, 616 - 533);
-        inventoryBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png"), Texture.class), 346, 616 - 534);
-        inventorySlot = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//InventorySlot.png")), 507, 616 - 282);
-        m4a4hud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//m4a4_hud2.png")), 519, 616 - 266, 113, 75);
-        icegunhud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//icegun_hud.png")), 519, 616 - 266, 113, 75);
-        throwerhud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//firegun_hud.png")), 519, 616 - 266, 113, 75);
+        inventoryApply = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class), 473, 616 - 533);
+        inventoryBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/InventoryMenu2.png"), Texture.class), 346, 616 - 534);
+        inventorySlot = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/InventorySlot.png")), 507, 616 - 282);
+        m4a4hud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/m4a4_hud2.png")), 519, 616 - 266, 113, 75);
+        icegunhud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/icegun_hud.png")), 519, 616 - 266, 113, 75);
+        throwerhud = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/firegun_hud.png")), 519, 616 - 266, 113, 75);
         inventoryApplystring = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "APPLY", 510.7f, 616 - 484);
         ApplyInvGroup = new Group();
         ApplyInvGroup.addActor(inventoryApply);
         ApplyInvGroup.addActor(inventoryApplystring);
-        inventoryLeft = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//inventory_btnleft.png")), 413, 616 - 265);
-        inventoryRight = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//inventory_btnright.png")), 663, 616 - 265);
+        inventoryLeft = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/inventory_btnleft.png")), 413, 616 - 265);
+        inventoryRight = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/inventory_btnright.png")), 663, 616 - 265);
         inventoryRight.addListener(new InventoryIncrease());
         inventoryLeft.addListener(new InventoryDecrease());
 
-        rifleInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//inventoryInfo_RIFLE.png")), 386, 616 - 443);
+        rifleInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/inventoryInfo_RIFLE.png")), 386, 616 - 443);
         rifleInfo.setVisible(false);
-        iceInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//inventoryInfo_ICEGUN.png")), 386, 616 - 443);
+        iceInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/inventoryInfo_ICEGUN.png")), 386, 616 - 443);
         iceInfo.setVisible(false);
-        flameInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//inventoryInfo_THROWER.png")), 386, 616 - 443);
+        flameInfo = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/inventoryInfo_THROWER.png")), 386, 616 - 443);
         flameInfo.setVisible(false);
 
         bullet = new Bullet(new Texture(crimsonTD.getInstance().resolvePath("fire1.png")), world.getPlayer().getX(), world.getPlayer().getY(), 100f, 62f, world.getPhysicsWorld(), BulletType.FLAME);
@@ -399,9 +399,9 @@ public class GameScreen implements Screen {
         ApplyInvGroup.addListener(new ApplyWeapon(inventoryCurrentChoose, inventoryScreen));
         //inventoryButton.addListener(new ShowMenu(inventoryScreen));
 
-        deathBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png"), Texture.class), 346, 616 - 534);
-        deathButton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class), 473, 616 - 533);
-        deathIcon = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//deathIcon.png")),  551, 616-208);
+        deathBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/InventoryMenu2.png"), Texture.class), 346, 616 - 534);
+        deathButton = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class), 473, 616 - 533);
+        deathIcon = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/deathIcon.png")),  551, 616-208);
         deathLB1 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "1. ", 406, 616 - 308);
         deathLB2 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "2. ", 406, 616 - 342);
         deathLB3 = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 24, fontColorWhite, "3. ", 406, 616 - 378);
@@ -430,7 +430,7 @@ public class GameScreen implements Screen {
                 "450");
         fw.close();
         */
-       // deathstringApply = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), 473, 616 - 533);
+       // deathstringApply = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), 473, 616 - 533);
         rifleEnabled = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("rifle_enabled.png")), 79, 616 - 145);
         icegunEnabled = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("icegun_enabled.png")), 79, 616 - 145);
         throwerEnabled = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("falmethrower_enabled.png")), 79, 616 - 145);
@@ -450,23 +450,23 @@ public class GameScreen implements Screen {
 
         settingsScreen = new Group();
         settBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("Menu.png"), Texture.class), 384, 616-534);
-        settOK = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class), 473, 616 - 533);
+        settOK = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class), 473, 616 - 533);
         stringOPTIONS = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 48, fontColorBlue, "OPTIONS", 460.7f, 616-152);
         stringBLOOD = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "BLOOD:", 504, 616-204);
         stringSFXSOUND = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "SFX SOUND:", 457, 616-286);
         stringMUSIC = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorBlue, "MUSIC:", 501, 616-371);
-        stBloodON_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 437, 616 - 280);
-        stBloodON_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 437, 616 - 280);
-        stBloodOFF_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 582, 616 - 280);
-        stBloodOFF_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 582, 616 - 280);
-        stSFXON_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 437, 616 - 363);
-        stSFXON_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 437, 616 - 363);
-        stSFXOFF_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 582, 616 - 363);
-        stSFXOFF_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 582, 616 - 363);
-        stMusicON_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 437, 616 - 450);
-        stMusicON_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 437, 616 - 450);
-        stMusicOFF_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png")), 582, 616 - 450);
-        stMusicOFF_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png")), 582, 616 - 450);
+        stBloodON_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png")), 437, 616 - 280);
+        stBloodON_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png")), 437, 616 - 280);
+        stBloodOFF_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png")), 582, 616 - 280);
+        stBloodOFF_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png")), 582, 616 - 280);
+        stSFXON_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png")), 437, 616 - 363);
+        stSFXON_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png")), 437, 616 - 363);
+        stSFXOFF_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png")), 582, 616 - 363);
+        stSFXOFF_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png")), 582, 616 - 363);
+        stMusicON_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png")), 437, 616 - 450);
+        stMusicON_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png")), 437, 616 - 450);
+        stMusicOFF_E = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png")), 582, 616 - 450);
+        stMusicOFF_D = new ImageActor(new Texture(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png")), 582, 616 - 450);
         stBloodON_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "ON", 464, 616 - 244);
         stBloodOFF_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "OFF", 607.5f, 616 - 244);
         stSFXON_string = new FontActor(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), 36, fontColorWhite, "ON", 464, 616 - 326);
@@ -529,8 +529,8 @@ public class GameScreen implements Screen {
         settOK.addListener(new ShowMenu(settingsScreen));
 
         //PERKS
-        perksBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png"), Texture.class), 346, 616 - 534);
-        perksApply =  new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class), 473, 616 - 533);
+        perksBG = new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/InventoryMenu2.png"), Texture.class), 346, 616 - 534);
+        perksApply =  new ImageActor(assetManager.get(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class), 473, 616 - 533);
         perkMS = new Perk(new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_ms.png"))),
                 new TextureRegion(new Texture(crimsonTD.getInstance().resolvePath("perks/perk_ms_d.png"))),
                 0, 0 , PerkType.MSUP);
@@ -797,18 +797,24 @@ public class GameScreen implements Screen {
                 );
                 break;
             case FLAMETHROWER:
+                bullet = new Bullet(new Texture(crimsonTD.getInstance().resolvePath("fire1.png")),
+                        world.getPlayer().getX() ,
+                        world.getPlayer().getY(),
+                        100f, 62f,
+                        world.getPhysicsWorld(),
+                        BulletType.FLAME);
                 break;
         }
         bulletsShooted++;
-        if(bullet.getBulletType() == BulletType.FLAME){
-        bullet.setPosition(
-                world.getPlayer().getX() + world.getPlayer().getOriginX()
-                        + 70 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
-                        + 10 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation())),
-                world.getPlayer().getY() + world.getPlayer().getOriginY()
-                        + 70 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation()))
-                        - 10 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
-        );}
+//        if(bullet.getBulletType() == BulletType.FLAME){
+//        bullet.setPosition(
+//                world.getPlayer().getX() + world.getPlayer().getOriginX()
+//                        + 70 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
+//                        + 10 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation())),
+//                world.getPlayer().getY() + world.getPlayer().getOriginY()
+//                        + 70 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation()))
+//                        - 10 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
+//        );}
 
 
         // bullet.setPosition(world.getPlayer().getX() + world.getPlayer().getWidth() * (float) Math.cos(Math.toRadians(world.getPlayer().getBody().getAngle())),
@@ -1039,6 +1045,7 @@ public class GameScreen implements Screen {
 
                 }
             }
+//            System.out.println(bullets.get(i).getBulletType().toString());
             if(bullets.get(i).getBulletType() != BulletType.FLAME) {
                 bullets.get(i).moveBy(bulletSpeed * delta * (float) Math.cos(bullets.get(i).getRotation() / 180 * Math.PI), bulletSpeed * delta * (float) Math.sin(bullets.get(i).getRotation() / 180 * Math.PI));
             }
@@ -1046,11 +1053,11 @@ public class GameScreen implements Screen {
             {
                 bullets.get(i).setPosition(
                         world.getPlayer().getX() + world.getPlayer().getOriginX()
-                                + 80 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
-                                + 10 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation())),
+                                + 40 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
+                                + 40 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation())),
                         world.getPlayer().getY() + world.getPlayer().getOriginY()
-                                + 80 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation()))
-                                - 10 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
+                                + 40 * (float) Math.sin(Math.toRadians(world.getPlayer().getRotation()))
+                                - 40 * (float) Math.cos(Math.toRadians(world.getPlayer().getRotation()))
                 );
                 bullets.get(i).setRotation(world.getPlayer().getRotation());
             }

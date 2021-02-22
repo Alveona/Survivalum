@@ -146,8 +146,11 @@ public class crimsonTD extends Game {
 		}
 		else
 		{
-			return String.format("android//assets//%s", fileName);
-			//return String.format("%s", fileName);
+//			if (fileName == "nasalization-rg.ttf") {
+//				return "android/assets/nasalizationrg.ttf";
+//			}
+			//return String.format("android/assets/%s", fileName);
+			return String.format("%s", fileName);
 		}
 	}
 

@@ -124,9 +124,24 @@ idea {
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:multidex:1.0.3'
     //
     //classpath 'com.android.tools.build:gradle:2.1.0'
 
 }
+
+allprojects {
+    repositories {
+        // google()
+
+        // If you're using a version of Gradle lower than 4.1, you must
+        // instead use:
+        //
+         maven {
+             url 'https://maven.google.com'
+         }
+    }
+}
+
+
 

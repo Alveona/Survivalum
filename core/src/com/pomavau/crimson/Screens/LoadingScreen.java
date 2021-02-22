@@ -25,21 +25,21 @@ public class LoadingScreen implements Screen {
         {
             System.out.println("STARTED LOADING");
             //Main Menu Assets
-            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu//music.mp3"), Music.class);
+            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/music.mp3"), Music.class);
             assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_art.png"), Texture.class);
-            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_bg.png"), Texture.class);
-            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btnPlay.png"), Texture.class);
-            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btnSet.png"), Texture.class);
-            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btnStat2.png"), Texture.class);
-            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu//title2.png"), Texture.class);
+            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_bg.png"), Texture.class);
+            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btnPlay.png"), Texture.class);
+            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btnSet.png"), Texture.class);
+            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btnStat2.png"), Texture.class);
+            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/title2.png"), Texture.class);
             assetManager.load(crimsonTD.getInstance().resolvePath("Menu.png"), Texture.class);
-            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_btn.png"), Texture.class);
-            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu//InventoryMenu2.png"), Texture.class);
-            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_enabled.png"), Texture.class);
-            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu//mainmenu_settings_disabled.png"), Texture.class);
-            assetManager.load(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), BitmapFont.class);
+            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_btn.png"), Texture.class);
+            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/InventoryMenu2.png"), Texture.class);
+            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_enabled.png"), Texture.class);
+            assetManager.load(crimsonTD.getInstance().resolvePath("mainmenu/mainmenu_settings_disabled.png"), Texture.class);
+//            assetManager.load(crimsonTD.getInstance().resolvePath("nasalization-rg.ttf"), BitmapFont.class);
             //Game Screen Assets
-            //assetManager.load();
+//            assetManager.finishLoading();
             System.out.println("FINISHED LOADING");
         }
     @Override
